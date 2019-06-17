@@ -6,4 +6,4 @@ Please replace the GoogleService-Info.plist file with your own (from Firebase) i
 Also, consider making a pull request if you think you can help improve the app!
 
 ### Requirements:
-Xcode 11, iOS 13
+Xcode 11, iOS 13 (Works on iPhone and iPad)
