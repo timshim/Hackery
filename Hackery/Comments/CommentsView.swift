@@ -18,23 +18,6 @@ struct CommentView: View {
             .color(Color("titleColor"))
             .lineLimit(nil)
             .padding()
-//        VStack(alignment: .leading) {
-//            Text("\(comment.text)")
-//                .font(.custom("Lato-Regular", size: 16))
-//                .color(Color("titleColor"))
-//                .lineLimit(nil)
-//                .padding(.bottom, 3)
-//            HStack {
-//                Text("By \(comment.by)")
-//                    .font(.custom("Lato-Regular", size: 13))
-//                    .color(Color("subtitleColor"))
-//                Spacer()
-//                Text("\(comment.timeAgo)")
-//                    .font(.custom("Lato-Regular", size: 13))
-//                    .color(Color("subtitleColor"))
-//            }
-//        }
-//        .padding()
     }
 }
 
@@ -49,7 +32,7 @@ struct CommentsView : View {
                     .font(.custom("Lato-Bold", size: 18))
                     .bold()
                     .color(Color("titleColor"))
-//                    .lineLimit(nil)
+                    .lineLimit(nil)
                     .padding(.bottom, 3)
                 HStack(alignment: .bottom) {
                     VStack(alignment: .leading) {

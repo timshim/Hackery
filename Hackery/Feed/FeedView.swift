@@ -95,7 +95,6 @@ struct FeedView: View {
             }
             .frame(width: self.width)
             .navigationBarTitle(Text("Hacker News"))
-//            .navigationBarHidden(true)
         }
     }
 }

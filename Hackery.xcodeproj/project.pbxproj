@@ -112,9 +112,9 @@
 		485E4B6E22AE27CF00626464 /* Hackery */ = {
 			isa = PBXGroup;
 			children = (
-				48B7F86122B7746600FF21AD /* Comments */,
 				4854FA9E22B74491001EC4AE /* Main */,
 				4854FA9F22B744BC001EC4AE /* Feed */,
+				48B7F86122B7746600FF21AD /* Comments */,
 			);
 			path = Hackery;
 			sourceTree = "<group>";
