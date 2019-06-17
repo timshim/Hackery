@@ -3,27 +3,45 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3661E618A4F5E5ECBD289D49 /* Pods_Hackery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE69C641A3D07A22C3335F83 /* Pods_Hackery.framework */; };
+		48227EAD22AE29E0009E85EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 48227EAC22AE29E0009E85EE /* GoogleService-Info.plist */; };
+		48227EAF22AE2A82009E85EE /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48227EAE22AE2A82009E85EE /* FeedView.swift */; };
+		48227EB122AE2B08009E85EE /* FeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48227EB022AE2B08009E85EE /* FeedController.swift */; };
+		4854FA9D22B73C18001EC4AE /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4854FA9C22B73C18001EC4AE /* FeedModel.swift */; };
 		485E4B7022AE27CF00626464 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485E4B6F22AE27CF00626464 /* AppDelegate.swift */; };
 		485E4B7222AE27CF00626464 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485E4B7122AE27CF00626464 /* SceneDelegate.swift */; };
-		485E4B7422AE27CF00626464 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485E4B7322AE27CF00626464 /* ContentView.swift */; };
 		485E4B7622AE27CF00626464 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 485E4B7522AE27CF00626464 /* Assets.xcassets */; };
 		485E4B7922AE27CF00626464 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 485E4B7822AE27CF00626464 /* Preview Assets.xcassets */; };
 		485E4B7C22AE27CF00626464 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 485E4B7A22AE27CF00626464 /* LaunchScreen.storyboard */; };
+		48B7F86022B7723500FF21AD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B7F85F22B7723500FF21AD /* Extensions.swift */; };
+		48B7F86322B7748B00FF21AD /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B7F86222B7748B00FF21AD /* CommentsView.swift */; };
+		48B7F86B22B7808600FF21AD /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 48B7F86722B7808600FF21AD /* Lato-Regular.ttf */; };
+		48B7F86C22B7808600FF21AD /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 48B7F86822B7808600FF21AD /* Lato-Bold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2A9642FC0C69CB0979BA4017 /* Pods-Hackery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hackery.debug.xcconfig"; path = "Target Support Files/Pods-Hackery/Pods-Hackery.debug.xcconfig"; sourceTree = "<group>"; };
+		48227EAC22AE29E0009E85EE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		48227EAE22AE2A82009E85EE /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
+		48227EB022AE2B08009E85EE /* FeedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedController.swift; sourceTree = "<group>"; };
+		4854FA9C22B73C18001EC4AE /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
 		485E4B6C22AE27CF00626464 /* Hackery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hackery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		485E4B6F22AE27CF00626464 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		485E4B7122AE27CF00626464 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		485E4B7322AE27CF00626464 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		485E4B7522AE27CF00626464 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		485E4B7822AE27CF00626464 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		485E4B7B22AE27CF00626464 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		485E4B7D22AE27CF00626464 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		48B7F85F22B7723500FF21AD /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		48B7F86222B7748B00FF21AD /* CommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsView.swift; sourceTree = "<group>"; };
+		48B7F86722B7808600FF21AD /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
+		48B7F86822B7808600FF21AD /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
+		AFED32ADF5F0D1D6A4E5CD26 /* Pods-Hackery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hackery.release.xcconfig"; path = "Target Support Files/Pods-Hackery/Pods-Hackery.release.xcconfig"; sourceTree = "<group>"; };
+		EE69C641A3D07A22C3335F83 /* Pods_Hackery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hackery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +49,55 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3661E618A4F5E5ECBD289D49 /* Pods_Hackery.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2DF375554D7C9AFC7BE9CA73 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2A9642FC0C69CB0979BA4017 /* Pods-Hackery.debug.xcconfig */,
+				AFED32ADF5F0D1D6A4E5CD26 /* Pods-Hackery.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		4854FA9E22B74491001EC4AE /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				485E4B6F22AE27CF00626464 /* AppDelegate.swift */,
+				485E4B7122AE27CF00626464 /* SceneDelegate.swift */,
+				48227EAC22AE29E0009E85EE /* GoogleService-Info.plist */,
+				485E4B7522AE27CF00626464 /* Assets.xcassets */,
+				485E4B7A22AE27CF00626464 /* LaunchScreen.storyboard */,
+				485E4B7D22AE27CF00626464 /* Info.plist */,
+				485E4B7722AE27CF00626464 /* Preview Content */,
+				48B7F85F22B7723500FF21AD /* Extensions.swift */,
+				48B7F86422B7805D00FF21AD /* Fonts */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		4854FA9F22B744BC001EC4AE /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				4854FA9C22B73C18001EC4AE /* FeedModel.swift */,
+				48227EAE22AE2A82009E85EE /* FeedView.swift */,
+				48227EB022AE2B08009E85EE /* FeedController.swift */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
 		485E4B6322AE27CF00626464 = {
 			isa = PBXGroup;
 			children = (
 				485E4B6E22AE27CF00626464 /* Hackery */,
 				485E4B6D22AE27CF00626464 /* Products */,
+				2DF375554D7C9AFC7BE9CA73 /* Pods */,
+				51FCD10488BC17C0CAFBED90 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,13 +112,9 @@
 		485E4B6E22AE27CF00626464 /* Hackery */ = {
 			isa = PBXGroup;
 			children = (
-				485E4B6F22AE27CF00626464 /* AppDelegate.swift */,
-				485E4B7122AE27CF00626464 /* SceneDelegate.swift */,
-				485E4B7322AE27CF00626464 /* ContentView.swift */,
-				485E4B7522AE27CF00626464 /* Assets.xcassets */,
-				485E4B7A22AE27CF00626464 /* LaunchScreen.storyboard */,
-				485E4B7D22AE27CF00626464 /* Info.plist */,
-				485E4B7722AE27CF00626464 /* Preview Content */,
+				48B7F86122B7746600FF21AD /* Comments */,
+				4854FA9E22B74491001EC4AE /* Main */,
+				4854FA9F22B744BC001EC4AE /* Feed */,
 			);
 			path = Hackery;
 			sourceTree = "<group>";
@@ -75,6 +127,31 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		48B7F86122B7746600FF21AD /* Comments */ = {
+			isa = PBXGroup;
+			children = (
+				48B7F86222B7748B00FF21AD /* CommentsView.swift */,
+			);
+			path = Comments;
+			sourceTree = "<group>";
+		};
+		48B7F86422B7805D00FF21AD /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				48B7F86822B7808600FF21AD /* Lato-Bold.ttf */,
+				48B7F86722B7808600FF21AD /* Lato-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		51FCD10488BC17C0CAFBED90 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EE69C641A3D07A22C3335F83 /* Pods_Hackery.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -82,9 +159,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 485E4B8022AE27CF00626464 /* Build configuration list for PBXNativeTarget "Hackery" */;
 			buildPhases = (
+				1D2AB72497E7B6648B33B277 /* [CP] Check Pods Manifest.lock */,
 				485E4B6822AE27CF00626464 /* Sources */,
 				485E4B6922AE27CF00626464 /* Frameworks */,
 				485E4B6A22AE27CF00626464 /* Resources */,
+				CF2D0DB2ACD2408E1B98756D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -134,21 +213,70 @@
 			buildActionMask = 2147483647;
 			files = (
 				485E4B7C22AE27CF00626464 /* LaunchScreen.storyboard in Resources */,
+				48227EAD22AE29E0009E85EE /* GoogleService-Info.plist in Resources */,
 				485E4B7922AE27CF00626464 /* Preview Assets.xcassets in Resources */,
+				48B7F86B22B7808600FF21AD /* Lato-Regular.ttf in Resources */,
 				485E4B7622AE27CF00626464 /* Assets.xcassets in Resources */,
+				48B7F86C22B7808600FF21AD /* Lato-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1D2AB72497E7B6648B33B277 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Hackery-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CF2D0DB2ACD2408E1B98756D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Hackery/Pods-Hackery-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Hackery/Pods-Hackery-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Hackery/Pods-Hackery-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		485E4B6822AE27CF00626464 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48227EAF22AE2A82009E85EE /* FeedView.swift in Sources */,
+				48B7F86022B7723500FF21AD /* Extensions.swift in Sources */,
 				485E4B7022AE27CF00626464 /* AppDelegate.swift in Sources */,
+				48227EB122AE2B08009E85EE /* FeedController.swift in Sources */,
+				4854FA9D22B73C18001EC4AE /* FeedModel.swift in Sources */,
 				485E4B7222AE27CF00626464 /* SceneDelegate.swift in Sources */,
-				485E4B7422AE27CF00626464 /* ContentView.swift in Sources */,
+				48B7F86322B7748B00FF21AD /* CommentsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,17 +410,19 @@
 		};
 		485E4B8122AE27CF00626464 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2A9642FC0C69CB0979BA4017 /* Pods-Hackery.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "Hackery/Preview\\ Content";
+				DEVELOPMENT_ASSET_PATHS = "Hackery/Main/Preview\\ Content";
 				DEVELOPMENT_TEAM = QKNVPTRYEV;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = Hackery/Info.plist;
+				INFOPLIST_FILE = Hackery/Main/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.timshim.Hackery;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -302,17 +432,19 @@
 		};
 		485E4B8222AE27CF00626464 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AFED32ADF5F0D1D6A4E5CD26 /* Pods-Hackery.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "Hackery/Preview\\ Content";
+				DEVELOPMENT_ASSET_PATHS = "Hackery/Main/Preview\\ Content";
 				DEVELOPMENT_TEAM = QKNVPTRYEV;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = Hackery/Info.plist;
+				INFOPLIST_FILE = Hackery/Main/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.timshim.Hackery;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
