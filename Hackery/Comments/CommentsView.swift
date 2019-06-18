@@ -61,7 +61,8 @@ struct CommentsView : View {
                 self.fc.loadComments(story: self.story)
             }
         }
-        .navigationBarItem(title: Text(""), titleDisplayMode: .inline, hidesBackButton: false)
+        .navigationBarTitle(Text(""), displayMode: .inline)
+        .background(Color("cardBg"))
         .colorScheme(.light)
     }
 }
