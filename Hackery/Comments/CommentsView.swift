@@ -26,7 +26,7 @@ struct CommentsView : View {
     var story: Story
 
     var body: some View {
-        List {
+        VStack(alignment: .leading) {
             VStack(alignment: .leading, spacing: 5) {
                 Text(story.title)
                     .font(.custom("Lato-Bold", size: 18))
@@ -53,15 +53,15 @@ struct CommentsView : View {
                     }
                 }
             }
-            .padding()
-            ForEach(fc.comments.identified(by: \.self)) { comment in
+            .padding(EdgeInsets(top: 30, leading: 30, bottom: 0, trailing: 30))
+            List(fc.comments.identified(by: \.self)) { comment in
                 CommentView(comment: comment)
+            }
+            .onAppear {
+                self.fc.loadComments(story: self.story)
             }
         }
         .navigationBarItem(title: Text(""), titleDisplayMode: .inline, hidesBackButton: false)
         .colorScheme(.light)
-        .onAppear {
-            self.fc.loadComments(story: self.story)
-        }
     }
 }

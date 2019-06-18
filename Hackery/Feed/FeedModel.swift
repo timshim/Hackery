@@ -21,6 +21,8 @@ struct Story: Hashable {
 
 struct Comment: Hashable {
     var by = ""
+    var deleted = 0
+    var dead = 0
     var id = 0
     var kids = [Int]()
     var parent = 0
