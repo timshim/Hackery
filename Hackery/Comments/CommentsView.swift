@@ -7,17 +7,37 @@
 //
 
 import SwiftUI
-import Combine
+
+struct TextView: UIViewRepresentable {
+    let text: String
+
+    func makeUIView(context: Context) -> UITextView {
+        let tv = UITextView()
+        tv.dataDetectorTypes = .link
+        tv.isEditable = false
+        tv.text = text
+        tv.textColor = UIColor(named: "titleColor")
+        tv.font = UIFont(name: "Lato-Regular", size: 16)
+        tv.isScrollEnabled = false
+        tv.textContainer.lineBreakMode = .byWordWrapping
+        return tv
+    }
+    func updateUIView(_ uiView: UITextView, context: Context) {
+    }
+}
 
 struct CommentView: View {
     var comment: Comment
 
     var body: some View {
+//        Text lines do not wrap as intended
+//        TextView(text: "\(comment.text)\n\n\(comment.by) \(comment.timeAgo.lowercased())")
+//            .padding(10)
         Text("\(comment.text)\n\n\(comment.by) \(comment.timeAgo.lowercased())")
             .font(.custom("Lato-Regular", size: 16))
             .color(Color("titleColor"))
             .lineLimit(nil)
-            .padding()
+            .padding(15)
     }
 }
 

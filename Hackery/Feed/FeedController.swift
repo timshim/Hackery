@@ -63,13 +63,12 @@ final class FeedController: BindableObject {
 
     func loadComments(story: Story) {
         var loadedComments = [Comment]()
-        var kids = story.kids
-        for (index, kid) in kids.enumerated() {
+        var kidsCount = story.kids.count
+        for kid in story.kids {
             self.item.child("\(kid)").observeSingleEvent(of: .value) { snapshot in
                 if let value = snapshot.value as? [String: Any] {
-                    print(value)
                     if let deleted = value["deleted"] as? Int, deleted == 1 {
-                        kids.remove(at: index)
+                        kidsCount -= 1
                     }
                     guard let by = value["by"] as? String else { print("error by"); return }
                     guard let id = value["id"] as? Int else { print("error id"); return }
@@ -85,14 +84,13 @@ final class FeedController: BindableObject {
 
                     let timeAgo = Date(timeIntervalSince1970: TimeInterval(time)).relativeTime
 
-                    let parsedText = try! SwiftSoup.parse(text).text()
+                    let parsedText = try! SwiftSoup.parse(text.replacingOccurrences(of: "<p>", with: "<p>*newline*")).text().replacingOccurrences(of: "*newline*", with: "\n\n")
 
                     let comment = Comment(by: by, id: id, kids: moreComments, parent: parent, text: parsedText, time: time, timeAgo: timeAgo, type: type)
                     loadedComments.append(comment)
 
-                    if loadedComments.count == kids.count {
+                    if loadedComments.count == kidsCount {
                         self.comments = loadedComments.sorted { $0.time > $1.time }
-                        print(self.comments)
                     }
                 }
             }

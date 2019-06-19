@@ -6,7 +6,9 @@
 //  Copyright © 2019 Tim Shim. All rights reserved.
 //
 
-struct Story: Hashable {
+import SwiftUI
+
+struct Story: Identifiable & Hashable {
     var id = 0
     var by = ""
     var descendants = 0
@@ -19,7 +21,7 @@ struct Story: Hashable {
     var url = ""
 }
 
-struct Comment: Hashable {
+struct Comment: Identifiable & Hashable {
     var by = ""
     var deleted = 0
     var dead = 0

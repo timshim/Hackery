@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import Combine
 
 private let feedController = FeedController()
 
@@ -71,7 +70,7 @@ struct StoryView: View {
 }
 
 struct FeedView: View {
-    @State var fc = feedController
+    @ObjectBinding private var fc = feedController
     private let width = UIScreen.main.bounds.width - 20
 
     var body: some View {
@@ -96,5 +95,6 @@ struct FeedView: View {
             .frame(width: self.width)
             .navigationBarTitle(Text("Hacker News"))
         }
+        .colorScheme(.dark)
     }
 }
