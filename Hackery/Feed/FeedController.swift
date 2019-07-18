@@ -13,41 +13,44 @@ import SafariServices
 import SwiftSoup
 
 final class FeedController: BindableObject {
-    var didChange = PassthroughSubject<FeedController, Never>()
+
+    var willChange = PassthroughSubject<FeedController, Never>()
 
     var stories = [Story]() {
         didSet {
-            didChange.send(self)
+            willChange.send(self)
         }
     }
     var comments = [Comment]() {
         didSet {
-            didChange.send(self)
+            willChange.send(self)
         }
     }
     private let topstories = Database.database().reference().child("v0").child("topstories")
     private let item = Database.database().reference().child("v0").child("item")
 
     init() {
-        topstories.queryLimited(toFirst: 100).observe(.childAdded) { snapshot in
-            if let id = snapshot.value as? Int {
-                self.item.child("\(id)").observeSingleEvent(of: .value) { [weak self] itemSnap in
-                    if let item = itemSnap.value as? [String: Any] {
-                        guard let id = item["id"] as? Int else { return }
-                        guard let by = item["by"] as? String else { return }
-                        guard let descendants = item["descendants"] as? Int else { return }
-                        guard let kids = item["kids"] as? [Int] else { return }
-                        guard let score = item["score"] as? Int else { return }
-                        guard let time = item["time"] as? Int else { return }
-                        guard let title = item["title"] as? String else { return }
-                        guard let type = item["type"] as? String else { return }
-                        guard let url = item["url"] as? String else { return }
+        topstories.queryLimited(toFirst: 100).observeSingleEvent(of: .value) { snapshot in
+            if let ids = snapshot.value as? [Int] {
+                for id in ids {
+                    self.item.child("\(id)").observeSingleEvent(of: .value) { [weak self] itemSnap in
+                        if let item = itemSnap.value as? [String: Any] {
+                            guard let id = item["id"] as? Int else { return }
+                            guard let by = item["by"] as? String else { return }
+                            guard let descendants = item["descendants"] as? Int else { return }
+                            guard let kids = item["kids"] as? [Int] else { return }
+                            guard let score = item["score"] as? Int else { return }
+                            guard let time = item["time"] as? Int else { return }
+                            guard let title = item["title"] as? String else { return }
+                            guard let type = item["type"] as? String else { return }
+                            guard let url = item["url"] as? String else { return }
 
-                        let timeAgo = Date(timeIntervalSince1970: TimeInterval(time)).relativeTime
+                            let timeAgo = Date(timeIntervalSince1970: TimeInterval(time)).relativeTime
 
-                        let story = Story(id: id, by: by, descendants: descendants, kids: kids, score: score, time: time, timeAgo: timeAgo, title: title, type: type, url: url)
-                        self?.stories.append(story)
-                        print("Story added: \(story)")
+                            let story = Story(id: id, by: by, descendants: descendants, kids: kids, score: score, time: time, timeAgo: timeAgo, title: title, type: type, url: url)
+                            self?.stories.append(story)
+                            print("Story added: \(story)")
+                        }
                     }
                 }
             }

@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct Story: Identifiable & Hashable {
+struct Story: Hashable, Codable, Identifiable {
     var id = 0
     var by = ""
     var descendants = 0
@@ -21,7 +21,7 @@ struct Story: Identifiable & Hashable {
     var url = ""
 }
 
-struct Comment: Identifiable & Hashable {
+struct Comment: Hashable, Codable, Identifiable {
     var by = ""
     var deleted = 0
     var dead = 0

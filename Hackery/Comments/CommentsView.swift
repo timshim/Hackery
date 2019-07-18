@@ -35,7 +35,7 @@ struct CommentView: View {
 //            .padding(10)
         Text("\(comment.text)\n\n\(comment.by) \(comment.timeAgo.lowercased())")
             .font(.custom("Lato-Regular", size: 16))
-            .color(Color("titleColor"))
+            .foregroundColor(Color("titleColor"))
             .lineLimit(nil)
             .padding(15)
     }
@@ -51,30 +51,30 @@ struct CommentsView : View {
                 Text(story.title)
                     .font(.custom("Lato-Bold", size: 18))
                     .bold()
-                    .color(Color("titleColor"))
+                    .foregroundColor(Color("titleColor"))
                     .lineLimit(nil)
                     .padding(.bottom, 3)
                 HStack(alignment: .bottom) {
                     VStack(alignment: .leading) {
                         Text("\(story.timeAgo)")
                             .font(.custom("Lato-Regular", size: 15))
-                            .color(Color("subtitleColor"))
+                            .foregroundColor(Color("subtitleColor"))
                             .lineLimit(1)
                             .padding(.bottom, -7)
                         Text("\(story.score) points")
                             .font(.custom("Lato-Regular", size: 15))
-                            .color(Color("subtitleColor"))
+                            .foregroundColor(Color("subtitleColor"))
                             .lineLimit(1)
                             .padding(.bottom, -7)
                         Text("By \(story.by)")
                             .font(.custom("Lato-Regular", size: 15))
-                            .color(Color("subtitleColor"))
+                            .foregroundColor(Color("subtitleColor"))
                             .lineLimit(1)
                     }
                 }
             }
             .padding(EdgeInsets(top: 30, leading: 30, bottom: 0, trailing: 30))
-            List(fc.comments.identified(by: \.self)) { comment in
+            List(fc.comments) { comment in
                 CommentView(comment: comment)
             }
             .onAppear {
@@ -83,6 +83,5 @@ struct CommentsView : View {
         }
         .navigationBarTitle(Text(""), displayMode: .inline)
         .background(Color("cardBg"))
-        .colorScheme(.light)
     }
 }

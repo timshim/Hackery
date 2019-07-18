@@ -7,22 +7,15 @@
 //
 
 import SwiftUI
+import SafariServices
 
 private let feedController = FeedController()
-
-struct StatusBarView: View {
-    var body: some View {
-        Spacer()
-            .frame(width: UIScreen.main.bounds.width, height: 2)
-            .edgesIgnoringSafeArea([.top, .bottom])
-    }
-}
 
 struct CommentButton: View {
     var body: some View {
         Text("COMMENTS")
             .font(.custom("Lato-Regular", size: 13))
-            .color(Color("titleColor"))
+            .foregroundColor(Color("titleColor"))
             .padding(EdgeInsets(top: 6, leading: 10, bottom: 6, trailing: 10))
             .border(Color("borderColor"), width: 1, cornerRadius: 5)
     }
@@ -33,33 +26,33 @@ struct StoryView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
-            Text(story.title)
+            Text(self.story.title)
                 .font(.custom("Lato-Bold", size: 18))
                 .bold()
-                .color(Color("titleColor"))
+                .foregroundColor(Color("titleColor"))
                 .padding(.bottom, 3)
                 .lineLimit(nil)
-                .frame(minHeight: 24, idealHeight: 48, maxHeight: 96)
+                .frame(height: 48)
             HStack(alignment: .bottom) {
                 VStack(alignment: .leading) {
-                    Text("\(story.timeAgo)")
+                    Text("\(self.story.timeAgo)")
                         .font(.custom("Lato-Regular", size: 15))
-                        .color(Color("subtitleColor"))
+                        .foregroundColor(Color("subtitleColor"))
                         .lineLimit(1)
                         .padding(.bottom, -7)
-                    Text("\(story.score) points")
+                    Text("\(self.story.score) points")
                         .font(.custom("Lato-Regular", size: 15))
-                        .color(Color("subtitleColor"))
+                        .foregroundColor(Color("subtitleColor"))
                         .lineLimit(1)
                         .padding(.bottom, -7)
-                    Text("By \(story.by)")
+                    Text("By \(self.story.by)")
                         .font(.custom("Lato-Regular", size: 15))
-                        .color(Color("subtitleColor"))
+                        .foregroundColor(Color("subtitleColor"))
                         .lineLimit(1)
                 }
                 Spacer()
-                if story.kids.count > 0 {
-                    NavigationButton(destination: CommentsView(fc: feedController, story: story).background(Color.white)) {
+                if self.story.kids.count > 0 {
+                    NavigationLink(destination: CommentsView(fc: feedController, story: self.story).background(Color.white)) {
                         CommentButton()
                     }
                 }
@@ -75,10 +68,9 @@ struct FeedView: View {
 
     var body: some View {
         NavigationView {
-            StatusBarView()
-            ScrollView(showsVerticalIndicator: false) {
+            ScrollView(.vertical, showsIndicators: false) {
                 Group {
-                    ForEach(fc.stories.identified(by: \.self)) { story in
+                    ForEach(self.fc.stories) { story in
                         StoryView(story: story)
                             .frame(width: self.width, alignment: .leading)
                             .background(Color("cardBg"))
@@ -95,6 +87,6 @@ struct FeedView: View {
             .frame(width: self.width)
             .navigationBarTitle(Text("Hacker News"))
         }
-        .colorScheme(.dark)
+        .navigationViewStyle(.stack)
     }
 }
