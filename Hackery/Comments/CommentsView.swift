@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct TextView: UIViewRepresentable {
+struct MultilineTextView: UIViewRepresentable {
     let text: String
 
     func makeUIView(context: Context) -> UITextView {
@@ -31,7 +31,7 @@ struct CommentView: View {
 
     var body: some View {
 //        Text lines do not wrap as intended
-//        TextView(text: "\(comment.text)\n\n\(comment.by) \(comment.timeAgo.lowercased())")
+//        MultilineTextView(text: "\(comment.text)\n\n\(comment.by) \(comment.timeAgo.lowercased())")
 //            .padding(10)
         Text("\(comment.text)\n\n\(comment.by) \(comment.timeAgo.lowercased())")
             .font(.custom("Lato-Regular", size: 16))
@@ -42,7 +42,7 @@ struct CommentView: View {
 }
 
 struct CommentsView : View {
-    @State var fc: FeedController
+    @ObservedObject var fc: FeedController
     var story: Story
 
     var body: some View {
@@ -82,6 +82,5 @@ struct CommentsView : View {
             }
         }
         .navigationBarTitle(Text(""), displayMode: .inline)
-        .background(Color("cardBg"))
     }
 }

@@ -16,7 +16,7 @@ struct CommentButton: View {
         Text("COMMENTS")
             .font(.custom("Lato-Regular", size: 13))
             .foregroundColor(Color("titleColor"))
-            .padding(EdgeInsets(top: 6, leading: 10, bottom: 6, trailing: 10))
+            .padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
             .border(Color("borderColor"), width: 1, cornerRadius: 5)
     }
 }
@@ -52,7 +52,7 @@ struct StoryView: View {
                 }
                 Spacer()
                 if self.story.kids.count > 0 {
-                    NavigationLink(destination: CommentsView(fc: feedController, story: self.story).background(Color.white)) {
+                    NavigationLink(destination: CommentsView(fc: feedController, story: self.story)) {
                         CommentButton()
                     }
                 }
@@ -63,7 +63,7 @@ struct StoryView: View {
 }
 
 struct FeedView: View {
-    @ObjectBinding private var fc = feedController
+    @ObservedObject private var fc = feedController
     private let width = UIScreen.main.bounds.width - 20
 
     var body: some View {
@@ -74,7 +74,7 @@ struct FeedView: View {
                         StoryView(story: story)
                             .frame(width: self.width, alignment: .leading)
                             .background(Color("cardBg"))
-                            .tapAction {
+                            .onTapGesture {
                                 self.fc.showStory(story)
                         }
                         Spacer()
@@ -87,6 +87,6 @@ struct FeedView: View {
             .frame(width: self.width)
             .navigationBarTitle(Text("Hacker News"))
         }
-        .navigationViewStyle(.stack)
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }

@@ -12,20 +12,11 @@ import Combine
 import SafariServices
 import SwiftSoup
 
-final class FeedController: BindableObject {
+final class FeedController: ObservableObject {
 
-    var willChange = PassthroughSubject<FeedController, Never>()
+    @Published var stories = [Story]()
+    @Published var comments = [Comment]()
 
-    var stories = [Story]() {
-        didSet {
-            willChange.send(self)
-        }
-    }
-    var comments = [Comment]() {
-        didSet {
-            willChange.send(self)
-        }
-    }
     private let topstories = Database.database().reference().child("v0").child("topstories")
     private let item = Database.database().reference().child("v0").child("item")
 
@@ -59,7 +50,6 @@ final class FeedController: BindableObject {
 
     func showStory(_ story: Story) {
         if let url = URL(string: story.url) {
-            print(url)
             UIApplication.shared.open(url)
         }
     }
