@@ -13,11 +13,11 @@ private let feedController = FeedController()
 
 struct CommentButton: View {
     var body: some View {
-        Text("COMMENTS")
+        Text(verbatim: "COMMENTS")
             .font(.custom("Lato-Regular", size: 13))
-            .foregroundColor(Color("titleColor"))
+            .foregroundColor(Color.black)
             .padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
-            .border(Color("borderColor"), width: 1, cornerRadius: 5)
+            .border(Color("borderColor"), width: 1)
     }
 }
 
@@ -31,20 +31,16 @@ struct StoryView: View {
                 .bold()
                 .foregroundColor(Color("titleColor"))
                 .padding(.bottom, 3)
-                .lineLimit(nil)
-                .frame(height: 48)
             HStack(alignment: .bottom) {
                 VStack(alignment: .leading) {
                     Text("\(self.story.timeAgo)")
                         .font(.custom("Lato-Regular", size: 15))
                         .foregroundColor(Color("subtitleColor"))
                         .lineLimit(1)
-                        .padding(.bottom, -7)
                     Text("\(self.story.score) points")
                         .font(.custom("Lato-Regular", size: 15))
                         .foregroundColor(Color("subtitleColor"))
                         .lineLimit(1)
-                        .padding(.bottom, -7)
                     Text("By \(self.story.by)")
                         .font(.custom("Lato-Regular", size: 15))
                         .foregroundColor(Color("subtitleColor"))

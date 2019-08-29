@@ -15,7 +15,6 @@ struct MultilineTextView: UIViewRepresentable {
         let tv = UITextView()
         tv.dataDetectorTypes = .link
         tv.isEditable = false
-        tv.text = text
         tv.textColor = UIColor(named: "titleColor")
         tv.font = UIFont(name: "Lato-Regular", size: 16)
         tv.isScrollEnabled = false
@@ -23,6 +22,7 @@ struct MultilineTextView: UIViewRepresentable {
         return tv
     }
     func updateUIView(_ uiView: UITextView, context: Context) {
+        uiView.text = self.text
     }
 }
 
@@ -33,10 +33,9 @@ struct CommentView: View {
 //        Text lines do not wrap as intended
 //        MultilineTextView(text: "\(comment.text)\n\n\(comment.by) \(comment.timeAgo.lowercased())")
 //            .padding(10)
-        Text("\(comment.text)\n\n\(comment.by) \(comment.timeAgo.lowercased())")
+        Text(verbatim: "\(comment.text)\n\n\(comment.by) \(comment.timeAgo.lowercased())")
             .font(.custom("Lato-Regular", size: 16))
             .foregroundColor(Color("titleColor"))
-            .lineLimit(nil)
             .padding(15)
     }
 }
@@ -52,7 +51,6 @@ struct CommentsView : View {
                     .font(.custom("Lato-Bold", size: 18))
                     .bold()
                     .foregroundColor(Color("titleColor"))
-                    .lineLimit(nil)
                     .padding(.bottom, 3)
                 HStack(alignment: .bottom) {
                     VStack(alignment: .leading) {
@@ -60,12 +58,10 @@ struct CommentsView : View {
                             .font(.custom("Lato-Regular", size: 15))
                             .foregroundColor(Color("subtitleColor"))
                             .lineLimit(1)
-                            .padding(.bottom, -7)
                         Text("\(story.score) points")
                             .font(.custom("Lato-Regular", size: 15))
                             .foregroundColor(Color("subtitleColor"))
                             .lineLimit(1)
-                            .padding(.bottom, -7)
                         Text("By \(story.by)")
                             .font(.custom("Lato-Regular", size: 15))
                             .foregroundColor(Color("subtitleColor"))
