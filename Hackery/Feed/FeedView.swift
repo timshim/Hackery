@@ -15,7 +15,7 @@ struct CommentButton: View {
     var body: some View {
         Text(verbatim: "COMMENTS")
             .font(.custom("Lato-Regular", size: 13))
-            .foregroundColor(Color.black)
+            .foregroundColor(Color("titleColor"))
             .padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
             .border(Color("borderColor"), width: 1)
     }
