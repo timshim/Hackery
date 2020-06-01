@@ -57,16 +57,20 @@ struct CommentsView: View {
 
 struct CommentView: View {
     var comment: Comment
-
+    
     var body: some View {
         ZStack {
             Color("cardBg")
                 .edgesIgnoringSafeArea(.all)
-            VStack {
-                Text(verbatim: "\(comment.text)\n\n\(comment.by) \(comment.timeAgo.lowercased())")
-                .font(.custom("Lato-Regular", size: 16))
-                .foregroundColor(Color("titleColor"))
-                .padding(15)
+            VStack(alignment: .leading) {
+                Text(comment.text)
+                    .font(.custom("Lato-Regular", size: 16))
+                    .foregroundColor(Color("titleColor"))
+                    .padding(EdgeInsets(top: 20, leading: 15, bottom: 15, trailing: 15))
+                Text("\(comment.by) \(comment.timeAgo.lowercased())")
+                    .font(.custom("Lato-Regular", size: 16))
+                    .foregroundColor(Color("subtitleColor"))
+                    .padding(EdgeInsets(top: 5, leading: 15, bottom: 12, trailing: 15))
                 Rectangle()
                     .frame(height: 1)
                     .foregroundColor(Color("borderColor"))
