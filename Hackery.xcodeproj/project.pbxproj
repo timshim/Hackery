@@ -21,6 +21,9 @@
 		48B7F86322B7748B00FF21AD /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B7F86222B7748B00FF21AD /* CommentsView.swift */; };
 		48B7F86B22B7808600FF21AD /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 48B7F86722B7808600FF21AD /* Lato-Regular.ttf */; };
 		48B7F86C22B7808600FF21AD /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 48B7F86822B7808600FF21AD /* Lato-Bold.ttf */; };
+		48EE5B7B248351E500B8ABC7 /* StoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EE5B7A248351E500B8ABC7 /* StoryView.swift */; };
+		48EE5B7F2483522A00B8ABC7 /* CommentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EE5B7E2483522A00B8ABC7 /* CommentButton.swift */; };
+		48EE5B81248355BF00B8ABC7 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EE5B80248355BF00B8ABC7 /* SafariView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +43,9 @@
 		48B7F86222B7748B00FF21AD /* CommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsView.swift; sourceTree = "<group>"; };
 		48B7F86722B7808600FF21AD /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		48B7F86822B7808600FF21AD /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
+		48EE5B7A248351E500B8ABC7 /* StoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryView.swift; sourceTree = "<group>"; };
+		48EE5B7E2483522A00B8ABC7 /* CommentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentButton.swift; sourceTree = "<group>"; };
+		48EE5B80248355BF00B8ABC7 /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		AFED32ADF5F0D1D6A4E5CD26 /* Pods-Hackery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hackery.release.xcconfig"; path = "Target Support Files/Pods-Hackery/Pods-Hackery.release.xcconfig"; sourceTree = "<group>"; };
 		EE69C641A3D07A22C3335F83 /* Pods_Hackery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hackery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -87,6 +93,10 @@
 				4854FA9C22B73C18001EC4AE /* FeedModel.swift */,
 				48227EAE22AE2A82009E85EE /* FeedView.swift */,
 				48227EB022AE2B08009E85EE /* FeedController.swift */,
+				48EE5B7A248351E500B8ABC7 /* StoryView.swift */,
+				48EE5B7E2483522A00B8ABC7 /* CommentButton.swift */,
+				48EE5B80248355BF00B8ABC7 /* SafariView.swift */,
+				48B7F86222B7748B00FF21AD /* CommentsView.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -114,7 +124,6 @@
 			children = (
 				4854FA9E22B74491001EC4AE /* Main */,
 				4854FA9F22B744BC001EC4AE /* Feed */,
-				48B7F86122B7746600FF21AD /* Comments */,
 			);
 			path = Hackery;
 			sourceTree = "<group>";
@@ -125,14 +134,6 @@
 				485E4B7822AE27CF00626464 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		48B7F86122B7746600FF21AD /* Comments */ = {
-			isa = PBXGroup;
-			children = (
-				48B7F86222B7748B00FF21AD /* CommentsView.swift */,
-			);
-			path = Comments;
 			sourceTree = "<group>";
 		};
 		48B7F86422B7805D00FF21AD /* Fonts */ = {
@@ -273,9 +274,12 @@
 				48227EAF22AE2A82009E85EE /* FeedView.swift in Sources */,
 				48B7F86022B7723500FF21AD /* Extensions.swift in Sources */,
 				485E4B7022AE27CF00626464 /* AppDelegate.swift in Sources */,
+				48EE5B7F2483522A00B8ABC7 /* CommentButton.swift in Sources */,
+				48EE5B81248355BF00B8ABC7 /* SafariView.swift in Sources */,
 				48227EB122AE2B08009E85EE /* FeedController.swift in Sources */,
 				4854FA9D22B73C18001EC4AE /* FeedModel.swift in Sources */,
 				485E4B7222AE27CF00626464 /* SceneDelegate.swift in Sources */,
+				48EE5B7B248351E500B8ABC7 /* StoryView.swift in Sources */,
 				48B7F86322B7748B00FF21AD /* CommentsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -418,6 +422,7 @@
 				DEVELOPMENT_TEAM = QKNVPTRYEV;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hackery/Main/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -440,6 +445,7 @@
 				DEVELOPMENT_TEAM = QKNVPTRYEV;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hackery/Main/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

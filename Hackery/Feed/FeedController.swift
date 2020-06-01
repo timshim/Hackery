@@ -6,7 +6,7 @@
 //  Copyright © 2019 Tim Shim. All rights reserved.
 //
 
-import Firebase
+import FirebaseDatabase
 import SwiftUI
 import Combine
 import SafariServices
@@ -21,6 +21,12 @@ final class FeedController: ObservableObject {
     private let item = Database.database().reference().child("v0").child("item")
 
     init() {
+        reload()
+    }
+    
+    func reload() {
+        self.stories.removeAll()
+
         topstories.queryLimited(toFirst: 100).observeSingleEvent(of: .value) { snapshot in
             if let ids = snapshot.value as? [Int] {
                 for id in ids {
@@ -45,12 +51,6 @@ final class FeedController: ObservableObject {
                     }
                 }
             }
-        }
-    }
-
-    func showStory(_ story: Story) {
-        if let url = URL(string: story.url) {
-            UIApplication.shared.open(url)
         }
     }
 

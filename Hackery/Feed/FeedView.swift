@@ -9,80 +9,75 @@
 import SwiftUI
 import SafariServices
 
-private let feedController = FeedController()
-
-struct CommentButton: View {
-    var body: some View {
-        Text(verbatim: "COMMENTS")
-            .font(.custom("Lato-Regular", size: 13))
-            .foregroundColor(Color("titleColor"))
-            .padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
-            .border(Color("borderColor"), width: 1)
-    }
-}
-
-struct StoryView: View {
-    var story: Story
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 5) {
-            Text(self.story.title)
-                .font(.custom("Lato-Bold", size: 18))
-                .bold()
-                .foregroundColor(Color("titleColor"))
-                .padding(.bottom, 3)
-            HStack(alignment: .bottom) {
-                VStack(alignment: .leading) {
-                    Text("\(self.story.timeAgo)")
-                        .font(.custom("Lato-Regular", size: 15))
-                        .foregroundColor(Color("subtitleColor"))
-                        .lineLimit(1)
-                    Text("\(self.story.score) points")
-                        .font(.custom("Lato-Regular", size: 15))
-                        .foregroundColor(Color("subtitleColor"))
-                        .lineLimit(1)
-                    Text("By \(self.story.by)")
-                        .font(.custom("Lato-Regular", size: 15))
-                        .foregroundColor(Color("subtitleColor"))
-                        .lineLimit(1)
-                }
-                Spacer()
-                if self.story.kids.count > 0 {
-                    NavigationLink(destination: CommentsView(fc: feedController, story: self.story)) {
-                        CommentButton()
-                    }
-                }
-            }
-        }
-        .padding()
-    }
-}
-
 struct FeedView: View {
-    @ObservedObject private var fc = feedController
-    private let width = UIScreen.main.bounds.width - 20
-
+    @EnvironmentObject private var fc: FeedController
+    
     var body: some View {
         NavigationView {
-            ScrollView(.vertical, showsIndicators: false) {
-                Group {
-                    ForEach(self.fc.stories) { story in
-                        StoryView(story: story)
-                            .frame(width: self.width, alignment: .leading)
-                            .background(Color("cardBg"))
-                            .onTapGesture {
-                                self.fc.showStory(story)
+            ZStack {
+                Color("background")
+                    .edgesIgnoringSafeArea(.all)
+                List {
+                    ForEach(self.fc.stories, id: \.id) { story in
+                        ZStack {
+                            StoryView(story: story).environmentObject(self.fc)
+                            NavigationLink(destination: SafariView(url: URL(string: story.url)!)) {
+                                EmptyView()
+                            }
+                            .frame(width: 0)
+                            .opacity(0)
                         }
-                        Spacer()
-                            .frame(width: self.width, height: CGFloat(1))
-                            .background(Color("borderColor"))
+                        .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 1, trailing: 0))
+                        .listRowBackground(Color("background"))
+                    
                     }
+                    .cornerRadius(10)
+                    .padding(.horizontal, 8)
                 }
-                .cornerRadius(10)
+                .padding(.top, 50)
+                .edgesIgnoringSafeArea(.top)
+                VStack {
+                    Spacer()
+                    Button(action: {
+                        self.fc.reload()
+                    }) {
+                        Image(systemName: "arrow.clockwise")
+                            .font(.system(size: 24, weight: .bold, design: .rounded))
+                            .foregroundColor(Color("titleColor"))
+                            .padding(.bottom, 6)
+                    }
+                    .background(Circle().foregroundColor(Color("cardBg")).frame(width: 60, height: 60))
+                    .padding()
+                    .shadow(color: Color("shadow"), radius: 20, x: 0, y: 20)
+                }
             }
-            .frame(width: self.width)
-            .navigationBarTitle(Text("Hacker News"))
         }
-        .navigationViewStyle(StackNavigationViewStyle())
+//        .edgesIgnoringSafeArea(.top)
+    }
+    
+    init() {
+        UITableView.appearance().tableFooterView = UIView()
+        UITableView.appearance().separatorStyle = .none
+        UITableView.appearance().backgroundColor = .clear
+        UITableView.appearance().showsVerticalScrollIndicator = false
+    }
+}
+
+struct MyButtonStyle: ButtonStyle {
+
+  func makeBody(configuration: Self.Configuration) -> some View {
+    configuration.label
+      .padding()
+      .foregroundColor(.white)
+      .background(configuration.isPressed ? Color.red : Color.blue)
+      .cornerRadius(8.0)
+  }
+
+}
+
+
+struct FeedView_Previews: PreviewProvider {
+    static var previews: some View {
+        FeedView()
     }
 }
