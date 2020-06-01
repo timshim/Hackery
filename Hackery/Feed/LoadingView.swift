@@ -17,7 +17,7 @@ struct LoadingView: View {
             ForEach(0..<5) { index in
                 Group {
                     Circle()
-                        .foregroundColor(Color("titleColor"))
+                        .foregroundColor(Color("loader"))
                         .frame(width: geometry.size.width / 5, height: geometry.size.height / 5)
                         .scaleEffect(!self.isAnimating ? 1 - CGFloat(index) / 5 : 0.2 + CGFloat(index) / 5)
                         .offset(y: geometry.size.width / 10 - geometry.size.height / 2)
