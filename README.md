@@ -7,8 +7,11 @@ Please replace the `GoogleService-Info.plist` file with your own (from Firebase)
 
 Also, consider making a pull request if you think you can help improve the app!
 
-### Screenshot
-<img src="screen.png" alt="App screenshot" width="300" height="650">
+### Screenshots
+<p float="left">
+  <img src="Hackery-Light.png" alt="Light mode" width="300" height="650">
+  <img src="Hackery-Dark.png" alt="Dark mode" width="300" height="650">
+</p>
 
 ### Requirements
 Xcode 11, iOS 13 (Works on iPhone and iPad)
