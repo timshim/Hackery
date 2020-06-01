@@ -24,6 +24,7 @@
 		48EE5B7B248351E500B8ABC7 /* StoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EE5B7A248351E500B8ABC7 /* StoryView.swift */; };
 		48EE5B7F2483522A00B8ABC7 /* CommentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EE5B7E2483522A00B8ABC7 /* CommentButton.swift */; };
 		48EE5B81248355BF00B8ABC7 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EE5B80248355BF00B8ABC7 /* SafariView.swift */; };
+		48FDFE2F2485273200973CB9 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FDFE2E2485273200973CB9 /* LoadingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		48EE5B7A248351E500B8ABC7 /* StoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryView.swift; sourceTree = "<group>"; };
 		48EE5B7E2483522A00B8ABC7 /* CommentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentButton.swift; sourceTree = "<group>"; };
 		48EE5B80248355BF00B8ABC7 /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
+		48FDFE2E2485273200973CB9 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		AFED32ADF5F0D1D6A4E5CD26 /* Pods-Hackery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hackery.release.xcconfig"; path = "Target Support Files/Pods-Hackery/Pods-Hackery.release.xcconfig"; sourceTree = "<group>"; };
 		EE69C641A3D07A22C3335F83 /* Pods_Hackery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hackery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -97,6 +99,7 @@
 				48EE5B7E2483522A00B8ABC7 /* CommentButton.swift */,
 				48EE5B80248355BF00B8ABC7 /* SafariView.swift */,
 				48B7F86222B7748B00FF21AD /* CommentsView.swift */,
+				48FDFE2E2485273200973CB9 /* LoadingView.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 				485E4B7222AE27CF00626464 /* SceneDelegate.swift in Sources */,
 				48EE5B7B248351E500B8ABC7 /* StoryView.swift in Sources */,
 				48B7F86322B7748B00FF21AD /* CommentsView.swift in Sources */,
+				48FDFE2F2485273200973CB9 /* LoadingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

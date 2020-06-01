@@ -50,9 +50,17 @@ struct FeedView: View {
                     .padding()
                     .shadow(color: Color("shadow"), radius: 20, x: 0, y: 20)
                 }
+                if fc.isLoading {
+                    VStack {
+                        Spacer()
+                        LoadingView()
+                            .frame(width: 60, height: 60, alignment: .center)
+                        Spacer()
+                    }
+                    .edgesIgnoringSafeArea(.all)
+                }
             }
         }
-//        .edgesIgnoringSafeArea(.top)
     }
     
     init() {

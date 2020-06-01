@@ -16,6 +16,7 @@ final class FeedController: ObservableObject {
 
     @Published var stories = [Story]()
     @Published var comments = [Comment]()
+    @Published var isLoading = false
 
     private let topstories = Database.database().reference().child("v0").child("topstories")
     private let item = Database.database().reference().child("v0").child("item")
@@ -25,6 +26,7 @@ final class FeedController: ObservableObject {
     }
     
     func reload() {
+        self.isLoading = true
         self.stories.removeAll()
 
         topstories.queryLimited(toFirst: 100).observeSingleEvent(of: .value) { snapshot in
@@ -51,6 +53,7 @@ final class FeedController: ObservableObject {
                     }
                 }
             }
+            self.isLoading = false
         }
     }
 
