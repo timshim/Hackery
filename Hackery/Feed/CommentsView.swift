@@ -41,11 +41,11 @@ struct CommentsView: View {
                     }
                 }
                 .padding(EdgeInsets(top: 30, leading: 30, bottom: -50, trailing: 30))
-                List {
-                    ForEach(fc.comments, id: \.id) { comment in
-                        CommentView(comment: comment)
-                            .listRowInsets(EdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 12))
-                            .listRowBackground(Color("cardBg"))
+                ScrollView {
+                    LazyVStack {
+                        ForEach(fc.comments, id: \.id) { comment in
+                            CommentView(comment: comment)
+                        }
                     }
                 }
                 .padding(.top, 50)
@@ -66,11 +66,11 @@ struct CommentView: View {
                 Text(comment.text)
                     .font(.custom("Lato-Regular", size: 16))
                     .foregroundColor(Color("titleColor"))
-                    .padding(EdgeInsets(top: 20, leading: 15, bottom: 15, trailing: 15))
+                    .padding(EdgeInsets(top: 15, leading: 30, bottom: 15, trailing: 30))
                 Text("\(comment.by) \(comment.timeAgo.lowercased())")
                     .font(.custom("Lato-Regular", size: 16))
                     .foregroundColor(Color("subtitleColor"))
-                    .padding(EdgeInsets(top: 5, leading: 15, bottom: 12, trailing: 15))
+                    .padding(EdgeInsets(top: 5, leading: 30, bottom: 12, trailing: 30))
                 Rectangle()
                     .frame(height: 1)
                     .foregroundColor(Color("borderColor"))

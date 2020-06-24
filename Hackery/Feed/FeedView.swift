@@ -17,22 +17,17 @@ struct FeedView: View {
             ZStack {
                 Color("background")
                     .edgesIgnoringSafeArea(.all)
-                List {
-                    ForEach(self.fc.stories, id: \.id) { story in
-                        ZStack {
-                            StoryView(story: story).environmentObject(self.fc)
+                ScrollView {
+                    LazyVStack {
+                        ForEach(self.fc.stories, id: \.id) { story in
                             NavigationLink(destination: SafariView(url: URL(string: story.url)!)) {
-                                EmptyView()
+                                StoryView(story: story)
+                                    .environmentObject(self.fc)
                             }
-                            .frame(width: 0)
-                            .opacity(0)
                         }
-                        .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 1, trailing: 0))
-                        .listRowBackground(Color("background"))
-                    
+                        .cornerRadius(10)
+                        .padding(EdgeInsets(top: 0, leading: 8, bottom: -5, trailing: 8))
                     }
-                    .cornerRadius(10)
-                    .padding(.horizontal, 8)
                 }
                 .padding(.top, 50)
                 .edgesIgnoringSafeArea(.top)
@@ -53,36 +48,16 @@ struct FeedView: View {
                 if fc.isLoading {
                     VStack {
                         Spacer()
-                        LoadingView()
-                            .frame(width: 60, height: 60, alignment: .center)
+                        ProgressView()
                         Spacer()
                     }
                     .edgesIgnoringSafeArea(.all)
                 }
             }
+            .navigationBarHidden(true)
         }
     }
-    
-    init() {
-        UITableView.appearance().tableFooterView = UIView()
-        UITableView.appearance().separatorStyle = .none
-        UITableView.appearance().backgroundColor = .clear
-        UITableView.appearance().showsVerticalScrollIndicator = false
-    }
 }
-
-struct MyButtonStyle: ButtonStyle {
-
-  func makeBody(configuration: Self.Configuration) -> some View {
-    configuration.label
-      .padding()
-      .foregroundColor(.white)
-      .background(configuration.isPressed ? Color.red : Color.blue)
-      .cornerRadius(8.0)
-  }
-
-}
-
 
 struct FeedView_Previews: PreviewProvider {
     static var previews: some View {
