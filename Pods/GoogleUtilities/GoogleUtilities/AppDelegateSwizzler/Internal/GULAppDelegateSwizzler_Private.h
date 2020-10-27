@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-#import <GoogleUtilities/GULAppDelegateSwizzler.h>
-#import <GoogleUtilities/GULMutableDictionary.h>
+#import <Foundation/Foundation.h>
+#import "GoogleUtilities/AppDelegateSwizzler/Public/GoogleUtilities/GULAppDelegateSwizzler.h"
+#import "GoogleUtilities/Network/Public/GoogleUtilities/GULMutableDictionary.h"
 
 @class GULApplication;
 

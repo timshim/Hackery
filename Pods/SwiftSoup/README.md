@@ -1,5 +1,5 @@
 <p align="center" >
-  <img src="https://raw.githubusercontent.com/scinfu/SwiftSoup/master/swifsoup.png" alt="SwiftSoup" title="SwiftSoup">
+  <img src="https://raw.githubusercontent.com/scinfu/SwiftSoup/master/swiftsoup.png" alt="SwiftSoup" title="SwiftSoup">
 </p>
 
 
@@ -20,7 +20,10 @@
 * Clean user-submitted content against a safe white-list, to prevent XSS attacks
 * Output tidy HTML
 `SwiftSoup` is designed to deal with all varieties of HTML found in the wild; from pristine and validating, to invalid tag-soup; `SwiftSoup` will create a sensible parse tree.
+## Swift
+Swift 5 ```>=2.0.0```
 
+Swift 4.2 ```1.7.4```
 
 ## Installation
 

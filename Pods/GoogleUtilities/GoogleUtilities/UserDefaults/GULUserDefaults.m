@@ -12,9 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#import "Private/GULUserDefaults.h"
+#import "GoogleUtilities/UserDefaults/Public/GoogleUtilities/GULUserDefaults.h"
 
-#import <GoogleUtilities/GULLogger.h>
+#import "GoogleUtilities/Logger/Public/GoogleUtilities/GULLogger.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -194,28 +194,6 @@ typedef NS_ENUM(NSInteger, GULUDMessageCode) {
 }
 
 #pragma mark - Private methods
-
-/// Removes all values from the search list entry specified by 'domainName', the current user, and
-/// any host. The change is persistent. Equivalent to -removePersistentDomainForName: of
-/// NSUserDefaults.
-- (void)clearAllData {
-  // On macOS, using `kCFPreferencesCurrentHost` will not set all the keys necessary to match
-  // `NSUserDefaults`.
-#if TARGET_OS_OSX
-  CFStringRef host = kCFPreferencesAnyHost;
-#else
-  CFStringRef host = kCFPreferencesCurrentHost;
-#endif  // TARGET_OS_OSX
-
-  CFArrayRef keyList = CFPreferencesCopyKeyList(_appNameRef, kCFPreferencesCurrentUser, host);
-  if (!keyList) {
-    return;
-  }
-
-  CFPreferencesSetMultiple(NULL, keyList, _appNameRef, kCFPreferencesCurrentUser, host);
-  CFRelease(keyList);
-  [self scheduleSynchronize];
-}
 
 - (void)scheduleSynchronize {
   // Synchronize data using a timer so that multiple set... calls can be coalesced under one
