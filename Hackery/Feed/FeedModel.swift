@@ -6,8 +6,6 @@
 //  Copyright © 2019 Tim Shim. All rights reserved.
 //
 
-import SwiftUI
-
 struct Story: Hashable, Codable, Identifiable {
     var id = 0
     var by = ""

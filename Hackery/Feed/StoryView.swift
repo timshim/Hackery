@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct StoryView: View {
-    @EnvironmentObject private var fc: FeedController
+    @EnvironmentObject private var viewModel: FeedViewModel
     
     var story: Story
     @State private var showComments = false
@@ -40,15 +40,15 @@ struct StoryView: View {
                     Spacer()
                     if self.story.kids.count > 0 {
                         Button(action: {
-                            self.fc.comments.removeAll()
-                            self.fc.loadComments(story: self.story)
+                            viewModel.comments.removeAll()
+                            viewModel.loadComments(story: self.story)
                             self.showComments = true
                         }) {
-                            CommentButton()
+                            CommentButton(count: story.kids.count)
                         }
                         .buttonStyle(BorderlessButtonStyle())
                         .sheet(isPresented: $showComments) {
-                            CommentsView(story: self.story).environmentObject(self.fc)
+                            CommentsView(story: self.story).environmentObject(viewModel)
                         }
                     }
                 }

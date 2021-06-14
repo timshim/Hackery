@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct CommentsView: View {
-    @EnvironmentObject private var fc: FeedController
+    @EnvironmentObject private var viewModel: FeedViewModel
     
     var story: Story
 
@@ -43,7 +43,7 @@ struct CommentsView: View {
                 .padding(EdgeInsets(top: 30, leading: 30, bottom: -50, trailing: 30))
                 ScrollView {
                     LazyVStack {
-                        ForEach(fc.comments, id: \.id) { comment in
+                        ForEach(viewModel.comments, id: \.id) { comment in
                             CommentView(comment: comment)
                         }
                     }

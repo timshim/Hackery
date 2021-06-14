@@ -10,7 +10,7 @@ import SwiftUI
 import SafariServices
 
 struct FeedView: View {
-    @EnvironmentObject private var fc: FeedController
+    @EnvironmentObject private var viewModel: FeedViewModel
     
     var body: some View {
         NavigationView {
@@ -19,10 +19,12 @@ struct FeedView: View {
                     .edgesIgnoringSafeArea(.all)
                 ScrollView {
                     LazyVStack {
-                        ForEach(self.fc.stories, id: \.id) { story in
-                            NavigationLink(destination: SafariView(url: URL(string: story.url)!)) {
-                                StoryView(story: story)
-                                    .environmentObject(self.fc)
+                        ForEach(viewModel.stories, id: \.id) { story in
+                            if let storyUrl = story.url, let url = URL(string: storyUrl) {
+                                NavigationLink(destination: SafariView(url: url)) {
+                                    StoryView(story: story)
+                                        .environmentObject(viewModel)
+                                }
                             }
                         }
                         .cornerRadius(10)
@@ -32,9 +34,15 @@ struct FeedView: View {
                 .padding(.top, 50)
                 .edgesIgnoringSafeArea(.top)
                 VStack {
+                    Color("background")
+                        .frame(maxWidth: .infinity, minHeight: 50, idealHeight: 50, maxHeight: 50, alignment: .top)
+                    Spacer()
+                }
+                .edgesIgnoringSafeArea(.all)
+                VStack {
                     Spacer()
                     Button(action: {
-                        self.fc.reload()
+                        viewModel.loadTopStories()
                     }) {
                         Image(systemName: "arrow.clockwise")
                             .font(.system(size: 24, weight: .bold, design: .rounded))
@@ -45,7 +53,7 @@ struct FeedView: View {
                     .padding()
                     .shadow(color: Color("shadow"), radius: 20, x: 0, y: 20)
                 }
-                if fc.isLoading {
+                if viewModel.isLoading {
                     VStack {
                         Spacer()
                         ProgressView()
@@ -55,6 +63,9 @@ struct FeedView: View {
                 }
             }
             .navigationBarHidden(true)
+        }
+        .onAppear {
+            viewModel.loadTopStories()
         }
     }
 }
