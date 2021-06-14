@@ -10,10 +10,10 @@ import SwiftUI
 
 struct StoryView: View {
     @EnvironmentObject private var viewModel: FeedViewModel
+    @State private var showComments = false
     
     var story: Story
-    @State private var showComments = false
-
+    
     var body: some View {
         ZStack {
             Color("cardBg")
@@ -40,8 +40,6 @@ struct StoryView: View {
                     Spacer()
                     if self.story.kids.count > 0 {
                         Button(action: {
-                            viewModel.comments.removeAll()
-                            viewModel.loadComments(story: self.story)
                             self.showComments = true
                         }) {
                             CommentButton(count: story.kids.count)

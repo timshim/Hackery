@@ -17,6 +17,14 @@ struct FeedView: View {
             ZStack {
                 Color("background")
                     .edgesIgnoringSafeArea(.all)
+                if viewModel.isLoading {
+                    VStack {
+                        Spacer()
+                        ProgressView()
+                        Spacer()
+                    }
+                    .edgesIgnoringSafeArea(.all)
+                }
                 ScrollView {
                     LazyVStack {
                         ForEach(viewModel.stories, id: \.id) { story in
@@ -52,14 +60,6 @@ struct FeedView: View {
                     .background(Circle().foregroundColor(Color("cardBg")).frame(width: 60, height: 60))
                     .padding()
                     .shadow(color: Color("shadow"), radius: 20, x: 0, y: 20)
-                }
-                if viewModel.isLoading {
-                    VStack {
-                        Spacer()
-                        ProgressView()
-                        Spacer()
-                    }
-                    .edgesIgnoringSafeArea(.all)
                 }
             }
             .navigationBarHidden(true)

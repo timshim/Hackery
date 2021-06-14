@@ -51,6 +51,17 @@ struct CommentsView: View {
                 .padding(.top, 50)
                 .edgesIgnoringSafeArea(.top)
             }
+            if viewModel.isLoading {
+                VStack {
+                    Spacer()
+                    ProgressView()
+                    Spacer()
+                }
+                .edgesIgnoringSafeArea(.all)
+            }
+        }
+        .onAppear {
+            viewModel.loadComments(story: story)
         }
     }
 }
