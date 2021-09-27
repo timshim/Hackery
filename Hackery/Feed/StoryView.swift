@@ -19,6 +19,7 @@ struct StoryView: View {
             Color("cardBg")
             VStack(alignment: .leading, spacing: 5) {
                 Text(self.story.title)
+                    .multilineTextAlignment(.leading)
                     .font(.custom("Lato-Bold", size: 18))
                     .foregroundColor(Color("titleColor"))
                     .padding(EdgeInsets(top: 16, leading: 16, bottom: 0, trailing: 16))
