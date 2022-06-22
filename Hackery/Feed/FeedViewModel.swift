@@ -7,8 +7,6 @@
 //
 
 import SwiftUI
-import Combine
-import SafariServices
 import SwiftSoup
 
 final class FeedViewModel: ObservableObject {

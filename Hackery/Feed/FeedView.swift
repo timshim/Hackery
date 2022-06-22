@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import SafariServices
 
 struct FeedView: View {
     @EnvironmentObject private var viewModel: FeedViewModel
