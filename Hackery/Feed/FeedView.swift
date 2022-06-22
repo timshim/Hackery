@@ -13,7 +13,7 @@ struct FeedView: View {
     @EnvironmentObject private var viewModel: FeedViewModel
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 Color("background")
                     .edgesIgnoringSafeArea(.all)
