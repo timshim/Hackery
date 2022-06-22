@@ -3,7 +3,7 @@
 # Hackery
 A HackerNews client made using SwiftUI
 
-- Updated for Xcode 13 and iOS 15.
+- Updated for Xcode 14 and iOS 16.
 - Swift Package Manager for dependencies.
 - Removed use of Firebase SDK.
 - Converted to use new SwiftUI lifecycle.
@@ -17,4 +17,4 @@ Consider making a pull request if you think you can help improve the app!
 </p>
 
 ### Requirements
-Xcode 13, iOS 15 (Works on iPhone and iPad)
+Xcode 14, iOS 16 (Works on iPhone and iPad)
