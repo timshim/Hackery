@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-//import Firebase
 
 @main
 struct Hackery: App {
