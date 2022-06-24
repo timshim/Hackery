@@ -20,12 +20,18 @@ struct FeedView: View {
                 }
                 ContentView(viewModel: viewModel)
                 StatusBarView()
-                ButtonView(tapped: viewModel.loadTopStories)
+                ButtonView(tapped: loadTopStories)
             }
             .navigationBarHidden(true)
         }
         .onAppear {
-            viewModel.loadTopStories()
+            loadTopStories()
+        }
+    }
+    
+    private func loadTopStories() {
+        Task {
+            await viewModel.loadTopStories()
         }
     }
 }

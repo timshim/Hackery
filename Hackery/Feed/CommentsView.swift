@@ -62,7 +62,13 @@ struct CommentsView: View {
             }
         }
         .onAppear {
-            viewModel.loadComments(story: story)
+            loadComments(for: story)
+        }
+    }
+    
+    private func loadComments(for story: Story) {
+        Task {
+            await viewModel.loadComments(for: story)
         }
     }
 }
