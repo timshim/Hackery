@@ -61,19 +61,18 @@ struct ContentView: View {
                 .padding(EdgeInsets(top: 0, leading: 8, bottom: -5, trailing: 8))
             }
         }
-        .padding(.top, 50)
-        .edgesIgnoringSafeArea(.top)
     }
 }
 
 struct StatusBarView: View {
     var body: some View {
-        VStack {
+        GeometryReader { proxy in
             Color("background")
-                .frame(maxWidth: .infinity, minHeight: 50, idealHeight: 50, maxHeight: 50, alignment: .top)
-            Spacer()
+                .frame(maxWidth: .infinity)
+                .frame(height: proxy.safeAreaInsets.top)
+                .edgesIgnoringSafeArea(.all)
         }
-        .edgesIgnoringSafeArea(.all)
+        
     }
 }
 
