@@ -1,0 +1,697 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		48227EAF22AE2A82009E85EE /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48227EAE22AE2A82009E85EE /* FeedView.swift */; };
+		48227EB122AE2B08009E85EE /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48227EB022AE2B08009E85EE /* FeedViewModel.swift */; };
+		484A62742A80117E0029118A /* BookmarksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484A62732A80117E0029118A /* BookmarksView.swift */; };
+		4854FA9D22B73C18001EC4AE /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4854FA9C22B73C18001EC4AE /* FeedModel.swift */; };
+		485E4B7022AE27CF00626464 /* Hackery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485E4B6F22AE27CF00626464 /* Hackery.swift */; };
+		485E4B7622AE27CF00626464 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 485E4B7522AE27CF00626464 /* Assets.xcassets */; };
+		485E4B7922AE27CF00626464 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 485E4B7822AE27CF00626464 /* Preview Assets.xcassets */; };
+		488819DB2548137C007B57F2 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 488819D52548067A007B57F2 /* Lato-Bold.ttf */; };
+		488819E125481381007B57F2 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 488819D62548067A007B57F2 /* Lato-Regular.ttf */; };
+		48A0125D2B997A2000CE4A95 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 48A0125C2B997A2000CE4A95 /* SwiftSoup */; };
+		48B7F86022B7723500FF21AD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B7F85F22B7723500FF21AD /* Extensions.swift */; };
+		48B7F86322B7748B00FF21AD /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B7F86222B7748B00FF21AD /* CommentsView.swift */; };
+		48BB402C26776E8A00490132 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 48BB402B26776E8A00490132 /* SwiftSoup */; };
+		48CABD662A7FE758004F61FC /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = 48CABD652A7FE758004F61FC /* RealityKitContent */; };
+		48CABD682A7FE758004F61FC /* HackeryV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CABD672A7FE758004F61FC /* HackeryV.swift */; };
+		48CABD6A2A7FE758004F61FC /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CABD692A7FE758004F61FC /* FeedView.swift */; };
+		48CABD6C2A7FE75B004F61FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48CABD6B2A7FE75B004F61FC /* Assets.xcassets */; };
+		48CABD6F2A7FE75B004F61FC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48CABD6E2A7FE75B004F61FC /* Preview Assets.xcassets */; };
+		48CABD752A7FE936004F61FC /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4854FA9C22B73C18001EC4AE /* FeedModel.swift */; };
+		48CABD792A7FEA30004F61FC /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CABD782A7FEA30004F61FC /* FeedViewModel.swift */; };
+		48CABD7A2A7FEA8A004F61FC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B7F85F22B7723500FF21AD /* Extensions.swift */; };
+		48CABD7C2A7FEAA3004F61FC /* StoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CABD7B2A7FEAA3004F61FC /* StoryView.swift */; };
+		48CABD7E2A7FEAB7004F61FC /* CommentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CABD7D2A7FEAB7004F61FC /* CommentButton.swift */; };
+		48CABD802A7FEACC004F61FC /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CABD7F2A7FEACC004F61FC /* SafariView.swift */; };
+		48CABD822A7FEAD5004F61FC /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CABD812A7FEAD5004F61FC /* CommentsView.swift */; };
+		48EE5B7B248351E500B8ABC7 /* StoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EE5B7A248351E500B8ABC7 /* StoryView.swift */; };
+		48EE5B7F2483522A00B8ABC7 /* CommentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EE5B7E2483522A00B8ABC7 /* CommentButton.swift */; };
+		48EE5B81248355BF00B8ABC7 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EE5B80248355BF00B8ABC7 /* SafariView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		487DD6CA2547FF9A006B3876 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		48227EAE22AE2A82009E85EE /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
+		48227EB022AE2B08009E85EE /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
+		484A62732A80117E0029118A /* BookmarksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksView.swift; sourceTree = "<group>"; };
+		4854FA9C22B73C18001EC4AE /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
+		485E4B6C22AE27CF00626464 /* Hackery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hackery.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		485E4B6F22AE27CF00626464 /* Hackery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hackery.swift; sourceTree = "<group>"; };
+		485E4B7522AE27CF00626464 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		485E4B7822AE27CF00626464 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		487DD6BA2547FF9A006B3876 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		487DD6BC2547FF9A006B3876 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		488819D52548067A007B57F2 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
+		488819D62548067A007B57F2 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
+		48B7F85F22B7723500FF21AD /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		48B7F86222B7748B00FF21AD /* CommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsView.swift; sourceTree = "<group>"; };
+		48BB404526777DA600490132 /* Hackery.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hackery.entitlements; sourceTree = "<group>"; };
+		48CABD612A7FE758004F61FC /* HackeryV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HackeryV.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		48CABD642A7FE758004F61FC /* RealityKitContent */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealityKitContent; sourceTree = "<group>"; };
+		48CABD672A7FE758004F61FC /* HackeryV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HackeryV.swift; sourceTree = "<group>"; };
+		48CABD692A7FE758004F61FC /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
+		48CABD6B2A7FE75B004F61FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		48CABD6E2A7FE75B004F61FC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		48CABD782A7FEA30004F61FC /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
+		48CABD7B2A7FEAA3004F61FC /* StoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryView.swift; sourceTree = "<group>"; };
+		48CABD7D2A7FEAB7004F61FC /* CommentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentButton.swift; sourceTree = "<group>"; };
+		48CABD7F2A7FEACC004F61FC /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
+		48CABD812A7FEAD5004F61FC /* CommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsView.swift; sourceTree = "<group>"; };
+		48EE5B7A248351E500B8ABC7 /* StoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryView.swift; sourceTree = "<group>"; };
+		48EE5B7E2483522A00B8ABC7 /* CommentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentButton.swift; sourceTree = "<group>"; };
+		48EE5B80248355BF00B8ABC7 /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		485E4B6922AE27CF00626464 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				48BB402C26776E8A00490132 /* SwiftSoup in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		48CABD5E2A7FE757004F61FC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				48CABD662A7FE758004F61FC /* RealityKitContent in Frameworks */,
+				48A0125D2B997A2000CE4A95 /* SwiftSoup in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		484A62722A8011610029118A /* Bookmarks */ = {
+			isa = PBXGroup;
+			children = (
+				484A62732A80117E0029118A /* BookmarksView.swift */,
+			);
+			path = Bookmarks;
+			sourceTree = "<group>";
+		};
+		4854FA9E22B74491001EC4AE /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				485E4B6F22AE27CF00626464 /* Hackery.swift */,
+				48BB404526777DA600490132 /* Hackery.entitlements */,
+				485E4B7522AE27CF00626464 /* Assets.xcassets */,
+				485E4B7722AE27CF00626464 /* Preview Content */,
+				48B7F85F22B7723500FF21AD /* Extensions.swift */,
+				488819D42548067A007B57F2 /* Fonts */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		4854FA9F22B744BC001EC4AE /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				4854FA9C22B73C18001EC4AE /* FeedModel.swift */,
+				48227EAE22AE2A82009E85EE /* FeedView.swift */,
+				48227EB022AE2B08009E85EE /* FeedViewModel.swift */,
+				48EE5B7A248351E500B8ABC7 /* StoryView.swift */,
+				48EE5B7E2483522A00B8ABC7 /* CommentButton.swift */,
+				48EE5B80248355BF00B8ABC7 /* SafariView.swift */,
+				48B7F86222B7748B00FF21AD /* CommentsView.swift */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		485E4B6322AE27CF00626464 = {
+			isa = PBXGroup;
+			children = (
+				485E4B6E22AE27CF00626464 /* Hackery */,
+				48CABD622A7FE758004F61FC /* HackeryV */,
+				48CABD632A7FE758004F61FC /* Packages */,
+				485E4B6D22AE27CF00626464 /* Products */,
+				51FCD10488BC17C0CAFBED90 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		485E4B6D22AE27CF00626464 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				485E4B6C22AE27CF00626464 /* Hackery.app */,
+				48CABD612A7FE758004F61FC /* HackeryV.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		485E4B6E22AE27CF00626464 /* Hackery */ = {
+			isa = PBXGroup;
+			children = (
+				4854FA9E22B74491001EC4AE /* Main */,
+				4854FA9F22B744BC001EC4AE /* Feed */,
+			);
+			path = Hackery;
+			sourceTree = "<group>";
+		};
+		485E4B7722AE27CF00626464 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				485E4B7822AE27CF00626464 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		488819D42548067A007B57F2 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				488819D52548067A007B57F2 /* Lato-Bold.ttf */,
+				488819D62548067A007B57F2 /* Lato-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		48CABD622A7FE758004F61FC /* HackeryV */ = {
+			isa = PBXGroup;
+			children = (
+				48CABD732A7FE7F8004F61FC /* Main */,
+				48CABD742A7FE81A004F61FC /* Feed */,
+				484A62722A8011610029118A /* Bookmarks */,
+				48CABD6D2A7FE75B004F61FC /* Preview Content */,
+			);
+			path = HackeryV;
+			sourceTree = "<group>";
+		};
+		48CABD632A7FE758004F61FC /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				48CABD642A7FE758004F61FC /* RealityKitContent */,
+			);
+			path = Packages;
+			sourceTree = "<group>";
+		};
+		48CABD6D2A7FE75B004F61FC /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				48CABD6E2A7FE75B004F61FC /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		48CABD732A7FE7F8004F61FC /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				48CABD672A7FE758004F61FC /* HackeryV.swift */,
+				48CABD6B2A7FE75B004F61FC /* Assets.xcassets */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		48CABD742A7FE81A004F61FC /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				48CABD692A7FE758004F61FC /* FeedView.swift */,
+				48CABD782A7FEA30004F61FC /* FeedViewModel.swift */,
+				48CABD7B2A7FEAA3004F61FC /* StoryView.swift */,
+				48CABD7D2A7FEAB7004F61FC /* CommentButton.swift */,
+				48CABD7F2A7FEACC004F61FC /* SafariView.swift */,
+				48CABD812A7FEAD5004F61FC /* CommentsView.swift */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		51FCD10488BC17C0CAFBED90 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				487DD6BA2547FF9A006B3876 /* WidgetKit.framework */,
+				487DD6BC2547FF9A006B3876 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		485E4B6B22AE27CF00626464 /* Hackery */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 485E4B8022AE27CF00626464 /* Build configuration list for PBXNativeTarget "Hackery" */;
+			buildPhases = (
+				485E4B6822AE27CF00626464 /* Sources */,
+				485E4B6922AE27CF00626464 /* Frameworks */,
+				485E4B6A22AE27CF00626464 /* Resources */,
+				487DD6CA2547FF9A006B3876 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Hackery;
+			packageProductDependencies = (
+				48BB402B26776E8A00490132 /* SwiftSoup */,
+			);
+			productName = Hackery;
+			productReference = 485E4B6C22AE27CF00626464 /* Hackery.app */;
+			productType = "com.apple.product-type.application";
+		};
+		48CABD602A7FE757004F61FC /* HackeryV */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 48CABD722A7FE75B004F61FC /* Build configuration list for PBXNativeTarget "HackeryV" */;
+			buildPhases = (
+				48CABD5D2A7FE757004F61FC /* Sources */,
+				48CABD5E2A7FE757004F61FC /* Frameworks */,
+				48CABD5F2A7FE757004F61FC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HackeryV;
+			packageProductDependencies = (
+				48CABD652A7FE758004F61FC /* RealityKitContent */,
+				48A0125C2B997A2000CE4A95 /* SwiftSoup */,
+			);
+			productName = HackeryV;
+			productReference = 48CABD612A7FE758004F61FC /* HackeryV.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		485E4B6422AE27CF00626464 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1520;
+				ORGANIZATIONNAME = "Tim Shim";
+				TargetAttributes = {
+					485E4B6B22AE27CF00626464 = {
+						CreatedOnToolsVersion = 11.0;
+					};
+					48CABD602A7FE757004F61FC = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = 485E4B6722AE27CF00626464 /* Build configuration list for PBXProject "Hackery" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 485E4B6322AE27CF00626464;
+			packageReferences = (
+				48BB402526775B7300490132 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
+			);
+			productRefGroup = 485E4B6D22AE27CF00626464 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				485E4B6B22AE27CF00626464 /* Hackery */,
+				48CABD602A7FE757004F61FC /* HackeryV */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		485E4B6A22AE27CF00626464 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				488819E125481381007B57F2 /* Lato-Regular.ttf in Resources */,
+				488819DB2548137C007B57F2 /* Lato-Bold.ttf in Resources */,
+				485E4B7922AE27CF00626464 /* Preview Assets.xcassets in Resources */,
+				485E4B7622AE27CF00626464 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		48CABD5F2A7FE757004F61FC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				48CABD6F2A7FE75B004F61FC /* Preview Assets.xcassets in Resources */,
+				48CABD6C2A7FE75B004F61FC /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		485E4B6822AE27CF00626464 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				48227EAF22AE2A82009E85EE /* FeedView.swift in Sources */,
+				48B7F86022B7723500FF21AD /* Extensions.swift in Sources */,
+				485E4B7022AE27CF00626464 /* Hackery.swift in Sources */,
+				48EE5B7F2483522A00B8ABC7 /* CommentButton.swift in Sources */,
+				48EE5B81248355BF00B8ABC7 /* SafariView.swift in Sources */,
+				48227EB122AE2B08009E85EE /* FeedViewModel.swift in Sources */,
+				4854FA9D22B73C18001EC4AE /* FeedModel.swift in Sources */,
+				48EE5B7B248351E500B8ABC7 /* StoryView.swift in Sources */,
+				48B7F86322B7748B00FF21AD /* CommentsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		48CABD5D2A7FE757004F61FC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				48CABD7C2A7FEAA3004F61FC /* StoryView.swift in Sources */,
+				48CABD7A2A7FEA8A004F61FC /* Extensions.swift in Sources */,
+				48CABD822A7FEAD5004F61FC /* CommentsView.swift in Sources */,
+				48CABD6A2A7FE758004F61FC /* FeedView.swift in Sources */,
+				48CABD752A7FE936004F61FC /* FeedModel.swift in Sources */,
+				48CABD802A7FEACC004F61FC /* SafariView.swift in Sources */,
+				48CABD792A7FEA30004F61FC /* FeedViewModel.swift in Sources */,
+				48CABD7E2A7FEAB7004F61FC /* CommentButton.swift in Sources */,
+				484A62742A80117E0029118A /* BookmarksView.swift in Sources */,
+				48CABD682A7FE758004F61FC /* HackeryV.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		485E4B7E22AE27CF00626464 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = Hackery/Main/Hackery.entitlements;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		485E4B7F22AE27CF00626464 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = Hackery/Main/Hackery.entitlements;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		485E4B8122AE27CF00626464 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Hackery/Main/Hackery.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "Hackery/Main/Preview\\ Content";
+				DEVELOPMENT_TEAM = QKNVPTRYEV;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Hackery/Main/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Hackery;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.4;
+				PRODUCT_BUNDLE_IDENTIFIER = com.timshim.Hackery;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		485E4B8222AE27CF00626464 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Hackery/Main/Hackery.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "Hackery/Main/Preview\\ Content";
+				DEVELOPMENT_TEAM = QKNVPTRYEV;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Hackery/Main/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Hackery;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.4;
+				PRODUCT_BUNDLE_IDENTIFIER = com.timshim.Hackery;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		48CABD702A7FE75B004F61FC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"HackeryV/Preview Content\"";
+				DEVELOPMENT_TEAM = QKNVPTRYEV;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Hackery;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.timshim.HackeryV;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = xros;
+				SUPPORTED_PLATFORMS = "xros xrsimulator";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 1.0;
+			};
+			name = Debug;
+		};
+		48CABD712A7FE75B004F61FC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"HackeryV/Preview Content\"";
+				DEVELOPMENT_TEAM = QKNVPTRYEV;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Hackery;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.timshim.HackeryV;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = xros;
+				SUPPORTED_PLATFORMS = "xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 1.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		485E4B6722AE27CF00626464 /* Build configuration list for PBXProject "Hackery" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				485E4B7E22AE27CF00626464 /* Debug */,
+				485E4B7F22AE27CF00626464 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		485E4B8022AE27CF00626464 /* Build configuration list for PBXNativeTarget "Hackery" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				485E4B8122AE27CF00626464 /* Debug */,
+				485E4B8222AE27CF00626464 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		48CABD722A7FE75B004F61FC /* Build configuration list for PBXNativeTarget "HackeryV" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				48CABD702A7FE75B004F61FC /* Debug */,
+				48CABD712A7FE75B004F61FC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		48BB402526775B7300490132 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scinfu/SwiftSoup";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		48A0125C2B997A2000CE4A95 /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 48BB402526775B7300490132 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
+		};
+		48BB402B26776E8A00490132 /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 48BB402526775B7300490132 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
+		};
+		48CABD652A7FE758004F61FC /* RealityKitContent */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RealityKitContent;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 485E4B6422AE27CF00626464 /* Project object */;
+}
