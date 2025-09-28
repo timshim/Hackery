@@ -57,7 +57,7 @@ struct ContentView: View {
                         }
                     }
                 }
-                .cornerRadius(10)
+                .cornerRadius(16)
                 .padding(EdgeInsets(top: 0, leading: 8, bottom: -5, trailing: 8))
             }
         }
@@ -91,9 +91,8 @@ struct ButtonView: View {
                     .foregroundColor(Color("titleColor"))
                     .padding(.bottom, 6)
             }
-            .background(Circle().foregroundColor(Color("cardBg")).frame(width: 60, height: 60))
-            .padding()
-            .shadow(color: Color("shadow"), radius: 20, x: 0, y: 20)
+            .frame(width: 60, height: 60)
+            .glassEffect(.clear)
         }
     }
 }
