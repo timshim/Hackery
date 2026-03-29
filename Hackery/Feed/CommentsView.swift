@@ -11,15 +11,18 @@ import SwiftUI
 struct CommentsView: View {
   @Environment(FeedViewModel.self) private var viewModel
   @Environment(BookmarkStore.self) private var bookmarkStore
+  @State private var showGlow = false
+  @State private var showSafari = false
 
   var story: Story
 
   var body: some View {
-    ZStack {
-      Color("cardBg")
-        .ignoresSafeArea()
-      VStack(alignment: .leading) {
-        VStack(alignment: .leading, spacing: 5) {
+    NavigationStack {
+      ZStack {
+        Color("cardBg")
+          .ignoresSafeArea()
+        VStack(alignment: .leading) {
+          VStack(alignment: .leading, spacing: 5) {
           HStack(alignment: .top) {
             Text(story.title)
               .multilineTextAlignment(.leading)
@@ -55,16 +58,42 @@ struct CommentsView: View {
           }
         }
         .padding(EdgeInsets(top: 30, leading: 30, bottom: -50, trailing: 30))
+        .contentShape(Rectangle())
+        .onTapGesture {
+          if let _ = URL(string: story.url), !story.url.isEmpty {
+            showSafari = true
+          }
+        }
+        .fullScreenCover(isPresented: $showSafari) {
+          if let url = URL(string: story.url) {
+            PushedSafariView(url: url)
+              .ignoresSafeArea()
+          }
+        }
         ScrollView {
           LazyVStack {
             ForEach(viewModel.comments) { comment in
               CommentView(comment: comment)
+            }
+            if viewModel.hasMoreComments && !viewModel.comments.isEmpty && !viewModel.isLoading {
+              Color.clear
+                .frame(height: 1)
+                .onAppear {
+                  Task { await viewModel.loadMoreComments() }
+                }
             }
           }
         }
         .padding(.top, 50)
         .ignoresSafeArea(edges: .top)
       }
+      VStack {
+        Spacer()
+        PaginationGlow()
+      }
+      .ignoresSafeArea()
+      .allowsHitTesting(false)
+      .opacity(showGlow ? 1 : 0)
       if viewModel.isLoading {
         VStack {
           Spacer()
@@ -73,14 +102,23 @@ struct CommentsView: View {
         }
         .ignoresSafeArea()
       }
-    }
-    .overlay(alignment: .bottom) {
-      if let error = viewModel.error {
-        ErrorBannerView(message: error)
+      }
+      .navigationBarHidden(true)
+      .overlay(alignment: .bottom) {
+        if let error = viewModel.error {
+          ErrorBannerView(message: error)
+        }
       }
     }
     .onAppear {
       viewModel.loadComments(for: story)
+    }
+    .onChange(of: viewModel.isLoadingMoreComments) { _, loading in
+      if loading {
+        withAnimation(.easeIn(duration: 0.3)) { showGlow = true }
+      } else {
+        withAnimation(.easeOut(duration: 0.6)) { showGlow = false }
+      }
     }
   }
 }
@@ -103,18 +141,36 @@ struct CommentView: View {
     return result
   }
 
+  private var leadingPadding: CGFloat {
+    24 + CGFloat(comment.depth) * 16
+  }
+
   var body: some View {
     ZStack {
       Color("cardBg")
         .ignoresSafeArea()
-      VStack(alignment: .leading) {
-        Text(attributedText)
-          .multilineTextAlignment(.leading)
-          .padding(EdgeInsets(top: 15, leading: 30, bottom: 15, trailing: 30))
-        Text("\(comment.by) \(comment.timeAgo.lowercased())")
-          .font(.custom("Lato-Regular", size: 16, relativeTo: .body))
-          .foregroundColor(Color("subtitleColor"))
-          .padding(EdgeInsets(top: 5, leading: 30, bottom: 12, trailing: 30))
+      VStack(spacing: 0) {
+        VStack(alignment: .leading) {
+          Text(attributedText)
+            .multilineTextAlignment(.leading)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(EdgeInsets(top: 15, leading: leadingPadding, bottom: 15, trailing: 30))
+          Text("\(comment.by) \(comment.timeAgo.lowercased())")
+            .font(.custom("Lato-Regular", size: 16, relativeTo: .body))
+            .foregroundColor(Color("subtitleColor"))
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(EdgeInsets(top: 5, leading: leadingPadding, bottom: 12, trailing: 30))
+        }
+        .overlay(alignment: .leading) {
+          if comment.depth > 0 {
+            Rectangle()
+              .fill(Color("borderColor"))
+              .frame(width: 2)
+              .padding(.leading, leadingPadding - 16)
+              .padding(.bottom, 12)
+              .padding(.top, 12)
+          }
+        }
         Rectangle()
           .frame(height: 1)
           .foregroundColor(Color("borderColor"))

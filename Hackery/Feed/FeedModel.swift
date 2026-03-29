@@ -71,12 +71,13 @@ struct Comment: Identifiable, Hashable {
   let type: String
   let deleted: Bool
   let dead: Bool
+  let depth: Int
 
   var timeAgo: String {
     Date(timeIntervalSince1970: TimeInterval(time)).relativeTime
   }
 
-  init(from item: HNItem, parsedText: String? = nil) {
+  init(from item: HNItem, parsedText: String? = nil, depth: Int = 0) {
     self.id = item.id
     self.by = item.by ?? "[deleted]"
     self.kids = item.kids ?? []
@@ -86,6 +87,7 @@ struct Comment: Identifiable, Hashable {
     self.type = item.type ?? "comment"
     self.deleted = item.deleted ?? false
     self.dead = item.dead ?? false
+    self.depth = depth
   }
 }
 

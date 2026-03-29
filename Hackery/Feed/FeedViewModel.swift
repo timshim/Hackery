@@ -11,6 +11,8 @@ import SwiftSoup
 
 private let baseURL = "https://hacker-news.firebaseio.com/v0"
 private let pageSize = 25
+private let commentPageSize = 3
+private let maxCommentDepth = 3
 
 @MainActor
 @Observable
@@ -20,12 +22,15 @@ final class FeedViewModel {
   var comments = [Comment]()
   var isLoading = false
   var isLoadingMore = false
+  var isLoadingMoreComments = false
   var error: String?
 
   private let decoder = JSONDecoder()
   private var currentTask: Task<Void, Never>?
   private var allStoryIds = [Int]()
   private var loadedCount = 0
+  private var allTopLevelCommentIds = [Int]()
+  private var loadedCommentCount = 0
 
   func loadTopStories(refresh: Bool = false) {
     currentTask?.cancel()
@@ -58,7 +63,7 @@ final class FeedViewModel {
       } catch is CancellationError {
         // no-op
       } catch {
-        self.error = error.localizedDescription
+        setError(error)
       }
 
       isLoading = false
@@ -81,7 +86,7 @@ final class FeedViewModel {
     } catch is CancellationError {
       // no-op
     } catch {
-      self.error = error.localizedDescription
+      setError(error)
     }
 
     isLoadingMore = false
@@ -96,47 +101,103 @@ final class FeedViewModel {
     isLoading = true
     error = nil
     comments.removeAll()
+    allTopLevelCommentIds = story.kids
+    loadedCommentCount = 0
 
     currentTask = Task {
       do {
-        let fetched = try await withThrowingTaskGroup(of: (Int, Comment?).self) { group in
-          for (index, id) in story.kids.enumerated() {
-            group.addTask { [decoder] in
-              try Task.checkCancellation()
-              guard let url = URL(string: "\(baseURL)/item/\(id).json") else {
-                return (index, nil)
-              }
-              let (data, _) = try await URLSession.shared.data(from: url)
-              let item = try decoder.decode(HNItem.self, from: data)
-
-              var parsedText: String?
-              if let text = item.text {
-                parsedText = Self.parseHTML(text)
-              }
-
-              return (index, Comment(from: item, parsedText: parsedText))
-            }
-          }
-
-          var results = [(Int, Comment?)]()
-          for try await result in group {
-            results.append(result)
-          }
-          return results
-            .sorted { $0.0 < $1.0 }
-            .compactMap { $0.1 }
-        }
+        let firstBatch = Array(allTopLevelCommentIds.prefix(commentPageSize))
+        let fetched = try await fetchCommentTree(ids: firstBatch, depth: 0)
 
         try Task.checkCancellation()
-        comments = fetched.filter { !$0.deleted && !$0.dead }
+        comments = fetched
+        loadedCommentCount = commentPageSize
       } catch is CancellationError {
         // no-op
       } catch {
-        self.error = error.localizedDescription
+        setError(error)
       }
 
       isLoading = false
     }
+  }
+
+  func loadMoreComments() async {
+    guard !isLoadingMoreComments,
+          loadedCommentCount < allTopLevelCommentIds.count else { return }
+
+    isLoadingMoreComments = true
+    error = nil
+
+    let nextIds = Array(allTopLevelCommentIds.dropFirst(loadedCommentCount).prefix(commentPageSize))
+    do {
+      let more = try await fetchCommentTree(ids: nextIds, depth: 0)
+      comments.append(contentsOf: more)
+      loadedCommentCount += commentPageSize
+    } catch is CancellationError {
+      // no-op
+    } catch {
+      setError(error)
+    }
+
+    isLoadingMoreComments = false
+  }
+
+  var hasMoreComments: Bool {
+    loadedCommentCount < allTopLevelCommentIds.count
+  }
+
+  private func fetchCommentTree(ids: [Int], depth: Int) async throws -> [Comment] {
+    let fetched = try await withThrowingTaskGroup(of: (Int, (Comment, [Comment])?).self) { group in
+      for (index, id) in ids.enumerated() {
+        group.addTask { [decoder] in
+          try Task.checkCancellation()
+          guard let url = URL(string: "\(baseURL)/item/\(id).json") else {
+            return (index, nil)
+          }
+          let (data, _) = try await URLSession.shared.data(from: url)
+          let item = try decoder.decode(HNItem.self, from: data)
+
+          guard item.deleted != true, item.dead != true else { return (index, nil) }
+
+          var parsedText: String?
+          if let text = item.text {
+            parsedText = Self.parseHTML(text)
+          }
+
+          let comment = Comment(from: item, parsedText: parsedText, depth: depth)
+
+          var childComments = [Comment]()
+          if depth < maxCommentDepth, let kids = item.kids, !kids.isEmpty {
+            childComments = try await self.fetchCommentTree(ids: kids, depth: depth + 1)
+          }
+
+          return (index, (comment, childComments))
+        }
+      }
+
+      var results = [(Int, (Comment, [Comment]))]()
+      for try await result in group {
+        if let pair = result.1 {
+          results.append((result.0, pair))
+        }
+      }
+      return results.sorted { $0.0 < $1.0 }
+    }
+
+    var flat = [Comment]()
+    for (_, (comment, children)) in fetched {
+      flat.append(comment)
+      flat.append(contentsOf: children)
+    }
+    return flat
+  }
+
+  private func setError(_ error: any Error) {
+    let message = error.localizedDescription
+    if message.lowercased() == "cancelled" { return }
+    if (error as? URLError)?.code == .cancelled { return }
+    self.error = message
   }
 
   // MARK: - Private

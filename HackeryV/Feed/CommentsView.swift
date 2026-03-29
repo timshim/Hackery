@@ -10,6 +10,7 @@ import SwiftUI
 
 struct CommentsView: View {
   @Environment(FeedViewModel.self) private var viewModel
+  @State private var showGlow = false
 
   var story: Story
 
@@ -46,10 +47,24 @@ struct CommentsView: View {
             ForEach(viewModel.comments) { comment in
               CommentView(comment: comment)
             }
+            if viewModel.hasMoreComments && !viewModel.comments.isEmpty && !viewModel.isLoading {
+              Color.clear
+                .frame(height: 1)
+                .onAppear {
+                  Task { await viewModel.loadMoreComments() }
+                }
+            }
           }
         }
         .ignoresSafeArea(edges: .top)
       }
+      VStack {
+        Spacer()
+        PaginationGlow()
+      }
+      .ignoresSafeArea()
+      .allowsHitTesting(false)
+      .opacity(showGlow ? 1 : 0)
       if viewModel.isLoading {
         VStack {
           Spacer()
@@ -66,6 +81,13 @@ struct CommentsView: View {
     }
     .onAppear {
       viewModel.loadComments(for: story)
+    }
+    .onChange(of: viewModel.isLoadingMoreComments) { _, loading in
+      if loading {
+        withAnimation(.easeIn(duration: 0.3)) { showGlow = true }
+      } else {
+        withAnimation(.easeOut(duration: 0.6)) { showGlow = false }
+      }
     }
   }
 }
@@ -87,16 +109,32 @@ struct CommentView: View {
     return result
   }
 
+  private var leadingPadding: CGFloat {
+    30 + CGFloat(comment.depth) * 16
+  }
+
   var body: some View {
     ZStack {
-      VStack(alignment: .leading) {
-        Text(attributedText)
-          .multilineTextAlignment(.leading)
-          .padding(EdgeInsets(top: 15, leading: 30, bottom: 15, trailing: 30))
-        Text("\(comment.by) \(comment.timeAgo.lowercased())")
-          .font(.system(.body, design: .rounded))
-          .foregroundStyle(.secondary)
-          .padding(EdgeInsets(top: 5, leading: 30, bottom: 12, trailing: 30))
+      VStack(spacing: 0) {
+        VStack(alignment: .leading) {
+          Text(attributedText)
+            .multilineTextAlignment(.leading)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(EdgeInsets(top: 15, leading: leadingPadding, bottom: 15, trailing: 30))
+          Text("\(comment.by) \(comment.timeAgo.lowercased())")
+            .font(.system(.body, design: .rounded))
+            .foregroundStyle(.secondary)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(EdgeInsets(top: 5, leading: leadingPadding, bottom: 12, trailing: 30))
+        }
+        .overlay(alignment: .leading) {
+          if comment.depth > 0 {
+            Rectangle()
+              .fill(.secondary.opacity(0.3))
+              .frame(width: 2)
+              .padding(.leading, leadingPadding - 12)
+          }
+        }
         Rectangle()
           .frame(height: 1)
           .foregroundColor(.secondary)

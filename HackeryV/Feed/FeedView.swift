@@ -106,6 +106,28 @@ struct LoaderView: View {
   }
 }
 
+struct PaginationGlow: View {
+  @State private var pulse = false
+
+  var body: some View {
+    LinearGradient(
+      colors: [
+        Color.clear,
+        Color.blue.opacity(pulse ? 0.3 : 0.1),
+        Color.purple.opacity(pulse ? 0.25 : 0.08)
+      ],
+      startPoint: .top,
+      endPoint: .bottom
+    )
+    .frame(height: 160)
+    .animation(
+      .easeInOut(duration: 0.8).repeatForever(autoreverses: true),
+      value: pulse
+    )
+    .onAppear { pulse = true }
+  }
+}
+
 struct ErrorBannerView: View {
   let message: String
 

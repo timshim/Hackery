@@ -67,17 +67,16 @@ struct StoryListView: View {
   @Environment(FeedViewModel.self) private var viewModel
   @Environment(BookmarkStore.self) private var bookmarkStore
   @Environment(\.isPaging) private var isPaging
+  @State private var selectedURL: URL?
 
   var body: some View {
     List {
       ForEach(viewModel.stories) { story in
         StoryView(story: story)
-          .background {
+          .contentShape(Rectangle())
+          .onTapGesture {
             if let url = URL(string: story.url), !story.url.isEmpty {
-              NavigationLink(destination: SafariView(url: url)) {
-                EmptyView()
-              }
-              .opacity(0)
+              selectedURL = url
             }
           }
         .swipeActions(edge: .trailing) {
@@ -114,6 +113,15 @@ struct StoryListView: View {
     .listStyle(.plain)
     .scrollContentBackground(.hidden)
     .scrollDisabled(isPaging)
+    .fullScreenCover(isPresented: Binding(
+      get: { selectedURL != nil },
+      set: { if !$0 { selectedURL = nil } }
+    )) {
+      if let url = selectedURL {
+        PushedSafariView(url: url)
+          .ignoresSafeArea()
+      }
+    }
   }
 }
 
