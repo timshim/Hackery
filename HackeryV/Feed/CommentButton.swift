@@ -13,7 +13,7 @@ struct CommentButton: View {
 
   var body: some View {
     Text(verbatim: "\(count > 100 ? "100+" : "\(count)") \(count == 1 ? "COMMENT" : "COMMENTS")")
-      .font(.system(.callout, design: .rounded))
+      .font(.custom("Lato-Regular", size: 13, relativeTo: .callout))
       .foregroundStyle(.secondary)
       .padding()
       .accessibilityLabel("\(count) \(count == 1 ? "comment" : "comments")")

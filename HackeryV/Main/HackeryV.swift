@@ -15,6 +15,7 @@ struct HackeryV: App {
 
   private let modelContainer: ModelContainer
   @State private var bookmarkStore: BookmarkStore
+  @State private var showGlow = false
 
   init() {
     let schema = Schema([BookmarkedStory.self])
@@ -40,11 +41,26 @@ struct HackeryV: App {
 
   var body: some Scene {
     WindowGroup {
-      FeedView()
-        .frame(minWidth: 500, maxWidth: 500)
-        .padding()
-        .environment(viewModel)
-        .environment(bookmarkStore)
+      ZStack {
+        FeedView()
+          .frame(minWidth: 500, maxWidth: 500)
+          .padding()
+          .environment(viewModel)
+          .environment(bookmarkStore)
+        VStack {
+          Spacer()
+          PaginationGlow()
+        }
+        .allowsHitTesting(false)
+        .opacity(showGlow ? 1 : 0)
+      }
+      .onChange(of: viewModel.isLoadingMore) { _, loading in
+        if loading {
+          withAnimation(.easeIn(duration: 0.3)) { showGlow = true }
+        } else {
+          withAnimation(.easeOut(duration: 0.6)) { showGlow = false }
+        }
+      }
     }
     .defaultSize(width: 500, height: 800)
     .windowResizability(.contentSize)

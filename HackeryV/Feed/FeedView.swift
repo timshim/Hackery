@@ -10,28 +10,50 @@ import SwiftUI
 
 struct FeedView: View {
   @Environment(FeedViewModel.self) private var viewModel
+  @State private var showBookmarks = false
 
   var body: some View {
-    NavigationStack {
-      ZStack {
-        if viewModel.isLoading && viewModel.stories.isEmpty {
-          LoaderView()
+    Group {
+      if showBookmarks {
+        BookmarksView()
+      } else {
+        NavigationStack {
+          ZStack {
+            if viewModel.isLoading && viewModel.stories.isEmpty {
+              LoaderView()
+            }
+            StoryListView()
+          }
+          .overlay(alignment: .bottom) {
+            if let error = viewModel.error {
+              ErrorBannerView(message: error)
+            }
+          }
         }
-        StoryListView()
-      }
-      .overlay(alignment: .bottom) {
-        if let error = viewModel.error {
-          ErrorBannerView(message: error)
+        .onAppear {
+          viewModel.loadTopStories()
         }
       }
     }
     .ornament(attachmentAnchor: .scene(.bottom), ornament: {
-      RefreshButtonView(tapped: refresh)
-        .glassBackgroundEffect()
+      HStack(spacing: 12) {
+        Button(action: {
+          withAnimation(.easeInOut(duration: 0.2)) { showBookmarks.toggle() }
+        }) {
+          Image(systemName: showBookmarks ? "list.bullet" : "bookmark.fill")
+            .font(.system(size: 24, weight: .bold, design: .rounded))
+            .frame(width: 60, height: 60)
+            .padding()
+        }
+        .buttonStyle(.plain)
+
+        if !showBookmarks {
+          RefreshButtonView(tapped: refresh)
+        }
+      }
+      .padding(.horizontal, 8)
+      .glassBackgroundEffect()
     })
-    .onAppear {
-      viewModel.loadTopStories()
-    }
   }
 
   private func refresh() {
@@ -42,11 +64,14 @@ struct FeedView: View {
 struct StoryListView: View {
   @Environment(FeedViewModel.self) private var viewModel
   @Environment(BookmarkStore.self) private var bookmarkStore
+  @State private var selectedStory: Story?
 
   var body: some View {
     List {
       ForEach(viewModel.stories) { story in
-        StoryView(story: story)
+        StoryView(story: story, onShowComments: { selectedStory = story })
+          .contentShape(.hoverEffect, .rect(cornerRadius: 16))
+          .hoverEffect()
           .onTapGesture {
             if let url = URL(string: story.url), !story.url.isEmpty {
               UIApplication.shared.open(url)
@@ -61,15 +86,14 @@ struct StoryListView: View {
                 systemImage: bookmarkStore.isBookmarked(story) ? "bookmark.slash.fill" : "bookmark.fill"
               )
             }
-            .tint(.orange)
+            .tint(bookmarkStore.isBookmarked(story) ? .orange : .teal)
           }
           .listRowInsets(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
       }
 
-      if viewModel.hasMoreStories {
-        ProgressView()
-          .frame(maxWidth: .infinity)
-          .padding()
+      if viewModel.hasMoreStories && !viewModel.stories.isEmpty && !viewModel.isLoading {
+        Color.clear
+          .frame(height: 1)
           .listRowSeparator(.hidden)
           .onAppear {
             Task { await viewModel.loadMoreStories() }
@@ -77,6 +101,10 @@ struct StoryListView: View {
       }
     }
     .listStyle(.plain)
+    .contentMargins(.vertical, 16)
+    .sheet(item: $selectedStory) { story in
+      CommentsView(story: story)
+    }
   }
 }
 
