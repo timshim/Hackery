@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "485E4B6B22AE27CF00626464"
-               BuildableName = "Hackery.app"
-               BlueprintName = "Hackery"
+               BlueprintIdentifier = "48CABD602A7FE757004F61FC"
+               BuildableName = "HackeryV.app"
+               BlueprintName = "HackeryV"
                ReferencedContainer = "container:Hackery.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,17 +28,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4871E8A32F79930300746676"
-               BuildableName = "HackeryTests.xctest"
-               BlueprintName = "HackeryTests"
-               ReferencedContainer = "container:Hackery.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -55,9 +44,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "485E4B6B22AE27CF00626464"
-            BuildableName = "Hackery.app"
-            BlueprintName = "Hackery"
+            BlueprintIdentifier = "48CABD602A7FE757004F61FC"
+            BuildableName = "HackeryV.app"
+            BlueprintName = "HackeryV"
             ReferencedContainer = "container:Hackery.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -71,9 +60,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "485E4B6B22AE27CF00626464"
-            BuildableName = "Hackery.app"
-            BlueprintName = "Hackery"
+            BlueprintIdentifier = "48CABD602A7FE757004F61FC"
+            BuildableName = "HackeryV.app"
+            BlueprintName = "HackeryV"
             ReferencedContainer = "container:Hackery.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

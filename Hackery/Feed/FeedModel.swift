@@ -106,17 +106,3 @@ struct Comment: Identifiable, Hashable {
   }
 }
 
-private extension String {
-  var decodingHTMLEntities: String {
-    var result = self
-    let entities = [
-      "&amp;": "&", "&lt;": "<", "&gt;": ">",
-      "&quot;": "\"", "&#39;": "'", "&apos;": "'",
-      "&#x27;": "'", "&#x2F;": "/", "&#38;": "&",
-    ]
-    for (entity, char) in entities {
-      result = result.replacingOccurrences(of: entity, with: char)
-    }
-    return result
-  }
-}

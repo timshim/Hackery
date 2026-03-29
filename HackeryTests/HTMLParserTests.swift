@@ -1,66 +1,154 @@
+//
+//  HTMLParserTests.swift
+//  HackeryTests
+//
+//  Created by Tim Shim on 30/3/26.
+//  Copyright © 2026 Tim Shim. All rights reserved.
+//
+
 import Testing
-import Foundation
 @testable import Hackery
 
-@Suite("HTML Parser")
 struct HTMLParserTests {
 
-  private func parse(_ html: String) -> String {
-    // parseHTML is private, so test it through Comment init with parsedText
-    // We'll create a minimal HNItem and check the ViewModel's output
-    // Since parseHTML is private static, test through the Comment flow
-    // Actually, let's test the output by creating comments with known HTML
-    let item = try! JSONDecoder().decode(HNItem.self, from: """
-    {"id": 1, "type": "comment", "by": "user", "time": 1700000000, "text": "\(html.replacingOccurrences(of: "\"", with: "\\\""))", "parent": 0}
-    """.data(using: .utf8)!)
-    // Without access to parseHTML, test through the raw text
-    return item.text ?? ""
+  // MARK: - Link conversion
+
+  @Test func convertsSimpleLink() {
+    let html = #"<a href="https://example.com">Example</a>"#
+    let result = HTMLParser.parse(html)
+    #expect(result == "[Example](https://example.com)")
   }
 
-  @Test("Paragraph tags in HNItem text are preserved")
-  func paragraphPreserved() {
+  @Test func convertsLinkWithAttributes() {
+    let html = #"<a href="https://example.com" rel="nofollow">Example</a>"#
+    let result = HTMLParser.parse(html)
+    #expect(result == "[Example](https://example.com)")
+  }
+
+  @Test func convertsMultipleLinks() {
+    let html = #"<a href="https://a.com">A</a> and <a href="https://b.com">B</a>"#
+    let result = HTMLParser.parse(html)
+    #expect(result == "[A](https://a.com) and [B](https://b.com)")
+  }
+
+  @Test func escapesMarkdownBracketsInLinkText() {
+    let html = #"<a href="https://example.com">[test]</a>"#
+    let result = HTMLParser.parse(html)
+    #expect(result == "[\\[test\\]](https://example.com)")
+  }
+
+  @Test func stripsNestedTagsInsideLink() {
+    let html = #"<a href="https://example.com"><i>italic</i> text</a>"#
+    let result = HTMLParser.parse(html)
+    #expect(result == "[italic text](https://example.com)")
+  }
+
+  // MARK: - Block elements
+
+  @Test func convertsParagraphsToNewlines() {
     let html = "<p>First paragraph</p><p>Second paragraph</p>"
-    let item = try! JSONDecoder().decode(HNItem.self, from: """
-    {"id": 1, "text": "\(html)"}
-    """.data(using: .utf8)!)
-    #expect(item.text == html)
+    let result = HTMLParser.parse(html)
+    #expect(result == "First paragraph\n\nSecond paragraph")
   }
 
-  @Test("Comment with no HTML passes through")
-  func plainTextComment() {
-    let item = try! JSONDecoder().decode(HNItem.self, from: """
-    {"id": 1, "text": "Just plain text"}
-    """.data(using: .utf8)!)
-    let comment = Comment(from: item, parsedText: nil)
-    #expect(comment.text == "Just plain text")
+  @Test func convertsBreaksToNewlines() {
+    let html = "Line one<br>Line two<br/>Line three"
+    let result = HTMLParser.parse(html)
+    #expect(result == "Line one\nLine two\nLine three")
   }
 
-  @Test("Comment with parsedText uses parsed version")
-  func parsedTextUsed() {
-    let item = try! JSONDecoder().decode(HNItem.self, from: """
-    {"id": 1, "text": "<p>raw html</p>"}
-    """.data(using: .utf8)!)
-    let comment = Comment(from: item, parsedText: "Cleaned text")
-    #expect(comment.text == "Cleaned text")
+  @Test func convertsSelfClosingBreak() {
+    let html = "Hello<br />World"
+    let result = HTMLParser.parse(html)
+    #expect(result == "Hello\nWorld")
   }
 
-  @Test("HTML entity decoding in Story titles")
-  func storyTitleEntities() {
-    let json = """
-    {"id": 1, "title": "A &amp; B &lt; C &gt; D &quot;E&quot; F&#39;s"}
-    """.data(using: .utf8)!
-    let item = try! JSONDecoder().decode(HNItem.self, from: json)
-    let story = Story(from: item)
-    #expect(story.title == "A & B < C > D \"E\" F's")
+  // MARK: - Tag stripping
+
+  @Test func stripsRemainingHTMLTags() {
+    let html = "<strong>Bold</strong> and <em>italic</em>"
+    let result = HTMLParser.parse(html)
+    #expect(result == "Bold and italic")
   }
 
-  @Test("Multiple HTML entities in title")
-  func multipleEntities() {
-    let json = """
-    {"id": 1, "title": "&#x27;Hello&#x27; &#x2F; World"}
-    """.data(using: .utf8)!
-    let item = try! JSONDecoder().decode(HNItem.self, from: json)
-    let story = Story(from: item)
-    #expect(story.title == "'Hello' / World")
+  @Test func handlesPlainText() {
+    let result = HTMLParser.parse("No HTML here")
+    #expect(result == "No HTML here")
+  }
+
+  // MARK: - Named entity decoding
+
+  @Test func decodesCommonNamedEntities() {
+    let html = "&amp; &lt; &gt; &quot;"
+    let result = HTMLParser.parse(html)
+    #expect(result == #"& < > ""#)
+  }
+
+  @Test func decodesApostropheVariants() {
+    let html = "&#39; &apos; &#x27;"
+    let result = HTMLParser.parse(html)
+    #expect(result == "' ' '")
+  }
+
+  @Test func decodesNbsp() {
+    let html = "hello&nbsp;world"
+    let result = HTMLParser.parse(html)
+    #expect(result == "hello world")
+  }
+
+  // MARK: - Numeric entity decoding
+
+  @Test func decodesDecimalEntities() {
+    let html = "&#65;&#66;&#67;"  // ABC
+    let result = HTMLParser.parse(html)
+    #expect(result == "ABC")
+  }
+
+  @Test func decodesHexEntities() {
+    let html = "&#x41;&#x42;&#x43;"  // ABC
+    let result = HTMLParser.parse(html)
+    #expect(result == "ABC")
+  }
+
+  @Test func decodesEmojiHexEntity() {
+    let html = "&#x1F600;"  // 😀
+    let result = HTMLParser.parse(html)
+    #expect(result == "😀")
+  }
+
+  // MARK: - Combined / real-world
+
+  @Test func handlesTypicalHNComment() {
+    let html = """
+    <p>This is a comment with a <a href="https://example.com" rel="nofollow">link</a>.</p>\
+    <p>Second paragraph with &amp; entities.</p>
+    """
+    let result = HTMLParser.parse(html)
+    #expect(result.contains("[link](https://example.com)"))
+    #expect(result.contains("& entities"))
+    #expect(!result.contains("<"))
+  }
+
+  @Test func handlesEmptyString() {
+    let result = HTMLParser.parse("")
+    #expect(result == "")
+  }
+
+  @Test func trimsWhitespace() {
+    let html = "  <p>  text  </p>  "
+    let result = HTMLParser.parse(html)
+    #expect(result == "text")
+  }
+
+  // MARK: - String.decodingHTMLEntities
+
+  @Test func stringExtensionDecodesEntities() {
+    let input = "Tom &amp; Jerry &lt;3"
+    #expect(input.decodingHTMLEntities == "Tom & Jerry <3")
+  }
+
+  @Test func stringExtensionPassesThroughCleanText() {
+    let input = "No entities here"
+    #expect(input.decodingHTMLEntities == "No entities here")
   }
 }
