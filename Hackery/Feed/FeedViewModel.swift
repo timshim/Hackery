@@ -70,6 +70,7 @@ final class FeedViewModel {
           loadedCount < allStoryIds.count else { return }
 
     isLoadingMore = true
+    error = nil
 
     let nextIds = Array(allStoryIds.dropFirst(loadedCount).prefix(pageSize))
     do {
@@ -77,6 +78,8 @@ final class FeedViewModel {
       stories.append(contentsOf: more)
       loadedCount += pageSize
       StoryCache.save(stories)
+    } catch is CancellationError {
+      // no-op
     } catch {
       self.error = error.localizedDescription
     }
@@ -175,10 +178,14 @@ final class FeedViewModel {
       for link in try doc.select("a[href]") {
         let href = try link.attr("href")
         let text = try link.text()
-        try link.text(text == href ? href : "\(text) (\(href))")
+        // Escape markdown special chars in link text
+        let escaped = text.replacingOccurrences(of: "[", with: "\\[")
+          .replacingOccurrences(of: "]", with: "\\]")
+        try link.text("\\m[" + escaped + "](" + href + ")\\m")
       }
       return try doc.text()
         .replacingOccurrences(of: "\\n", with: "\n")
+        .replacingOccurrences(of: "\\m", with: "")
         .trimmingCharacters(in: .whitespacesAndNewlines)
     } catch {
       return html

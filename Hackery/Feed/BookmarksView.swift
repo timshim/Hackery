@@ -10,6 +10,7 @@ import SwiftUI
 
 struct BookmarksView: View {
   @Environment(BookmarkStore.self) private var bookmarkStore
+  @Environment(\.isPaging) private var isPaging
 
   var body: some View {
     NavigationStack {
@@ -40,13 +41,6 @@ struct BookmarksView: View {
                     .opacity(0)
                   }
                 }
-                .swipeActions(edge: .trailing) {
-                  Button(role: .destructive) {
-                    bookmarkStore.toggle(story)
-                  } label: {
-                    Label("Remove", systemImage: "bookmark.slash")
-                  }
-                }
                 .listRowBackground(
                   RoundedRectangle(cornerRadius: 16)
                     .fill(Color("cardBg"))
@@ -59,6 +53,7 @@ struct BookmarksView: View {
           }
           .listStyle(.plain)
           .scrollContentBackground(.hidden)
+          .scrollDisabled(isPaging)
         }
         StatusBarView()
       }

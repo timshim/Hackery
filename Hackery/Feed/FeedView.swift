@@ -20,15 +20,13 @@ struct FeedView: View {
           LoaderView()
         }
         StoryListView()
-        if showGlow {
-          VStack {
-            Spacer()
-            PaginationGlow()
-          }
-          .ignoresSafeArea()
-          .allowsHitTesting(false)
-          .transition(.opacity)
+        VStack {
+          Spacer()
+          PaginationGlow()
         }
+        .ignoresSafeArea()
+        .allowsHitTesting(false)
+        .opacity(showGlow ? 1 : 0)
         StatusBarView()
       }
       .navigationBarHidden(true)
@@ -68,6 +66,7 @@ struct BackgroundView: View {
 struct StoryListView: View {
   @Environment(FeedViewModel.self) private var viewModel
   @Environment(BookmarkStore.self) private var bookmarkStore
+  @Environment(\.isPaging) private var isPaging
 
   var body: some View {
     List {
@@ -90,7 +89,7 @@ struct StoryListView: View {
               systemImage: bookmarkStore.isBookmarked(story) ? "bookmark.slash.fill" : "bookmark.fill"
             )
           }
-          .tint(.orange)
+          .tint(bookmarkStore.isBookmarked(story) ? .orange : .teal)
         }
         .listRowBackground(
           RoundedRectangle(cornerRadius: 16)
@@ -114,6 +113,7 @@ struct StoryListView: View {
     }
     .listStyle(.plain)
     .scrollContentBackground(.hidden)
+    .scrollDisabled(isPaging)
   }
 }
 
@@ -155,8 +155,8 @@ struct PaginationGlow: View {
     LinearGradient(
       colors: [
         Color.clear,
-        Color.purple.opacity(pulse ? 0.25 : 0.08),
-        Color.blue.opacity(pulse ? 0.3 : 0.1)
+        Color.blue.opacity(pulse ? 0.3 : 0.1),
+        Color.purple.opacity(pulse ? 0.25 : 0.08)
       ],
       startPoint: .top,
       endPoint: .bottom

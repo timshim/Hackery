@@ -10,6 +10,7 @@ import SwiftUI
 
 struct CommentsView: View {
   @Environment(FeedViewModel.self) private var viewModel
+  @Environment(BookmarkStore.self) private var bookmarkStore
 
   var story: Story
 
@@ -19,11 +20,23 @@ struct CommentsView: View {
         .ignoresSafeArea()
       VStack(alignment: .leading) {
         VStack(alignment: .leading, spacing: 5) {
-          Text(story.title)
-            .multilineTextAlignment(.leading)
-            .font(.custom("Lato-Bold", size: 18, relativeTo: .headline))
-            .foregroundColor(Color("titleColor"))
-            .padding(.bottom, 3)
+          HStack(alignment: .top) {
+            Text(story.title)
+              .multilineTextAlignment(.leading)
+              .font(.custom("Lato-Bold", size: 18, relativeTo: .headline))
+              .foregroundColor(Color("titleColor"))
+            Spacer()
+            Button(action: {
+              bookmarkStore.toggle(story)
+            }) {
+              Image(systemName: bookmarkStore.isBookmarked(story) ? "bookmark.fill" : "bookmark")
+                .font(.system(size: 14, weight: .medium))
+                .foregroundColor(Color("subtitleColor").opacity(0.8))
+                .frame(width: 40, height: 40)
+                .overlay(Circle().stroke(Color("borderColor"), lineWidth: 1))
+            }
+          }
+          .padding(.bottom, 3)
           HStack(alignment: .bottom) {
             VStack(alignment: .leading) {
               Text(story.timeAgo)
@@ -75,15 +88,28 @@ struct CommentsView: View {
 struct CommentView: View {
   var comment: Comment
 
+  private var attributedText: AttributedString {
+    var result = (try? AttributedString(
+      markdown: comment.text,
+      options: .init(interpretedSyntax: .inlineOnlyPreservingWhitespace)
+    )) ?? AttributedString(comment.text)
+    result.font = .custom("Lato-Regular", size: 16, relativeTo: .body)
+    result.foregroundColor = Color("titleColor")
+    for run in result.runs {
+      if run.link != nil {
+        result[run.range].underlineStyle = .single
+      }
+    }
+    return result
+  }
+
   var body: some View {
     ZStack {
       Color("cardBg")
         .ignoresSafeArea()
       VStack(alignment: .leading) {
-        Text(comment.text)
+        Text(attributedText)
           .multilineTextAlignment(.leading)
-          .font(.custom("Lato-Regular", size: 16, relativeTo: .body))
-          .foregroundColor(Color("titleColor"))
           .padding(EdgeInsets(top: 15, leading: 30, bottom: 15, trailing: 30))
         Text("\(comment.by) \(comment.timeAgo.lowercased())")
           .font(.custom("Lato-Regular", size: 16, relativeTo: .body))

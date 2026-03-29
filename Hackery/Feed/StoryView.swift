@@ -21,7 +21,7 @@ struct StoryView: View {
         .multilineTextAlignment(.leading)
         .font(.custom("Lato-Bold", size: 18, relativeTo: .headline))
         .foregroundColor(Color("titleColor"))
-        .padding(EdgeInsets(top: 16, leading: 16, bottom: 0, trailing: 16))
+        .padding(EdgeInsets(top: 16, leading: 16, bottom: 0, trailing: bookmarkStore.isBookmarked(story) ? 36 : 16))
       HStack(alignment: .bottom) {
         VStack(alignment: .leading) {
           Text(story.timeAgo)

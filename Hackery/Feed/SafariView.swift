@@ -32,7 +32,9 @@ struct SafariViewController: UIViewControllerRepresentable {
   }
 
   func makeUIViewController(context: Context) -> SFSafariViewController {
-    let safariVC = SFSafariViewController(url: url)
+    let config = SFSafariViewController.Configuration()
+    config.entersReaderIfAvailable = true
+    let safariVC = SFSafariViewController(url: url, configuration: config)
     safariVC.delegate = context.coordinator
     return safariVC
   }

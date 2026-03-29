@@ -73,12 +73,25 @@ struct CommentsView: View {
 struct CommentView: View {
   var comment: Comment
 
+  private var attributedText: AttributedString {
+    var result = (try? AttributedString(
+      markdown: comment.text,
+      options: .init(interpretedSyntax: .inlineOnlyPreservingWhitespace)
+    )) ?? AttributedString(comment.text)
+    result.font = .system(.body, design: .rounded)
+    for run in result.runs {
+      if run.link != nil {
+        result[run.range].underlineStyle = .single
+      }
+    }
+    return result
+  }
+
   var body: some View {
     ZStack {
       VStack(alignment: .leading) {
-        Text(comment.text)
+        Text(attributedText)
           .multilineTextAlignment(.leading)
-          .font(.system(.body, design: .rounded))
           .padding(EdgeInsets(top: 15, leading: 30, bottom: 15, trailing: 30))
         Text("\(comment.by) \(comment.timeAgo.lowercased())")
           .font(.system(.body, design: .rounded))
