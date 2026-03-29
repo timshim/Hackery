@@ -9,6 +9,7 @@
 import SwiftUI
 import SwiftData
 
+#if os(iOS)
 private struct IsPagingKey: EnvironmentKey {
   static let defaultValue = false
 }
@@ -19,6 +20,7 @@ extension EnvironmentValues {
     set { self[IsPagingKey.self] = newValue }
   }
 }
+#endif
 
 @main
 struct Hackery: App {
@@ -27,18 +29,26 @@ struct Hackery: App {
   private let modelContainer: ModelContainer
   @State private var bookmarkStore: BookmarkStore
 
+  #if os(visionOS)
+  @State private var showGlow = false
+  #endif
+
   init() {
     let schema = Schema([BookmarkedStory.self])
     let container: ModelContainer
+    #if targetEnvironment(simulator)
+    let cloudKit: ModelConfiguration.CloudKitDatabase = .none
+    #else
+    let cloudKit: ModelConfiguration.CloudKitDatabase = .automatic
+    #endif
     do {
       let config = ModelConfiguration(
         "Bookmarks",
         schema: schema,
-        cloudKitDatabase: .automatic
+        cloudKitDatabase: cloudKit
       )
       container = try ModelContainer(for: schema, configurations: [config])
     } catch {
-      // Fall back to local-only if CloudKit setup fails
       let config = ModelConfiguration(
         "Bookmarks",
         schema: schema,
@@ -52,6 +62,7 @@ struct Hackery: App {
 
   var body: some Scene {
     WindowGroup {
+      #if os(iOS)
       PageCarousel {
         BookmarksView()
       } trailing: {
@@ -61,10 +72,37 @@ struct Hackery: App {
       .ignoresSafeArea()
       .environment(viewModel)
       .environment(bookmarkStore)
+      #elseif os(visionOS)
+      ZStack {
+        FeedView()
+          .frame(minWidth: 500, maxWidth: 500)
+          .padding()
+          .environment(viewModel)
+          .environment(bookmarkStore)
+        VStack {
+          Spacer()
+          PaginationGlow()
+        }
+        .allowsHitTesting(false)
+        .opacity(showGlow ? 1 : 0)
+      }
+      .onChange(of: viewModel.isLoadingMore) { _, loading in
+        if loading {
+          withAnimation(.easeIn(duration: 0.3)) { showGlow = true }
+        } else {
+          withAnimation(.easeOut(duration: 0.6)) { showGlow = false }
+        }
+      }
+      #endif
     }
+    #if os(visionOS)
+    .defaultSize(width: 500, height: 800)
+    .windowResizability(.contentSize)
+    #endif
   }
 }
 
+#if os(iOS)
 struct PageCarousel<Leading: View, Trailing: View>: View {
   @ViewBuilder let leading: Leading
   @ViewBuilder let trailing: Trailing
@@ -127,3 +165,4 @@ struct PageCarousel<Leading: View, Trailing: View>: View {
     }
   }
 }
+#endif

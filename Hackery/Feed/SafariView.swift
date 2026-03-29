@@ -6,6 +6,7 @@
 //  Copyright © 2020 Tim Shim. All rights reserved.
 //
 
+#if os(iOS)
 import SwiftUI
 import SafariServices
 
@@ -83,3 +84,4 @@ extension UINavigationController: @retroactive UIGestureRecognizerDelegate {
     true
   }
 }
+#endif

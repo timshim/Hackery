@@ -14,9 +14,14 @@ struct CommentButton: View {
   var body: some View {
     Text(verbatim: "\(count > 100 ? "100+" : "\(count)") \(count == 1 ? "COMMENT" : "COMMENTS")")
       .font(.custom("Lato-Regular", size: 13, relativeTo: .caption))
+      #if os(iOS)
       .foregroundColor(Color("titleColor"))
       .padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
       .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color("borderColor"), lineWidth: 1))
+      #elseif os(visionOS)
+      .foregroundStyle(.secondary)
+      .padding()
+      #endif
       .accessibilityLabel("\(count) \(count == 1 ? "comment" : "comments")")
   }
 }
