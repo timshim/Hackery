@@ -7,11 +7,36 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct HackeryV: App {
   @State private var viewModel = FeedViewModel()
-  @State private var bookmarkStore = BookmarkStore()
+
+  private let modelContainer: ModelContainer
+  @State private var bookmarkStore: BookmarkStore
+
+  init() {
+    let schema = Schema([BookmarkedStory.self])
+    let container: ModelContainer
+    do {
+      let config = ModelConfiguration(
+        "Bookmarks",
+        schema: schema,
+        cloudKitDatabase: .automatic
+      )
+      container = try ModelContainer(for: schema, configurations: [config])
+    } catch {
+      let config = ModelConfiguration(
+        "Bookmarks",
+        schema: schema,
+        cloudKitDatabase: .none
+      )
+      container = try! ModelContainer(for: schema, configurations: [config])
+    }
+    self.modelContainer = container
+    self._bookmarkStore = State(initialValue: BookmarkStore(modelContext: container.mainContext))
+  }
 
   var body: some Scene {
     WindowGroup {

@@ -7,16 +7,62 @@
 //
 
 import SwiftUI
+import SwiftData
+
+@Model
+final class BookmarkedStory {
+  var storyId: Int = 0
+  var by: String = ""
+  var descendants: Int = 0
+  var kids: [Int] = []
+  var score: Int = 0
+  var time: Int = 0
+  var title: String = ""
+  var type: String = "story"
+  var url: String = ""
+  var text: String?
+  var bookmarkedAt: Date = Date.distantPast
+
+  init(from story: Story) {
+    self.storyId = story.id
+    self.by = story.by
+    self.descendants = story.descendants
+    self.kids = story.kids
+    self.score = story.score
+    self.time = story.time
+    self.title = story.title
+    self.type = story.type
+    self.url = story.url
+    self.text = story.text
+    self.bookmarkedAt = Date()
+  }
+
+  func toStory() -> Story {
+    Story(
+      storyId: storyId,
+      by: by,
+      descendants: descendants,
+      kids: kids,
+      score: score,
+      time: time,
+      title: title,
+      type: type,
+      url: url,
+      text: text
+    )
+  }
+}
 
 @MainActor
 @Observable
 final class BookmarkStore {
-  private static let storageKey = "bookmarkedStories"
+  private var modelContext: ModelContext
 
   var bookmarks: [Story] = []
 
-  init() {
-    loadFromDisk()
+  init(modelContext: ModelContext) {
+    self.modelContext = modelContext
+    loadFromStore()
   }
 
   var bookmarkedIds: Set<Int> {
@@ -29,23 +75,26 @@ final class BookmarkStore {
 
   func toggle(_ story: Story) {
     if isBookmarked(story) {
+      let storyId = story.id
+      let predicate = #Predicate<BookmarkedStory> { $0.storyId == storyId }
+      let descriptor = FetchDescriptor(predicate: predicate)
+      if let existing = try? modelContext.fetch(descriptor).first {
+        modelContext.delete(existing)
+      }
       bookmarks.removeAll { $0.id == story.id }
     } else {
+      let bookmarked = BookmarkedStory(from: story)
+      modelContext.insert(bookmarked)
       bookmarks.insert(story, at: 0)
     }
-    saveToDisk()
+    try? modelContext.save()
   }
 
-  private func saveToDisk() {
-    guard let data = try? JSONEncoder().encode(bookmarks) else { return }
-    UserDefaults.standard.set(data, forKey: Self.storageKey)
-  }
-
-  private func loadFromDisk() {
-    guard let data = UserDefaults.standard.data(forKey: Self.storageKey),
-          let stored = try? JSONDecoder().decode([Story].self, from: data) else {
-      return
-    }
-    bookmarks = stored
+  private func loadFromStore() {
+    let descriptor = FetchDescriptor<BookmarkedStory>(
+      sortBy: [SortDescriptor(\.bookmarkedAt, order: .reverse)]
+    )
+    guard let stored = try? modelContext.fetch(descriptor) else { return }
+    bookmarks = stored.map { $0.toStory() }
   }
 }

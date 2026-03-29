@@ -27,11 +27,6 @@
 		48CABD6F2A7FE75B004F61FC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48CABD6E2A7FE75B004F61FC /* Preview Assets.xcassets */; };
 		48CABD752A7FE936004F61FC /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4854FA9C22B73C18001EC4AE /* FeedModel.swift */; };
 		48CABD792A7FEA30004F61FC /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48227EB022AE2B08009E85EE /* FeedViewModel.swift */; };
-		BB000001BBBBBB0100000001 /* BookmarksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000002BBBBBB0200000001 /* BookmarksView.swift */; };
-		AA000001AAAAAA0100000001 /* StoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000003AAAAAA0300000001 /* StoryCache.swift */; };
-		AA000002AAAAAA0200000001 /* StoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000003AAAAAA0300000001 /* StoryCache.swift */; };
-		AA000004AAAAAA0400000001 /* BookmarkStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000006AAAAAA0600000001 /* BookmarkStore.swift */; };
-		AA000005AAAAAA0500000001 /* BookmarkStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000006AAAAAA0600000001 /* BookmarkStore.swift */; };
 		48CABD7A2A7FEA8A004F61FC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B7F85F22B7723500FF21AD /* Extensions.swift */; };
 		48CABD7C2A7FEAA3004F61FC /* StoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CABD7B2A7FEAA3004F61FC /* StoryView.swift */; };
 		48CABD7E2A7FEAB7004F61FC /* CommentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CABD7D2A7FEAB7004F61FC /* CommentButton.swift */; };
@@ -40,6 +35,11 @@
 		48EE5B7B248351E500B8ABC7 /* StoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EE5B7A248351E500B8ABC7 /* StoryView.swift */; };
 		48EE5B7F2483522A00B8ABC7 /* CommentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EE5B7E2483522A00B8ABC7 /* CommentButton.swift */; };
 		48EE5B81248355BF00B8ABC7 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EE5B80248355BF00B8ABC7 /* SafariView.swift */; };
+		AA000001AAAAAA0100000001 /* StoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000003AAAAAA0300000001 /* StoryCache.swift */; };
+		AA000002AAAAAA0200000001 /* StoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000003AAAAAA0300000001 /* StoryCache.swift */; };
+		AA000004AAAAAA0400000001 /* BookmarkStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000006AAAAAA0600000001 /* BookmarkStore.swift */; };
+		AA000005AAAAAA0500000001 /* BookmarkStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000006AAAAAA0600000001 /* BookmarkStore.swift */; };
+		BB000001BBBBBB0100000001 /* BookmarksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000002BBBBBB0200000001 /* BookmarksView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -64,6 +64,7 @@
 		485E4B6F22AE27CF00626464 /* Hackery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hackery.swift; sourceTree = "<group>"; };
 		485E4B7522AE27CF00626464 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		485E4B7822AE27CF00626464 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		4871E88F2F7968C100746676 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		487DD6BA2547FF9A006B3876 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		487DD6BC2547FF9A006B3876 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		488819D52548067A007B57F2 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
@@ -77,9 +78,6 @@
 		48CABD692A7FE758004F61FC /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		48CABD6B2A7FE75B004F61FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		48CABD6E2A7FE75B004F61FC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		AA000003AAAAAA0300000001 /* StoryCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryCache.swift; sourceTree = "<group>"; };
-		BB000002BBBBBB0200000001 /* BookmarksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksView.swift; sourceTree = "<group>"; };
-		AA000006AAAAAA0600000001 /* BookmarkStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkStore.swift; sourceTree = "<group>"; };
 		48CABD7B2A7FEAA3004F61FC /* StoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryView.swift; sourceTree = "<group>"; };
 		48CABD7D2A7FEAB7004F61FC /* CommentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentButton.swift; sourceTree = "<group>"; };
 		48CABD7F2A7FEACC004F61FC /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
@@ -87,6 +85,9 @@
 		48EE5B7A248351E500B8ABC7 /* StoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryView.swift; sourceTree = "<group>"; };
 		48EE5B7E2483522A00B8ABC7 /* CommentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentButton.swift; sourceTree = "<group>"; };
 		48EE5B80248355BF00B8ABC7 /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
+		AA000003AAAAAA0300000001 /* StoryCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryCache.swift; sourceTree = "<group>"; };
+		AA000006AAAAAA0600000001 /* BookmarkStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkStore.swift; sourceTree = "<group>"; };
+		BB000002BBBBBB0200000001 /* BookmarksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +198,7 @@
 		48CABD622A7FE758004F61FC /* HackeryV */ = {
 			isa = PBXGroup;
 			children = (
+				4871E88F2F7968C100746676 /* Info.plist */,
 				48CABD732A7FE7F8004F61FC /* Main */,
 				48CABD742A7FE81A004F61FC /* Feed */,
 				484A62722A8011610029118A /* Bookmarks */,
@@ -594,6 +596,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HackeryV/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Hackery;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -628,6 +631,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HackeryV/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Hackery;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				LD_RUNPATH_SEARCH_PATHS = (

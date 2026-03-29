@@ -43,17 +43,32 @@ struct Story: Identifiable, Hashable, Codable {
     Date(timeIntervalSince1970: TimeInterval(time)).relativeTime
   }
 
+  init(storyId: Int, by: String, descendants: Int, kids: [Int], score: Int, time: Int, title: String, type: String, url: String, text: String?) {
+    self.id = storyId
+    self.by = by
+    self.descendants = descendants
+    self.kids = kids
+    self.score = score
+    self.time = time
+    self.title = title
+    self.type = type
+    self.url = url
+    self.text = text
+  }
+
   init(from item: HNItem) {
-    self.id = item.id
-    self.by = item.by ?? "[deleted]"
-    self.descendants = item.descendants ?? 0
-    self.kids = item.kids ?? []
-    self.score = item.score ?? 0
-    self.time = item.time ?? 0
-    self.title = (item.title ?? "").decodingHTMLEntities
-    self.type = item.type ?? "story"
-    self.url = item.url ?? ""
-    self.text = item.text
+    self.init(
+      storyId: item.id,
+      by: item.by ?? "[deleted]",
+      descendants: item.descendants ?? 0,
+      kids: item.kids ?? [],
+      score: item.score ?? 0,
+      time: item.time ?? 0,
+      title: (item.title ?? "").decodingHTMLEntities,
+      type: item.type ?? "story",
+      url: item.url ?? "",
+      text: item.text
+    )
   }
 
   private enum CodingKeys: String, CodingKey {

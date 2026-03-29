@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 private struct IsPagingKey: EnvironmentKey {
   static let defaultValue = false
@@ -22,7 +23,32 @@ extension EnvironmentValues {
 @main
 struct Hackery: App {
   @State private var viewModel = FeedViewModel()
-  @State private var bookmarkStore = BookmarkStore()
+
+  private let modelContainer: ModelContainer
+  @State private var bookmarkStore: BookmarkStore
+
+  init() {
+    let schema = Schema([BookmarkedStory.self])
+    let container: ModelContainer
+    do {
+      let config = ModelConfiguration(
+        "Bookmarks",
+        schema: schema,
+        cloudKitDatabase: .automatic
+      )
+      container = try ModelContainer(for: schema, configurations: [config])
+    } catch {
+      // Fall back to local-only if CloudKit setup fails
+      let config = ModelConfiguration(
+        "Bookmarks",
+        schema: schema,
+        cloudKitDatabase: .none
+      )
+      container = try! ModelContainer(for: schema, configurations: [config])
+    }
+    self.modelContainer = container
+    self._bookmarkStore = State(initialValue: BookmarkStore(modelContext: container.mainContext))
+  }
 
   var body: some Scene {
     WindowGroup {
