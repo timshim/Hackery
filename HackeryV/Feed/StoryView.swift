@@ -15,40 +15,38 @@ struct StoryView: View {
   var story: Story
 
   var body: some View {
-    ZStack {
-      VStack(alignment: .leading) {
-        Text(story.title)
-          .multilineTextAlignment(.leading)
-          .font(.system(.title, design: .rounded))
-          .padding(.bottom, 16)
-        HStack(alignment: .bottom) {
-          VStack(alignment: .leading) {
-            Text(story.timeAgo)
-              .font(.system(.body, design: .rounded))
-              .foregroundStyle(.secondary)
-              .lineLimit(1)
-            Text("\(story.score) points")
-              .font(.system(.body, design: .rounded))
-              .foregroundStyle(.secondary)
-              .lineLimit(1)
-            Text("By \(story.by)")
-              .font(.system(.body, design: .rounded))
-              .foregroundStyle(.secondary)
-              .lineLimit(1)
+    VStack(alignment: .leading) {
+      Text(story.title)
+        .multilineTextAlignment(.leading)
+        .font(.system(.title3, design: .rounded))
+        .padding(.bottom, 8)
+      HStack(alignment: .bottom) {
+        VStack(alignment: .leading) {
+          Text(story.timeAgo)
+            .font(.system(.body, design: .rounded))
+            .foregroundStyle(.secondary)
+            .lineLimit(1)
+          Text("\(story.score) points")
+            .font(.system(.body, design: .rounded))
+            .foregroundStyle(.secondary)
+            .lineLimit(1)
+          Text("By \(story.by)")
+            .font(.system(.body, design: .rounded))
+            .foregroundStyle(.secondary)
+            .lineLimit(1)
+        }
+        Spacer()
+        if story.descendants > 0 {
+          Button(action: {
+            showComments = true
+          }) {
+            CommentButton(count: story.descendants)
           }
-          Spacer()
-          if story.descendants > 0 {
-            Button(action: {
-              showComments = true
-            }) {
-              CommentButton(count: story.descendants)
-            }
-            .navigationDestination(isPresented: $showComments) {
-              CommentsView(story: story)
-            }
-            .buttonStyle(.plain)
-            .hoverEffect()
+          .navigationDestination(isPresented: $showComments) {
+            CommentsView(story: story)
           }
+          .buttonStyle(.plain)
+          .hoverEffect()
         }
       }
     }

@@ -65,9 +65,7 @@ struct CommentsView: View {
       }
     }
     .onAppear {
-      Task {
-        await viewModel.loadComments(for: story)
-      }
+      viewModel.loadComments(for: story)
     }
   }
 }

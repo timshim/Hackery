@@ -21,21 +21,21 @@ struct CommentsView: View {
         VStack(alignment: .leading, spacing: 5) {
           Text(story.title)
             .multilineTextAlignment(.leading)
-            .font(.custom("Lato-Bold", size: 18))
+            .font(.custom("Lato-Bold", size: 18, relativeTo: .headline))
             .foregroundColor(Color("titleColor"))
             .padding(.bottom, 3)
           HStack(alignment: .bottom) {
             VStack(alignment: .leading) {
               Text(story.timeAgo)
-                .font(.custom("Lato-Regular", size: 15))
+                .font(.custom("Lato-Regular", size: 15, relativeTo: .subheadline))
                 .foregroundColor(Color("subtitleColor"))
                 .lineLimit(1)
               Text("\(story.score) points")
-                .font(.custom("Lato-Regular", size: 15))
+                .font(.custom("Lato-Regular", size: 15, relativeTo: .subheadline))
                 .foregroundColor(Color("subtitleColor"))
                 .lineLimit(1)
               Text("By \(story.by)")
-                .font(.custom("Lato-Regular", size: 15))
+                .font(.custom("Lato-Regular", size: 15, relativeTo: .subheadline))
                 .foregroundColor(Color("subtitleColor"))
                 .lineLimit(1)
             }
@@ -67,9 +67,7 @@ struct CommentsView: View {
       }
     }
     .onAppear {
-      Task {
-        await viewModel.loadComments(for: story)
-      }
+      viewModel.loadComments(for: story)
     }
   }
 }
@@ -84,11 +82,11 @@ struct CommentView: View {
       VStack(alignment: .leading) {
         Text(comment.text)
           .multilineTextAlignment(.leading)
-          .font(.custom("Lato-Regular", size: 16))
+          .font(.custom("Lato-Regular", size: 16, relativeTo: .body))
           .foregroundColor(Color("titleColor"))
           .padding(EdgeInsets(top: 15, leading: 30, bottom: 15, trailing: 30))
         Text("\(comment.by) \(comment.timeAgo.lowercased())")
-          .font(.custom("Lato-Regular", size: 16))
+          .font(.custom("Lato-Regular", size: 16, relativeTo: .body))
           .foregroundColor(Color("subtitleColor"))
           .padding(EdgeInsets(top: 5, leading: 30, bottom: 12, trailing: 30))
         Rectangle()

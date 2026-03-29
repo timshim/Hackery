@@ -14,10 +14,10 @@ struct FeedView: View {
   var body: some View {
     NavigationStack {
       ZStack {
-        if viewModel.isLoading {
+        if viewModel.isLoading && viewModel.stories.isEmpty {
           LoaderView()
         }
-        StoryGridView()
+        StoryListView()
       }
       .overlay(alignment: .bottom) {
         if let error = viewModel.error {
@@ -26,54 +26,57 @@ struct FeedView: View {
       }
     }
     .ornament(attachmentAnchor: .scene(.bottom), ornament: {
-      RefreshButtonView(tapped: loadTopStories)
+      RefreshButtonView(tapped: refresh)
         .glassBackgroundEffect()
     })
     .onAppear {
-      loadTopStories()
+      viewModel.loadTopStories()
     }
   }
 
-  private func loadTopStories() {
-    Task {
-      await viewModel.loadTopStories()
-    }
+  private func refresh() {
+    viewModel.loadTopStories(refresh: true)
   }
 }
 
-struct StoryGridView: View {
+struct StoryListView: View {
   @Environment(FeedViewModel.self) private var viewModel
-
-  let columns = [
-    GridItem(.adaptive(minimum: 400), alignment: .top)
-  ]
+  @Environment(BookmarkStore.self) private var bookmarkStore
 
   var body: some View {
-    ScrollView {
-      LazyVGrid(columns: columns) {
-        ForEach(viewModel.stories) { story in
-          StoryView(story: story)
-            .padding(8)
-            .background(.regularMaterial, in: .rect(cornerRadius: 32))
-            .contentShape(.hoverEffect, .rect(cornerRadius: 32))
-            .hoverEffect()
-            .onTapGesture {
-              if let url = URL(string: story.url), !story.url.isEmpty {
-                UIApplication.shared.open(url)
-              }
+    List {
+      ForEach(viewModel.stories) { story in
+        StoryView(story: story)
+          .onTapGesture {
+            if let url = URL(string: story.url), !story.url.isEmpty {
+              UIApplication.shared.open(url)
             }
-        }
+          }
+          .swipeActions(edge: .trailing) {
+            Button(action: {
+              bookmarkStore.toggle(story)
+            }) {
+              Label(
+                bookmarkStore.isBookmarked(story) ? "Unbookmark" : "Bookmark",
+                systemImage: bookmarkStore.isBookmarked(story) ? "bookmark.slash.fill" : "bookmark.fill"
+              )
+            }
+            .tint(.orange)
+          }
+          .listRowInsets(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
+      }
+
+      if viewModel.hasMoreStories {
+        ProgressView()
+          .frame(maxWidth: .infinity)
+          .padding()
+          .listRowSeparator(.hidden)
+          .onAppear {
+            Task { await viewModel.loadMoreStories() }
+          }
       }
     }
-  }
-}
-
-struct StoryButtonStyle: ButtonStyle {
-  func makeBody(configuration: Configuration) -> some View {
-    configuration.label
-      .padding(8)
-      .background(.regularMaterial, in: .rect(cornerRadius: 32))
-      .hoverEffect()
+    .listStyle(.plain)
   }
 }
 

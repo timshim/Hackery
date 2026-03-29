@@ -10,6 +10,7 @@ import SwiftUI
 import SwiftSoup
 
 private let baseURL = "https://hacker-news.firebaseio.com/v0"
+private let pageSize = 25
 
 @MainActor
 @Observable
@@ -18,69 +19,82 @@ final class FeedViewModel {
   var stories = [Story]()
   var comments = [Comment]()
   var isLoading = false
+  var isLoadingMore = false
   var error: String?
 
   private let decoder = JSONDecoder()
   private var currentTask: Task<Void, Never>?
+  private var allStoryIds = [Int]()
+  private var loadedCount = 0
 
-  func loadTopStories() async {
+  func loadTopStories(refresh: Bool = false) {
     currentTask?.cancel()
     guard let url = URL(string: "\(baseURL)/topstories.json") else { return }
 
+    if refresh {
+      stories.removeAll()
+      allStoryIds.removeAll()
+      loadedCount = 0
+    } else if stories.isEmpty, let cached = StoryCache.load() {
+      stories = cached
+    }
+
     isLoading = true
     error = nil
-    stories.removeAll()
 
-    let task = Task {
+    currentTask = Task {
       do {
         let (data, _) = try await URLSession.shared.data(from: url)
-        let storyIds = try decoder.decode([Int].self, from: data)
+        try Task.checkCancellation()
+        allStoryIds = try decoder.decode([Int].self, from: data)
+        loadedCount = 0
 
-        let fetched = try await withThrowingTaskGroup(of: (Int, Story?).self) { group in
-          for (index, id) in storyIds.prefix(100).enumerated() {
-            group.addTask { [decoder] in
-              try Task.checkCancellation()
-              guard let itemURL = URL(string: "\(baseURL)/item/\(id).json") else {
-                return (index, nil)
-              }
-              let (itemData, _) = try await URLSession.shared.data(from: itemURL)
-              let item = try decoder.decode(HNItem.self, from: itemData)
-              guard item.deleted != true, item.dead != true else { return (index, nil) }
-              return (index, Story(from: item))
-            }
-          }
+        let firstPage = try await fetchStories(ids: Array(allStoryIds.prefix(pageSize)))
 
-          var results = [(Int, Story?)]()
-          for try await result in group {
-            results.append(result)
-          }
-          return results
-            .sorted { $0.0 < $1.0 }
-            .compactMap { $0.1 }
-        }
-
-        if !Task.isCancelled {
-          stories = fetched
-        }
+        try Task.checkCancellation()
+        stories = firstPage
+        loadedCount = pageSize
+        StoryCache.save(firstPage)
       } catch is CancellationError {
-        // Task was cancelled, no-op
+        // no-op
       } catch {
         self.error = error.localizedDescription
       }
 
       isLoading = false
     }
-    currentTask = task
-    await task.value
   }
 
-  func loadComments(for story: Story) async {
+  func loadMoreStories() async {
+    guard !isLoadingMore,
+          loadedCount < allStoryIds.count else { return }
+
+    isLoadingMore = true
+
+    let nextIds = Array(allStoryIds.dropFirst(loadedCount).prefix(pageSize))
+    do {
+      let more = try await fetchStories(ids: nextIds)
+      stories.append(contentsOf: more)
+      loadedCount += pageSize
+      StoryCache.save(stories)
+    } catch {
+      self.error = error.localizedDescription
+    }
+
+    isLoadingMore = false
+  }
+
+  var hasMoreStories: Bool {
+    loadedCount < allStoryIds.count
+  }
+
+  func loadComments(for story: Story) {
     currentTask?.cancel()
     isLoading = true
     error = nil
     comments.removeAll()
 
-    let task = Task {
+    currentTask = Task {
       do {
         let fetched = try await withThrowingTaskGroup(of: (Int, Comment?).self) { group in
           for (index, id) in story.kids.enumerated() {
@@ -110,19 +124,43 @@ final class FeedViewModel {
             .compactMap { $0.1 }
         }
 
-        if !Task.isCancelled {
-          comments = fetched.filter { !$0.deleted && !$0.dead }
-        }
+        try Task.checkCancellation()
+        comments = fetched.filter { !$0.deleted && !$0.dead }
       } catch is CancellationError {
-        // Task was cancelled, no-op
+        // no-op
       } catch {
         self.error = error.localizedDescription
       }
 
       isLoading = false
     }
-    currentTask = task
-    await task.value
+  }
+
+  // MARK: - Private
+
+  private func fetchStories(ids: [Int]) async throws -> [Story] {
+    try await withThrowingTaskGroup(of: (Int, Story?).self) { group in
+      for (index, id) in ids.enumerated() {
+        group.addTask { [decoder] in
+          try Task.checkCancellation()
+          guard let itemURL = URL(string: "\(baseURL)/item/\(id).json") else {
+            return (index, nil)
+          }
+          let (itemData, _) = try await URLSession.shared.data(from: itemURL)
+          let item = try decoder.decode(HNItem.self, from: itemData)
+          guard item.deleted != true, item.dead != true else { return (index, nil) }
+          return (index, Story(from: item))
+        }
+      }
+
+      var results = [(Int, Story?)]()
+      for try await result in group {
+        results.append(result)
+      }
+      return results
+        .sorted { $0.0 < $1.0 }
+        .compactMap { $0.1 }
+    }
   }
 
   nonisolated private static func parseHTML(_ html: String) -> String {

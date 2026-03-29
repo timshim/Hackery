@@ -11,6 +11,7 @@ import SwiftUI
 @main
 struct HackeryV: App {
   @State private var viewModel = FeedViewModel()
+  @State private var bookmarkStore = BookmarkStore()
 
   var body: some Scene {
     WindowGroup {
@@ -18,6 +19,7 @@ struct HackeryV: App {
         .frame(minWidth: 500, maxWidth: 500)
         .padding()
         .environment(viewModel)
+        .environment(bookmarkStore)
     }
     .defaultSize(width: 500, height: 800)
     .windowResizability(.contentSize)

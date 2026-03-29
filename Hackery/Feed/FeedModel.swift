@@ -27,7 +27,7 @@ struct HNItem: Codable {
   let parts: [Int]?
 }
 
-struct Story: Identifiable, Hashable {
+struct Story: Identifiable, Hashable, Codable {
   let id: Int
   let by: String
   let descendants: Int
@@ -54,6 +54,10 @@ struct Story: Identifiable, Hashable {
     self.type = item.type ?? "story"
     self.url = item.url ?? ""
     self.text = item.text
+  }
+
+  private enum CodingKeys: String, CodingKey {
+    case id, by, descendants, kids, score, time, title, type, url, text
   }
 }
 

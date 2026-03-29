@@ -13,7 +13,7 @@ struct CommentButton: View {
 
   var body: some View {
     Text(verbatim: "\(count > 100 ? "100+" : "\(count)") \(count == 1 ? "COMMENT" : "COMMENTS")")
-      .font(.custom("Lato-Regular", size: 13))
+      .font(.custom("Lato-Regular", size: 13, relativeTo: .caption))
       .foregroundColor(Color("titleColor"))
       .padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
       .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color("borderColor"), lineWidth: 1))
