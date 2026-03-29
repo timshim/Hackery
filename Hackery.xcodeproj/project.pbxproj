@@ -16,12 +16,10 @@
 		485E4B7922AE27CF00626464 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 485E4B7822AE27CF00626464 /* Preview Assets.xcassets */; };
 		488819DB2548137C007B57F2 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 488819D52548067A007B57F2 /* Lato-Bold.ttf */; };
 		488819E125481381007B57F2 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 488819D62548067A007B57F2 /* Lato-Regular.ttf */; };
-		48A0125D2B997A2000CE4A95 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 48A0125C2B997A2000CE4A95 /* SwiftSoup */; };
 		CC000001CCCCCC0100000001 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 488819D52548067A007B57F2 /* Lato-Bold.ttf */; };
 		CC000002CCCCCC0200000001 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 488819D62548067A007B57F2 /* Lato-Regular.ttf */; };
 		48B7F86022B7723500FF21AD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B7F85F22B7723500FF21AD /* Extensions.swift */; };
 		48B7F86322B7748B00FF21AD /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B7F86222B7748B00FF21AD /* CommentsView.swift */; };
-		48BB402C26776E8A00490132 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 48BB402B26776E8A00490132 /* SwiftSoup */; };
 		48CABD662A7FE758004F61FC /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = 48CABD652A7FE758004F61FC /* RealityKitContent */; };
 		48CABD682A7FE758004F61FC /* HackeryV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CABD672A7FE758004F61FC /* HackeryV.swift */; };
 		48CABD6A2A7FE758004F61FC /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CABD692A7FE758004F61FC /* FeedView.swift */; };
@@ -97,7 +95,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48BB402C26776E8A00490132 /* SwiftSoup in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,7 +103,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				48CABD662A7FE758004F61FC /* RealityKitContent in Frameworks */,
-				48A0125D2B997A2000CE4A95 /* SwiftSoup in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,7 +269,6 @@
 			);
 			name = Hackery;
 			packageProductDependencies = (
-				48BB402B26776E8A00490132 /* SwiftSoup */,
 			);
 			productName = Hackery;
 			productReference = 485E4B6C22AE27CF00626464 /* Hackery.app */;
@@ -294,7 +289,6 @@
 			name = HackeryV;
 			packageProductDependencies = (
 				48CABD652A7FE758004F61FC /* RealityKitContent */,
-				48A0125C2B997A2000CE4A95 /* SwiftSoup */,
 			);
 			productName = HackeryV;
 			productReference = 48CABD612A7FE758004F61FC /* HackeryV.app */;
@@ -329,7 +323,6 @@
 			);
 			mainGroup = 485E4B6322AE27CF00626464;
 			packageReferences = (
-				48BB402526775B7300490132 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 			);
 			productRefGroup = 485E4B6D22AE27CF00626464 /* Products */;
 			projectDirPath = "";
@@ -688,27 +681,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		48BB402526775B7300490132 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/scinfu/SwiftSoup";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		48A0125C2B997A2000CE4A95 /* SwiftSoup */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 48BB402526775B7300490132 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
-			productName = SwiftSoup;
-		};
-		48BB402B26776E8A00490132 /* SwiftSoup */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 48BB402526775B7300490132 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
-			productName = SwiftSoup;
-		};
 		48CABD652A7FE758004F61FC /* RealityKitContent */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = RealityKitContent;
