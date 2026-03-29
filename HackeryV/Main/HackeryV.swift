@@ -9,15 +9,17 @@
 import SwiftUI
 
 @main
-struct HackeryV: App {    
-    var body: some Scene {
-        WindowGroup {
-            FeedView()
-                .frame(minWidth: 500, maxWidth: 500)
-                .padding()
-                .environmentObject(FeedViewModel())
-        }
-        .defaultSize(width: 500, height: 800)
-        .windowResizability(.contentSize)
+struct HackeryV: App {
+  @State private var viewModel = FeedViewModel()
+
+  var body: some Scene {
+    WindowGroup {
+      FeedView()
+        .frame(minWidth: 500, maxWidth: 500)
+        .padding()
+        .environment(viewModel)
     }
+    .defaultSize(width: 500, height: 800)
+    .windowResizability(.contentSize)
+  }
 }

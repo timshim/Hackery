@@ -9,100 +9,141 @@
 import SwiftUI
 import SwiftSoup
 
+private let baseURL = "https://hacker-news.firebaseio.com/v0"
+
 @MainActor
-final class FeedViewModel: ObservableObject {
+@Observable
+final class FeedViewModel {
 
-    @Published var stories = [Story]()
-    @Published var comments = [Comment]()
-    @Published var isLoading = false
+  var stories = [Story]()
+  var comments = [Comment]()
+  var isLoading = false
+  var error: String?
 
-    func loadTopStories() async {
-        guard let url = URL(string: "https://hacker-news.firebaseio.com/v0/topstories.json") else { return }
-        
-        isLoading = true
-        stories.removeAll()
-        
-        do {
-            let (data, _) = try await URLSession.shared.data(from: url)
-            let storyIds = try JSONDecoder().decode([Int].self, from: data)
-            Task {
-                await loadStories(Array(storyIds.prefix(100)))
+  private let decoder = JSONDecoder()
+  private var currentTask: Task<Void, Never>?
+
+  func loadTopStories() async {
+    currentTask?.cancel()
+    guard let url = URL(string: "\(baseURL)/topstories.json") else { return }
+
+    isLoading = true
+    error = nil
+    stories.removeAll()
+
+    let task = Task {
+      do {
+        let (data, _) = try await URLSession.shared.data(from: url)
+        let storyIds = try decoder.decode([Int].self, from: data)
+
+        let fetched = try await withThrowingTaskGroup(of: (Int, Story?).self) { group in
+          for (index, id) in storyIds.prefix(100).enumerated() {
+            group.addTask { [decoder] in
+              try Task.checkCancellation()
+              guard let itemURL = URL(string: "\(baseURL)/item/\(id).json") else {
+                return (index, nil)
+              }
+              let (itemData, _) = try await URLSession.shared.data(from: itemURL)
+              let item = try decoder.decode(HNItem.self, from: itemData)
+              guard item.deleted != true, item.dead != true else { return (index, nil) }
+              return (index, Story(from: item))
             }
-        } catch let error {
-            print(error.localizedDescription)
-        }
-    }
-    
-    private func loadStories(_ storyIds: [Int]) async {
-        for id in storyIds {
-            Task {
-                guard let url = URL(string: "https://hacker-news.firebaseio.com/v0/item/\(id).json") else { return }
-                
-                do {
-                    let (data, _) = try await URLSession.shared.data(from: url)
-                    if let item = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any] {
-                        guard let id = item["id"] as? Int else { return }
-                        guard let by = item["by"] as? String else { return }
-                        guard let score = item["score"] as? Int else { return }
-                        guard let time = item["time"] as? Int else { return }
-                        guard let title = item["title"] as? String else { return }
-                        guard let type = item["type"] as? String else { return }
-                        
-                        let descendants = item["descendants"] as? Int ?? 0
-                        let kids = item["kids"] as? [Int] ?? []
-                        let url = item["url"] as? String ?? ""
-                        
-                        let timeAgo = Date(timeIntervalSince1970: TimeInterval(time)).relativeTime
-                        
-                        let story = Story(id: id, by: by, descendants: descendants, kids: kids, score: score, time: time, timeAgo: timeAgo, title: title, type: type, url: url)
-                        
-                        stories.append(story)
-                        isLoading = false
-                    }
-                } catch let error {
-                    print(error.localizedDescription)
-                }
-            }
-        }
-    }
+          }
 
-    func loadComments(for story: Story) async {
-        isLoading = true
-        comments.removeAll()
-        
-        for id in story.kids {
-            Task {
-                guard let url = URL(string: "https://hacker-news.firebaseio.com/v0/item/\(id).json") else { return }
-                
-                do {
-                    let (data, _) = try await URLSession.shared.data(from: url)
-                    if let item = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any] {
-                        guard let by = item["by"] as? String else { return }
-                        guard let id = item["id"] as? Int else { return }
-                        guard let parent = item["parent"] as? Int else { return }
-                        guard let text = item["text"] as? String else { return }
-                        guard let time = item["time"] as? Int else { return }
-                        guard let type = item["type"] as? String else { return }
-                        
-                        var moreComments = [Int]()
-                        if let kids = item["kids"] as? [Int] {
-                            moreComments = kids
-                        }
-                        
-                        let timeAgo = Date(timeIntervalSince1970: TimeInterval(time)).relativeTime
-                        
-                        let parsedText = try SwiftSoup.parse(text.replacingOccurrences(of: "<p>", with: "<p>*newline*")).text().replacingOccurrences(of: "*newline*", with: "\n\n")
-                        
-                        let comment = Comment(by: by, id: id, kids: moreComments, parent: parent, text: parsedText, time: time, timeAgo: timeAgo, type: type)
-                        
-                        comments.append(comment)
-                        isLoading = false
-                    }
-                } catch let error {
-                    print(error.localizedDescription)
-                }
-            }
+          var results = [(Int, Story?)]()
+          for try await result in group {
+            results.append(result)
+          }
+          return results
+            .sorted { $0.0 < $1.0 }
+            .compactMap { $0.1 }
         }
-    }
 
+        if !Task.isCancelled {
+          stories = fetched
+        }
+      } catch is CancellationError {
+        // Task was cancelled, no-op
+      } catch {
+        self.error = error.localizedDescription
+      }
+
+      isLoading = false
+    }
+    currentTask = task
+    await task.value
+  }
+
+  func loadComments(for story: Story) async {
+    currentTask?.cancel()
+    isLoading = true
+    error = nil
+    comments.removeAll()
+
+    let task = Task {
+      do {
+        let fetched = try await withThrowingTaskGroup(of: (Int, Comment?).self) { group in
+          for (index, id) in story.kids.enumerated() {
+            group.addTask { [decoder] in
+              try Task.checkCancellation()
+              guard let url = URL(string: "\(baseURL)/item/\(id).json") else {
+                return (index, nil)
+              }
+              let (data, _) = try await URLSession.shared.data(from: url)
+              let item = try decoder.decode(HNItem.self, from: data)
+
+              var parsedText: String?
+              if let text = item.text {
+                parsedText = Self.parseHTML(text)
+              }
+
+              return (index, Comment(from: item, parsedText: parsedText))
+            }
+          }
+
+          var results = [(Int, Comment?)]()
+          for try await result in group {
+            results.append(result)
+          }
+          return results
+            .sorted { $0.0 < $1.0 }
+            .compactMap { $0.1 }
+        }
+
+        if !Task.isCancelled {
+          comments = fetched.filter { !$0.deleted && !$0.dead }
+        }
+      } catch is CancellationError {
+        // Task was cancelled, no-op
+      } catch {
+        self.error = error.localizedDescription
+      }
+
+      isLoading = false
+    }
+    currentTask = task
+    await task.value
+  }
+
+  nonisolated private static func parseHTML(_ html: String) -> String {
+    do {
+      let doc = try SwiftSoup.parseBodyFragment(html)
+      for p in try doc.select("p") {
+        try p.before("\\n\\n")
+      }
+      for br in try doc.select("br") {
+        try br.before("\\n")
+      }
+      for link in try doc.select("a[href]") {
+        let href = try link.attr("href")
+        let text = try link.text()
+        try link.text(text == href ? href : "\(text) (\(href))")
+      }
+      return try doc.text()
+        .replacingOccurrences(of: "\\n", with: "\n")
+        .trimmingCharacters(in: .whitespacesAndNewlines)
+    } catch {
+      return html
+    }
+  }
 }

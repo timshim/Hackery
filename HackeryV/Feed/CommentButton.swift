@@ -9,12 +9,13 @@
 import SwiftUI
 
 struct CommentButton: View {
-    var count: Int
-    
-    var body: some View {
-        Text(verbatim: "\(count > 100 ? "100+" : "\(count)") \(count == 1 ? "COMMENT" : "COMMENTS")")
-            .font(.system(.callout, design: .rounded))
-            .foregroundStyle(.secondary)
-            .padding()
-    }
+  var count: Int
+
+  var body: some View {
+    Text(verbatim: "\(count > 100 ? "100+" : "\(count)") \(count == 1 ? "COMMENT" : "COMMENTS")")
+      .font(.system(.callout, design: .rounded))
+      .foregroundStyle(.secondary)
+      .padding()
+      .accessibilityLabel("\(count) \(count == 1 ? "comment" : "comments")")
+  }
 }

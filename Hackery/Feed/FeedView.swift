@@ -9,107 +9,119 @@
 import SwiftUI
 
 struct FeedView: View {
-    @EnvironmentObject private var viewModel: FeedViewModel
-    
-    var body: some View {
-        NavigationStack {
-            ZStack {
-                BackgroundView()
-                if viewModel.isLoading {
-                    LoaderView()
-                }
-                ContentView(viewModel: viewModel)
-                StatusBarView()
-                ButtonView(tapped: loadTopStories)
-            }
-            .navigationBarHidden(true)
+  @Environment(FeedViewModel.self) private var viewModel
+
+  var body: some View {
+    NavigationStack {
+      ZStack {
+        BackgroundView()
+        if viewModel.isLoading {
+          LoaderView()
         }
-        .onAppear {
-            loadTopStories()
+        StoryListView()
+        StatusBarView()
+        RefreshButtonView(tapped: loadTopStories)
+      }
+      .navigationBarHidden(true)
+      .overlay(alignment: .bottom) {
+        if let error = viewModel.error {
+          ErrorBannerView(message: error)
         }
+      }
     }
-    
-    private func loadTopStories() {
-        Task {
-            await viewModel.loadTopStories()
-        }
+    .onAppear {
+      loadTopStories()
     }
+  }
+
+  private func loadTopStories() {
+    Task {
+      await viewModel.loadTopStories()
+    }
+  }
 }
 
 struct BackgroundView: View {
-    var body: some View {
-        Color("background")
-            .edgesIgnoringSafeArea(.all)
-    }
+  var body: some View {
+    Color("background")
+      .ignoresSafeArea()
+  }
 }
 
-struct ContentView: View {
-    @ObservedObject var viewModel: FeedViewModel
-    
-    var body: some View {
-        ScrollView {
-            LazyVStack {
-                ForEach(viewModel.stories, id: \.id) { story in
-                    if let url = URL(string: story.url) {
-                        NavigationLink(destination: SafariView(url: url)) {
-                            StoryView(story: story)
-                                .environmentObject(viewModel)
-                        }
-                    }
-                }
-                .cornerRadius(16)
-                .padding(EdgeInsets(top: 0, leading: 8, bottom: -5, trailing: 8))
+struct StoryListView: View {
+  @Environment(FeedViewModel.self) private var viewModel
+
+  var body: some View {
+    ScrollView {
+      LazyVStack {
+        ForEach(viewModel.stories) { story in
+          if let url = URL(string: story.url), !story.url.isEmpty {
+            NavigationLink(destination: SafariView(url: url)) {
+              StoryView(story: story)
             }
+          } else {
+            StoryView(story: story)
+          }
         }
-        
+        .cornerRadius(16)
+        .padding(EdgeInsets(top: 0, leading: 8, bottom: -5, trailing: 8))
+      }
     }
+  }
 }
 
 struct StatusBarView: View {
-    var body: some View {
-        GeometryReader { proxy in
-            Color("background")
-                .frame(maxWidth: .infinity)
-                .frame(height: proxy.safeAreaInsets.top)
-                .edgesIgnoringSafeArea(.all)
-        }
-        
+  var body: some View {
+    GeometryReader { proxy in
+      Color("background")
+        .frame(maxWidth: .infinity)
+        .frame(height: proxy.safeAreaInsets.top)
+        .ignoresSafeArea()
     }
+  }
 }
 
-struct ButtonView: View {
-    var tapped: (() -> Void)?
-    
-    var body: some View {
-        VStack {
-            Spacer()
-            Button(action: {
-                tapped?()
-            }) {
-                Image(systemName: "arrow.clockwise")
-                    .font(.system(size: 24, weight: .bold, design: .rounded))
-                    .foregroundColor(Color("titleColor"))
-                    .padding(.bottom, 6)
-            }
-            .frame(width: 60, height: 60)
-            .glassEffect(.clear)
-        }
+struct RefreshButtonView: View {
+  var tapped: (() -> Void)?
+
+  var body: some View {
+    VStack {
+      Spacer()
+      Button(action: {
+        tapped?()
+      }) {
+        Image(systemName: "arrow.clockwise")
+          .font(.system(size: 24, weight: .bold, design: .rounded))
+          .foregroundColor(Color("titleColor"))
+          .padding(.bottom, 6)
+      }
+      .frame(width: 60, height: 60)
+      .glassEffect(.clear)
     }
+  }
 }
 
 struct LoaderView: View {
-    var body: some View {
-        VStack {
-            Spacer()
-            ProgressView()
-            Spacer()
-        }
-        .edgesIgnoringSafeArea(.all)
+  var body: some View {
+    VStack {
+      Spacer()
+      ProgressView()
+      Spacer()
     }
+    .ignoresSafeArea()
+  }
 }
 
-struct FeedView_Previews: PreviewProvider {
-    static var previews: some View {
-        FeedView()
-    }
+struct ErrorBannerView: View {
+  let message: String
+
+  var body: some View {
+    Text(message)
+      .font(.custom("Lato-Regular", size: 14))
+      .foregroundColor(.white)
+      .padding()
+      .background(Color.red.opacity(0.85), in: RoundedRectangle(cornerRadius: 12))
+      .padding()
+      .transition(.move(edge: .bottom).combined(with: .opacity))
+  }
 }

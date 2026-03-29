@@ -10,67 +10,62 @@ import SwiftUI
 import SafariServices
 
 struct SafariView: View {
-    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    
-    var url: URL
-    
-    var body: some View {
-        SafariViewController(url: url, mode: mode)
-            .edgesIgnoringSafeArea(.all)
-            .navigationBarTitle("", displayMode: .inline)
-            .navigationBarHidden(true)
-    }
+  @Environment(\.dismiss) private var dismiss
+
+  var url: URL
+
+  var body: some View {
+    SafariViewController(url: url, onDismiss: { dismiss() })
+      .ignoresSafeArea()
+      .navigationBarTitle("", displayMode: .inline)
+      .navigationBarHidden(true)
+  }
 }
 
 struct SafariViewController: UIViewControllerRepresentable {
 
-    var url: URL
-    var mode: Binding<PresentationMode>
-    
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
+  var url: URL
+  var onDismiss: () -> Void
+
+  func makeCoordinator() -> Coordinator {
+    Coordinator(onDismiss: onDismiss)
+  }
+
+  func makeUIViewController(context: Context) -> SFSafariViewController {
+    let safariVC = SFSafariViewController(url: url)
+    safariVC.delegate = context.coordinator
+    return safariVC
+  }
+
+  func updateUIViewController(_ uiViewController: SFSafariViewController, context: Context) {}
+
+  final class Coordinator: NSObject, SFSafariViewControllerDelegate {
+    let onDismiss: () -> Void
+
+    init(onDismiss: @escaping () -> Void) {
+      self.onDismiss = onDismiss
     }
 
-    func makeUIViewController(context: Context) -> SFSafariViewController {
-        let safariVC = SFSafariViewController(url: url)
-        safariVC.delegate = context.coordinator
-        return safariVC
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+      onDismiss()
     }
-
-    func updateUIViewController(_ uiViewController: SFSafariViewController, context: Context) {
-
-    }
-    
-    final class Coordinator: NSObject, SFSafariViewControllerDelegate {
-        private var parent: SafariViewController
-
-        init(_ safariViewController: SafariViewController) {
-            self.parent = safariViewController
-        }
-        
-        func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
-            parent.mode.wrappedValue.dismiss()
-        }
-    }
+  }
 }
 
 extension UINavigationController: @retroactive UIGestureRecognizerDelegate {
-    override open func viewDidLoad() {
-        super.viewDidLoad()
-        interactivePopGestureRecognizer?.delegate = self
-    }
-    
-    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        return viewControllers.count > 1
-    }
-    
-    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        true
-    }
-}
+  override open func viewDidLoad() {
+    super.viewDidLoad()
+    interactivePopGestureRecognizer?.delegate = self
+  }
 
-struct SafariView_Previews: PreviewProvider {
-    static var previews: some View {
-        SafariView(url: URL(string: "https://google.com")!)
-    }
+  public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+    return viewControllers.count > 1
+  }
+
+  public func gestureRecognizer(
+    _ gestureRecognizer: UIGestureRecognizer,
+    shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer
+  ) -> Bool {
+    true
+  }
 }
