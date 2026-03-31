@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hackery - A Hacker News Client for Apple Platforms</title>
+  <meta name="description" content="A clean, fast Hacker News client for iPhone, iPad, and Apple Vision Pro. Threaded comments, bookmarks with iCloud sync, and reader mode.">
+  <style>
+    @font-face {
+      font-family: 'Lato';
+      src: url('fonts/Lato-Regular.ttf') format('truetype');
+      font-weight: 400;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Lato';
+      src: url('fonts/Lato-Bold.ttf') format('truetype');
+      font-weight: 700;
+      font-display: swap;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #1a1a1a;
+      background: #fff;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 80px 24px 60px;
+    }
+
+    .hero-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 18px;
+      margin: 0 auto 24px;
+      overflow: hidden;
+    }
+
+    .hero-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 700;
+      letter-spacing: -1.5px;
+      margin-bottom: 16px;
+    }
+
+    .hero p {
+      font-size: 20px;
+      color: #666;
+      max-width: 520px;
+      margin: 0 auto 32px;
+      line-height: 1.5;
+    }
+
+    .app-store-badge {
+      display: inline-block;
+      transition: opacity 0.2s;
+    }
+
+    .app-store-badge:hover {
+      opacity: 0.8;
+    }
+
+    .app-store-badge img {
+      height: 54px;
+    }
+
+    .platforms {
+      margin-top: 16px;
+      font-size: 14px;
+      color: #999;
+    }
+
+    /* Features */
+    .features {
+      padding: 40px 0 80px;
+    }
+
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 64px;
+      padding: 60px 0;
+    }
+
+    .feature:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    .feature-image {
+      flex: 0 0 auto;
+    }
+
+    .feature-image img {
+      width: 280px;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+    }
+
+    .feature-image-dark img {
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+    }
+
+    .feature-text {
+      flex: 1;
+    }
+
+    .feature-text h2 {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+
+    .feature-text p {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #555;
+    }
+
+    /* CTA */
+    .cta {
+      text-align: center;
+      padding: 60px 24px 80px;
+      border-top: 1px solid #f0f0f0;
+    }
+
+    .cta h2 {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+
+    .cta p {
+      font-size: 18px;
+      color: #666;
+      margin-bottom: 24px;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      border-top: 1px solid #f0f0f0;
+      font-size: 14px;
+      color: #999;
+    }
+
+    footer a {
+      color: #999;
+      text-decoration: underline;
+    }
+
+    footer a:hover {
+      color: #333;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero { padding: 60px 24px 40px; }
+      .hero h1 { font-size: 36px; }
+      .hero p { font-size: 18px; }
+
+      .feature {
+        flex-direction: column !important;
+        text-align: center;
+        gap: 32px;
+        padding: 40px 0;
+      }
+
+      .feature-image img {
+        width: 220px;
+      }
+
+      .feature-text h2 { font-size: 26px; }
+      .feature-text p { font-size: 16px; }
+
+      .cta h2 { font-size: 26px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-icon"><img src="images/appicon.png" alt="Hackery app icon"></div>
+    <h1>Hackery</h1>
+    <p>A clean, fast Hacker News client for iPhone, iPad, and Apple Vision Pro.</p>
+    <a href="https://apps.apple.com/app/hackery-hacker-news-client/id1487575545" class="app-store-badge">
+      <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
+    </a>
+    <div class="platforms">Available on iOS, iPadOS, and visionOS</div>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <div class="container">
+
+      <div class="feature">
+        <div class="feature-image">
+          <img src="images/screenshot-feed.png" alt="Hackery main feed showing top Hacker News stories">
+        </div>
+        <div class="feature-text">
+          <h2>Stay in the Loop</h2>
+          <p>Browse the latest Hacker News stories in a clean, card-based layout. See scores, comment counts, and authors instantly. Tap any story to read in Safari's reader mode.</p>
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-image">
+          <img src="images/screenshot-swipe.png" alt="Swipe to bookmark a story in Hackery">
+        </div>
+        <div class="feature-text">
+          <h2>Never Lose a Story</h2>
+          <p>Swipe to save stories for later. Your bookmarks sync across all your devices via iCloud, so you never lose track of what you want to read.</p>
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-image">
+          <img src="images/screenshot-comments.png" alt="Threaded comments view in Hackery">
+        </div>
+        <div class="feature-text">
+          <h2>Follow the Conversation</h2>
+          <p>Follow conversations with nested, threaded comments. Links are tappable and underlined. Discussions load in pages so the app stays fast, even on long threads.</p>
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-image feature-image-dark">
+          <img src="images/screenshot-darkmode.png" alt="Hackery in dark mode">
+        </div>
+        <div class="feature-text">
+          <h2>Easy on the Eyes</h2>
+          <p>Easy on the eyes, day or night. Hackery follows your system appearance with a carefully crafted dark theme.</p>
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-image feature-image-dark">
+          <img src="images/screenshot-comments-dark.png" alt="Rich comments in dark mode">
+        </div>
+        <div class="feature-text">
+          <h2>Dive Deeper</h2>
+          <p>Dive deep into discussions with beautifully rendered comment threads. Bookmark stories right from the comments view and open articles with a tap.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <h2>Try Hackery</h2>
+    <p>Free on the App Store.</p>
+    <a href="https://apps.apple.com/app/hackery-hacker-news-client/id1487575545" class="app-store-badge">
+      <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
+    </a>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <a href="privacypolicy.html">Privacy Policy</a> &middot; Built by <a href="mailto:timshim@gmail.com" style="text-decoration: underline;">Tim Shim</a>
+  </footer>
+
+</body>
+</html>
