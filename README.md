@@ -11,6 +11,7 @@ A beautiful Hacker News client built entirely with SwiftUI.
 - **In-App Safari Reader** — Stories open in SFSafariViewController with Reader Mode enabled by default.
 - **Infinite Scroll with Pagination Glow** — Stories and comments load progressively with an animated gradient glow indicator.
 - **Offline Cache** — The feed is cached locally so stories appear instantly on relaunch (30-minute TTL).
+- **On-Device Comment Moderation** — AI-powered comment filtering using Apple Intelligence. Adjust sensitivity to hide low-quality or toxic comments.
 - **Dark Mode** — Full light and dark mode support with custom color theming.
 - **visionOS Support** — Runs natively on Apple Vision Pro with ornament controls, hover effects, and glass background materials.
 - **iPad Support** — Adaptive layout for iPad.
@@ -21,14 +22,14 @@ A beautiful Hacker News client built entirely with SwiftUI.
 <p float="left">
   <img src="Design/Screenshots/iphone-feed-light.png" alt="Feed - Light" width="230">
   <img src="Design/Screenshots/iphone-bookmark-light.png" alt="Swipe to Bookmark" width="230">
-  <img src="Design/Screenshots/iphone-comments-light.png" alt="Comments - Light" width="230">
+  <img src="Design/Screenshots/iphone-moderation-light.png" alt="AI Moderation - Light" width="230">
 </p>
 
 #### Dark Mode
 <p float="left">
   <img src="Design/Screenshots/iphone-feed-dark.png" alt="Feed - Dark" width="230">
   <img src="Design/Screenshots/iphone-bookmark-dark.png" alt="Swipe to Bookmark - Dark" width="230">
-  <img src="Design/Screenshots/iphone-comments-dark.png" alt="Comments - Dark" width="230">
+  <img src="Design/Screenshots/iphone-moderation-dark.png" alt="AI Moderation - Dark" width="230">
 </p>
 
 ### Requirements

@@ -2709,9 +2709,9 @@
     {
       "type": "frame",
       "id": "Ww7cd",
-      "x": 6920,
+      "x": 8304,
       "y": 700,
-      "name": "iPhone6",
+      "name": "iPhone7",
       "clip": true,
       "width": 1284,
       "height": 2778,
@@ -2723,7 +2723,7 @@
           "id": "C0XpF",
           "x": 133,
           "y": 737,
-          "name": "r6",
+          "name": "r7",
           "width": 1050,
           "height": 2283,
           "fill": "#ffffffff",
@@ -3250,9 +3250,9 @@
     {
       "type": "frame",
       "id": "DsPEw",
-      "x": 8304,
+      "x": 9688,
       "y": 700,
-      "name": "iPhone7",
+      "name": "iPhone8",
       "clip": true,
       "width": 1284,
       "height": 2778,
@@ -3264,7 +3264,7 @@
           "id": "vDtjv",
           "x": 133,
           "y": 737,
-          "name": "r7",
+          "name": "r8",
           "width": 1050,
           "height": 2283,
           "fill": "#ffffffff",
@@ -3791,9 +3791,9 @@
     {
       "type": "frame",
       "id": "aWemf",
-      "x": 9688,
+      "x": 11072,
       "y": 700,
-      "name": "iPhone8",
+      "name": "iPhone9",
       "clip": true,
       "width": 1284,
       "height": 2778,
@@ -3805,7 +3805,7 @@
           "id": "zJ08q",
           "x": 133,
           "y": 737,
-          "name": "r8",
+          "name": "r9",
           "width": 1050,
           "height": 2283,
           "fill": "#ffffffff",
@@ -4332,9 +4332,9 @@
     {
       "type": "frame",
       "id": "32d6N",
-      "x": 11072,
+      "x": 12456,
       "y": 700,
-      "name": "iPhone9",
+      "name": "iPhone10",
       "clip": true,
       "width": 1284,
       "height": 2778,
@@ -4346,7 +4346,7 @@
           "id": "QwyzI",
           "x": 133,
           "y": 737,
-          "name": "r9",
+          "name": "r10",
           "width": 1050,
           "height": 2283,
           "fill": "#ffffffff",
@@ -4873,9 +4873,9 @@
     {
       "type": "frame",
       "id": "Oki1x",
-      "x": 12456,
+      "x": 13840,
       "y": 700,
-      "name": "iPhone10",
+      "name": "iPhone11",
       "clip": true,
       "width": 1284,
       "height": 2778,
@@ -4887,7 +4887,7 @@
           "id": "81wxb",
           "x": 133,
           "y": 737,
-          "name": "r10",
+          "name": "r11",
           "width": 1050,
           "height": 2283,
           "fill": "#ffffffff",
@@ -5741,6 +5741,547 @@
               "height": 1600
             }
           ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "fC8ZJ",
+      "x": 6920,
+      "y": 700,
+      "name": "iPhone6",
+      "clip": true,
+      "width": 1284,
+      "height": 2778,
+      "fill": "#FFFFFF",
+      "layout": "none",
+      "children": [
+        {
+          "type": "frame",
+          "id": "3jPKd",
+          "x": 133,
+          "y": 737,
+          "name": "r6",
+          "width": 1050,
+          "height": 2283,
+          "fill": "#ffffffff",
+          "cornerRadius": 125,
+          "layout": "none",
+          "children": [
+            {
+              "type": "frame",
+              "id": "AMF7t",
+              "x": 0,
+              "y": 0,
+              "name": "Screen",
+              "clip": true,
+              "width": 1050,
+              "height": 2283,
+              "fill": {
+                "type": "image",
+                "enabled": true,
+                "url": "iphone-moderation-light.png",
+                "mode": "fill"
+              },
+              "cornerRadius": 115,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "wUJ7N",
+                  "x": 0,
+                  "y": 62,
+                  "name": "Sheet",
+                  "enabled": false,
+                  "width": 402,
+                  "height": 812,
+                  "fill": "#ffffffff",
+                  "cornerRadius": [
+                    38,
+                    38,
+                    0,
+                    0
+                  ],
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#0000002e",
+                    "offset": {
+                      "x": 0,
+                      "y": 15
+                    },
+                    "blur": 65.625
+                  },
+                  "layout": "vertical",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "S2mg6",
+                      "name": "Toolbar",
+                      "width": "fill_container",
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": {
+                          "bottom": 0.33329999446868896
+                        }
+                      },
+                      "layout": "vertical",
+                      "padding": [
+                        0,
+                        0,
+                        10,
+                        0
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "9SP2n",
+                          "name": "Grabber",
+                          "height": 16,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1
+                          },
+                          "layout": "vertical",
+                          "padding": [
+                            5,
+                            0,
+                            0,
+                            0
+                          ],
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "QSPgt",
+                              "name": "Grabber",
+                              "width": 36,
+                              "height": 5,
+                              "fill": "#ccccccff",
+                              "cornerRadius": 100,
+                              "stroke": {
+                                "align": "inside",
+                                "thickness": 1
+                              },
+                              "layout": "none"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "E0j6v",
+                          "name": "Title and Controls",
+                          "width": "fill_container",
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1
+                          },
+                          "gap": 66,
+                          "padding": [
+                            0,
+                            16
+                          ],
+                          "justifyContent": "space_between",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "KhvLM",
+                              "name": "Leading Button",
+                              "height": 44,
+                              "cornerRadius": 296,
+                              "stroke": {
+                                "align": "inside",
+                                "thickness": 6.437500476837158
+                              },
+                              "gap": 12,
+                              "padding": [
+                                0,
+                                4
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "ellipse",
+                                  "id": "VnM3P",
+                                  "layoutPosition": "absolute",
+                                  "x": 0,
+                                  "y": 0,
+                                  "name": "BG",
+                                  "sweepAngle": -360.00001001791264,
+                                  "fill": "#78788029",
+                                  "width": 44,
+                                  "height": 44,
+                                  "stroke": {
+                                    "align": "inside",
+                                    "thickness": 1
+                                  }
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "n83up",
+                                  "name": "Symbol",
+                                  "fill": {
+                                    "type": "color",
+                                    "color": "#727272ff",
+                                    "enabled": true,
+                                    "blendMode": "linearBurn"
+                                  },
+                                  "textGrowth": "fixed-width-height",
+                                  "width": 36,
+                                  "height": "fill_container",
+                                  "content": "􀆄",
+                                  "textAlign": "center",
+                                  "textAlignVertical": "middle",
+                                  "fontFamily": "SF Pro",
+                                  "fontSize": 17,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "UNGrl",
+                              "name": "Spacer",
+                              "clip": true,
+                              "width": 8,
+                              "height": "fill_container",
+                              "stroke": {
+                                "align": "inside",
+                                "thickness": 1
+                              },
+                              "layout": "none"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "70Qsu",
+                              "name": "Trailing Button",
+                              "height": 44,
+                              "cornerRadius": 296,
+                              "stroke": {
+                                "align": "inside",
+                                "thickness": 6.437500476837158
+                              },
+                              "gap": 12,
+                              "padding": [
+                                0,
+                                4
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "ellipse",
+                                  "id": "7fqHS",
+                                  "layoutPosition": "absolute",
+                                  "x": 0,
+                                  "y": 0,
+                                  "name": "BG",
+                                  "sweepAngle": -360.00001001791264,
+                                  "fill": "#0088ffff",
+                                  "width": 44,
+                                  "height": 44,
+                                  "stroke": {
+                                    "align": "inside",
+                                    "thickness": 1
+                                  }
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "GHLUx",
+                                  "name": "Symbol",
+                                  "fill": "#ffffffff",
+                                  "textGrowth": "fixed-width-height",
+                                  "width": 36,
+                                  "height": "fill_container",
+                                  "content": "􀄨",
+                                  "textAlign": "center",
+                                  "textAlignVertical": "middle",
+                                  "fontFamily": "SF Pro",
+                                  "fontSize": 17,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "V4G4x",
+                              "layoutPosition": "absolute",
+                              "x": 183,
+                              "y": 13,
+                              "name": "Title",
+                              "width": 36,
+                              "height": 22,
+                              "stroke": {
+                                "align": "inside",
+                                "thickness": 1
+                              },
+                              "layout": "none",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "ZvUXt",
+                                  "x": 0,
+                                  "y": 0,
+                                  "name": "Title",
+                                  "fill": "#1a1a1aff",
+                                  "content": "Title",
+                                  "lineHeight": 1.2941176470588236,
+                                  "textAlign": "center",
+                                  "fontFamily": "SF Pro",
+                                  "fontSize": 17,
+                                  "fontWeight": "normal",
+                                  "letterSpacing": -0.4300000071525574
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "qn7m3",
+              "x": 0,
+              "y": 0,
+              "name": "Status bar",
+              "enabled": false,
+              "width": 1284,
+              "height": 197,
+              "gap": 492,
+              "padding": [
+                67,
+                77,
+                60,
+                77
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "bv5bZ",
+                  "name": "Time",
+                  "width": "fill_container",
+                  "height": 70,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1
+                  },
+                  "gap": 10,
+                  "padding": [
+                    5,
+                    0,
+                    0,
+                    0
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "rx2vl",
+                      "name": "Time",
+                      "fill": "#000000ff",
+                      "content": "9:41",
+                      "lineHeight": 1.2941176470588236,
+                      "textAlign": "center",
+                      "fontFamily": "SF Pro",
+                      "fontSize": 54,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "KpFhu",
+                  "name": "Levels",
+                  "width": "fill_container",
+                  "height": 70,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1
+                  },
+                  "gap": 22,
+                  "padding": [
+                    3,
+                    3,
+                    0,
+                    0
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "path",
+                      "id": "ucIPU",
+                      "name": "Cellular Connection",
+                      "geometry": "M19.2 1.14623c0-0.63304-0.47756-1.14623-1.06667-1.14623l-1.06666 0c-0.5891 0-1.06667 0.51318-1.06667 1.14623l0 9.93396c0 0.63304 0.47756 1.14623 1.06667 1.14622l1.06666 0c0.5891 0 1.06667-0.51318 1.06667-1.14622l0-9.93396z m-7.43411 1.29905l1.06666 0c0.5891 0 1.06667 0.5255 1.06667 1.17374l0 7.43366c0 0.64824-0.47756 1.17374-1.06667 1.17373l-1.06666 0c-0.5891 0-1.06667-0.5255-1.06667-1.17373l0-7.43366c0-0.64824 0.47756-1.17374 1.06667-1.17374z m-4.33178 2.64905l-1.06666 0c-0.5891 0-1.06667 0.53219-1.06667 1.18868l0 4.75472c0 0.65649 0.47756 1.18868 1.06667 1.18867l1.06666 0.00001c0.5891 0 1.06667-0.53219 1.06667-1.18868l0-4.75472c0-0.65649-0.47756-1.18868-1.06667-1.18868z m-5.30078 2.44529l-1.06666 0c-0.5891 0-1.06667 0.52459-1.06667 1.1717l0 2.3434c0 0.64711 0.47756 1.1717 1.06667 1.1717l1.06666 0c0.5891 0 1.06667-0.52459 1.06667-1.1717l0-2.3434c0-0.64711-0.47756-1.1717-1.06667-1.1717z",
+                      "fillRule": "evenodd",
+                      "fill": "#000000ff",
+                      "width": 61,
+                      "height": 39
+                    },
+                    {
+                      "type": "path",
+                      "id": "REc7s",
+                      "name": "Wifi",
+                      "geometry": "M8.5713 2.46628c2.48711 0.00011 4.87912 0.92219 6.68163 2.57567 0.13573 0.12765 0.35269 0.12604 0.48637-0.00361l1.29749-1.26347c0.06769-0.06576 0.10543-0.15484 0.10487-0.24752-0.00056-0.09268-0.03938-0.18133-0.10786-0.24631-4.73101-4.37472-12.19473-4.37472-16.92574 0-0.06853 0.06494-0.10742 0.15356-0.10805 0.24624-0.00063 0.09268 0.03704 0.18178 0.10468 0.24759l1.29786 1.26347c0.1336 0.12985 0.35072 0.13146 0.48638 0.00361 1.80274-1.65359 4.19502-2.57567 6.68237-2.57567z m-0.00335 4.22028c1.35732-0.00008 2.6662 0.51165 3.67232 1.43578 0.13608 0.13116 0.35045 0.12831 0.4831-0.00641l1.28728-1.3193c0.06779-0.0692 0.1054-0.16308 0.10443-0.26063-0.00098-0.09755-0.04047-0.19063-0.10963-0.25843-3.06383-2.89085-7.80857-2.89085-10.8724 0-0.06921 0.06779-0.10869 0.16092-0.1096 0.2585-0.00091 0.09758 0.03684 0.19145 0.10477 0.26056l1.28691 1.3193c0.13265 0.13472 0.34702 0.13756 0.4831 0.00641 1.00545-0.92352 2.3133-1.43521 3.66972-1.43578z m2.52442 2.79355c0.00193 0.10535-0.03514 0.20692-0.10244 0.28073l-2.17666 2.45472c-0.06381 0.07214-0.1508 0.11274-0.24157 0.11275-0.09077 0-0.17776-0.0406-0.24157-0.11275l-2.17703-2.45472c-0.06725-0.07386-0.10425-0.17546-0.10225-0.28082 0.00199-0.10535 0.0428-0.20511 0.11279-0.27573 1.3901-1.31389 3.42602-1.31389 4.81612 0 0.06994 0.07067 0.11068 0.17047 0.11261 0.27582z",
+                      "fillRule": "evenodd",
+                      "fill": "#000000ff",
+                      "width": 55,
+                      "height": 39
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Z2smb",
+                      "name": "Frame",
+                      "width": 87,
+                      "height": 41,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      },
+                      "layout": "none",
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": 14,
+                          "id": "KdzUA",
+                          "x": 0,
+                          "y": 0,
+                          "name": "Border",
+                          "opacity": 0.3499999940395355,
+                          "width": 80,
+                          "height": 41,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#000000ff"
+                          }
+                        },
+                        {
+                          "type": "path",
+                          "id": "rmAl9",
+                          "x": 83,
+                          "y": 14,
+                          "name": "Cap",
+                          "opacity": 0.4000000059604645,
+                          "geometry": "M0 0l0 4c0.80473-0.33878 1.32804-1.12687 1.32804-2 0-0.87313-0.52331-1.66122-1.32804-2",
+                          "fill": "#000000ff",
+                          "width": 4,
+                          "height": 13
+                        },
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": 8,
+                          "id": "nwVA6",
+                          "x": 6,
+                          "y": 6,
+                          "name": "Capacity",
+                          "fill": "#000000ff",
+                          "width": 67,
+                          "height": 29
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "v3ftT",
+              "x": 0,
+              "y": 2194,
+              "name": "Home Indicator",
+              "width": 1050,
+              "height": 89,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "rectangle",
+                  "cornerRadius": 100,
+                  "id": "4Dwy6",
+                  "x": 713,
+                  "y": 55,
+                  "name": "Home Indicator",
+                  "flipX": true,
+                  "fill": "#000000ff",
+                  "width": 376,
+                  "height": 13,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1
+                  }
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "OGw07",
+              "x": 0,
+              "y": 0,
+              "name": "Bezel",
+              "width": 1050,
+              "height": 2283,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "rectangle",
+                  "id": "iWfWm",
+                  "x": -63,
+                  "y": -60,
+                  "name": "iPhone 17 Pro - Silver - Portrait",
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "Bezel.png",
+                    "mode": "fill"
+                  },
+                  "width": 1175,
+                  "height": 2403
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "1wCzw",
+          "x": 100,
+          "y": 260,
+          "name": "Title",
+          "fill": "#000000",
+          "textGrowth": "fixed-width",
+          "width": 1084,
+          "content": "AI Moderation",
+          "textAlign": "center",
+          "fontFamily": "Lato",
+          "fontSize": 84,
+          "fontWeight": "bold"
         }
       ]
     }

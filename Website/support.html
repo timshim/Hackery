@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support - Hackery</title>
+  <style>
+    @font-face {
+      font-family: 'Lato';
+      src: url('fonts/Lato-Regular.ttf') format('truetype');
+      font-weight: 400;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Lato';
+      src: url('fonts/Lato-Bold.ttf') format('truetype');
+      font-weight: 700;
+      font-display: swap;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.7;
+      color: #333;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+    h1 { font-size: 28px; margin-bottom: 8px; }
+    .subtitle { color: #888; font-size: 16px; margin-bottom: 32px; }
+    label {
+      display: block;
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 6px;
+      color: #333;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px 12px;
+      font-family: inherit;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #fafafa;
+      margin-bottom: 20px;
+      transition: border-color 0.2s;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #007AFF;
+      background: #fff;
+    }
+    textarea { resize: vertical; min-height: 140px; }
+    button {
+      display: inline-block;
+      padding: 12px 32px;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      background: #007AFF;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    button:hover { opacity: 0.85; }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    .success {
+      display: none;
+      padding: 16px;
+      background: #e8f5e9;
+      color: #2e7d32;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+    .error {
+      display: none;
+      padding: 16px;
+      background: #fbe9e7;
+      color: #c62828;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+    .back { display: inline-block; margin-bottom: 24px; color: #007AFF; text-decoration: none; font-size: 14px; }
+    .back:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back">&larr; Back to Hackery</a>
+  <h1>Support</h1>
+  <p class="subtitle">Having an issue or have a suggestion? Send us a message.</p>
+
+  <div id="success-msg" class="success">Your ticket has been submitted. We'll get back to you soon.</div>
+  <div id="error-msg" class="error">Something went wrong. Please try again or email us directly.</div>
+
+  <form id="support-form">
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required placeholder="you@example.com">
+
+    <label for="category">Category</label>
+    <select id="category" name="category" required>
+      <option value="" disabled selected>Select a category</option>
+      <option value="bug">Bug Report</option>
+      <option value="feature">Feature Request</option>
+      <option value="question">Question</option>
+      <option value="other">Other</option>
+    </select>
+
+    <label for="subject">Subject</label>
+    <input type="text" id="subject" name="subject" required placeholder="Brief summary of your issue">
+
+    <label for="message">Message</label>
+    <textarea id="message" name="message" required placeholder="Describe your issue or suggestion in detail..."></textarea>
+
+    <button type="submit" id="submit-btn">Submit</button>
+  </form>
+
+  <script>
+    const form = document.getElementById('support-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const successMsg = document.getElementById('success-msg');
+    const errorMsg = document.getElementById('error-msg');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      successMsg.style.display = 'none';
+      errorMsg.style.display = 'none';
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting...';
+
+      const payload = {
+        email: form.email.value,
+        category: form.category.value,
+        subject: form.subject.value,
+        message: form.message.value,
+      };
+
+      try {
+        const res = await fetch('/api/support', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        if (!res.ok) throw new Error('Request failed');
+
+        successMsg.style.display = 'block';
+        form.reset();
+      } catch {
+        errorMsg.style.display = 'block';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit';
+      }
+    });
+  </script>
+</body>
+</html>

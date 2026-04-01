@@ -28,13 +28,14 @@ struct Hackery: App {
 
   private let modelContainer: ModelContainer
   @State private var bookmarkStore: BookmarkStore
+  @State private var moderationStore: ModerationStore
 
   #if os(visionOS)
   @State private var showGlow = false
   #endif
 
   init() {
-    let schema = Schema([BookmarkedStory.self])
+    let schema = Schema([BookmarkedStory.self, ModerationPreference.self, BlockedUser.self])
     let container: ModelContainer
     #if targetEnvironment(simulator)
     let cloudKit: ModelConfiguration.CloudKitDatabase = .none
@@ -58,6 +59,7 @@ struct Hackery: App {
     }
     self.modelContainer = container
     self._bookmarkStore = State(initialValue: BookmarkStore(modelContext: container.mainContext))
+    self._moderationStore = State(initialValue: ModerationStore(modelContext: container.mainContext))
   }
 
   var body: some Scene {
@@ -72,6 +74,7 @@ struct Hackery: App {
       .ignoresSafeArea()
       .environment(viewModel)
       .environment(bookmarkStore)
+      .environment(moderationStore)
       #elseif os(visionOS)
       ZStack {
         FeedView()
@@ -79,6 +82,7 @@ struct Hackery: App {
           .padding()
           .environment(viewModel)
           .environment(bookmarkStore)
+          .environment(moderationStore)
         VStack {
           Spacer()
           PaginationGlow()

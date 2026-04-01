@@ -203,7 +203,7 @@ struct StoryListView: View {
         systemImage: bookmarkStore.isBookmarked(story) ? "bookmark.slash.fill" : "bookmark.fill"
       )
     }
-    .tint(bookmarkStore.isBookmarked(story) ? .orange : .teal)
+    .tint(bookmarkStore.isBookmarked(story) ? Color("accentOrange") : .teal)
   }
 }
 

@@ -41,6 +41,12 @@
 		CC000002CCCCCC0200000001 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 488819D62548067A007B57F2 /* Lato-Regular.ttf */; };
 		DD000002DDDDDD0200000001 /* HTMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD000001DDDDDD0100000001 /* HTMLParser.swift */; };
 		DD000003DDDDDD0300000001 /* HTMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD000001DDDDDD0100000001 /* HTMLParser.swift */; };
+		EE000001EEEEEE0100000001 /* CommentClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE000004EEEEEE0400000001 /* CommentClassifier.swift */; };
+		EE000002EEEEEE0200000001 /* ReportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE000005EEEEEE0500000001 /* ReportService.swift */; };
+		EE000003EEEEEE0300000001 /* ModerationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE000006EEEEEE0600000001 /* ModerationStore.swift */; };
+		EE000007EEEEEE0700000001 /* CommentClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE000004EEEEEE0400000001 /* CommentClassifier.swift */; };
+		EE000008EEEEEE0800000001 /* ReportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE000005EEEEEE0500000001 /* ReportService.swift */; };
+		EE000009EEEEEE0900000001 /* ModerationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE000006EEEEEE0600000001 /* ModerationStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +106,9 @@
 		AA000006AAAAAA0600000001 /* BookmarkStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkStore.swift; sourceTree = "<group>"; };
 		BB000002BBBBBB0200000001 /* BookmarksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksView.swift; sourceTree = "<group>"; };
 		DD000001DDDDDD0100000001 /* HTMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLParser.swift; sourceTree = "<group>"; };
+		EE000004EEEEEE0400000001 /* CommentClassifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentClassifier.swift; sourceTree = "<group>"; };
+		EE000005EEEEEE0500000001 /* ReportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportService.swift; sourceTree = "<group>"; };
+		EE000006EEEEEE0600000001 /* ModerationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModerationStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -167,6 +176,9 @@
 				AA000006AAAAAA0600000001 /* BookmarkStore.swift */,
 				BB000002BBBBBB0200000001 /* BookmarksView.swift */,
 				DD000001DDDDDD0100000001 /* HTMLParser.swift */,
+				EE000004EEEEEE0400000001 /* CommentClassifier.swift */,
+				EE000005EEEEEE0500000001 /* ReportService.swift */,
+				EE000006EEEEEE0600000001 /* ModerationStore.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -437,6 +449,9 @@
 				AA000004AAAAAA0400000001 /* BookmarkStore.swift in Sources */,
 				BB000001BBBBBB0100000001 /* BookmarksView.swift in Sources */,
 				DD000002DDDDDD0200000001 /* HTMLParser.swift in Sources */,
+				EE000001EEEEEE0100000001 /* CommentClassifier.swift in Sources */,
+				EE000002EEEEEE0200000001 /* ReportService.swift in Sources */,
+				EE000003EEEEEE0300000001 /* ModerationStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,6 +478,9 @@
 				AA000002AAAAAA0200000001 /* StoryCache.swift in Sources */,
 				AA000005AAAAAA0500000001 /* BookmarkStore.swift in Sources */,
 				DD000003DDDDDD0300000001 /* HTMLParser.swift in Sources */,
+				EE000007EEEEEE0700000001 /* CommentClassifier.swift in Sources */,
+				EE000008EEEEEE0800000001 /* ReportService.swift in Sources */,
+				EE000009EEEEEE0900000001 /* ModerationStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

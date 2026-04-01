@@ -76,6 +76,8 @@ struct Story: Identifiable, Hashable, Codable {
   }
 }
 
+typealias HNComment = Comment
+
 struct Comment: Identifiable, Hashable {
   let id: Int
   let by: String

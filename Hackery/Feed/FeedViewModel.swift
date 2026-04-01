@@ -30,6 +30,7 @@ final class FeedViewModel {
   private var loadedCount = 0
   private var allTopLevelCommentIds = [Int]()
   private var loadedCommentCount = 0
+  private(set) var currentCommentStoryId: Int?
 
   func loadTopStories(refresh: Bool = false) {
     currentTask?.cancel()
@@ -95,13 +96,18 @@ final class FeedViewModel {
     loadedCount < allStoryIds.count
   }
 
-  func loadComments(for story: Story) {
+  func loadComments(for story: Story, onLoaded: (([Comment]) async -> Void)? = nil) {
+    // Skip reload if already loaded for this story
+    if currentCommentStoryId == story.id && !comments.isEmpty {
+      return
+    }
     currentTask?.cancel()
     isLoading = true
     error = nil
     comments.removeAll()
     allTopLevelCommentIds = story.kids
     loadedCommentCount = 0
+    currentCommentStoryId = story.id
 
     currentTask = Task {
       do {
@@ -109,6 +115,12 @@ final class FeedViewModel {
         let fetched = try await fetchCommentTree(ids: firstBatch, depth: 0)
 
         try Task.checkCancellation()
+
+        // Run classification before revealing comments
+        if let onLoaded {
+          await onLoaded(fetched)
+        }
+
         comments = fetched
         loadedCommentCount = commentPageSize
       } catch is CancellationError {

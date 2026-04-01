@@ -8,6 +8,7 @@
 
 import SwiftUI
 import SwiftData
+import CoreData
 
 @Model
 final class BookmarkedStory {
@@ -63,6 +64,19 @@ final class BookmarkStore {
   init(modelContext: ModelContext) {
     self.modelContext = modelContext
     loadFromStore()
+    observeRemoteChanges()
+  }
+
+  private func observeRemoteChanges() {
+    NotificationCenter.default.addObserver(
+      forName: NSNotification.Name.NSPersistentStoreRemoteChange,
+      object: nil,
+      queue: .main
+    ) { [weak self] _ in
+      Task { @MainActor in
+        self?.loadFromStore()
+      }
+    }
   }
 
   var bookmarkedIds: Set<Int> {

@@ -86,7 +86,7 @@ struct StoryListView: View {
                 systemImage: bookmarkStore.isBookmarked(story) ? "bookmark.slash.fill" : "bookmark.fill"
               )
             }
-            .tint(bookmarkStore.isBookmarked(story) ? .orange : .teal)
+            .tint(bookmarkStore.isBookmarked(story) ? Color("accentOrange") : .teal)
           }
           .listRowInsets(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
       }
