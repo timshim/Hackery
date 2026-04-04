@@ -13,6 +13,8 @@ struct FeedView: View {
   @State private var showGlow = false
   #if os(visionOS)
   @State private var showBookmarks = false
+  @State private var showTipJar = false
+  @Environment(TipStore.self) private var tipStore
   #endif
 
   var body: some View {
@@ -91,10 +93,22 @@ struct FeedView: View {
         if !showBookmarks {
           RefreshButtonView(tapped: refresh)
         }
+
+        Button(action: { showTipJar = true }) {
+          Image(systemName: "cup.and.saucer.fill")
+            .font(.system(size: 20, weight: .bold, design: .rounded))
+            .frame(width: 60, height: 60)
+            .padding()
+        }
+        .buttonStyle(.plain)
       }
       .padding(.horizontal, 8)
       .glassBackgroundEffect()
     })
+    .sheet(isPresented: $showTipJar) {
+      TipJarView()
+        .environment(tipStore)
+    }
     #endif
   }
 

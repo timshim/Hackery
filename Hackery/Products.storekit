@@ -1,0 +1,71 @@
+{
+  "identifier" : "D4E5F6A7-B8C9-0D1E-2F3A-4B5C6D7E8F9A",
+  "type" : "Configuration",
+  "version" : 3,
+  "products" : [
+    {
+      "displayPrice" : "1.99",
+      "familyShareable" : false,
+      "internalID" : "tip_small_001",
+      "localizations" : [
+        {
+          "description" : "A small coffee to support Hackery",
+          "displayName" : "Small Coffee",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.hackery.tip.small",
+      "referenceName" : "Small Coffee Tip",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "4.99",
+      "familyShareable" : false,
+      "internalID" : "tip_medium_001",
+      "localizations" : [
+        {
+          "description" : "A medium coffee to support Hackery",
+          "displayName" : "Medium Coffee",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.hackery.tip.medium",
+      "referenceName" : "Medium Coffee Tip",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "9.99",
+      "familyShareable" : false,
+      "internalID" : "tip_large_001",
+      "localizations" : [
+        {
+          "description" : "A large coffee to support Hackery",
+          "displayName" : "Large Coffee",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.hackery.tip.large",
+      "referenceName" : "Large Coffee Tip",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "19.99",
+      "familyShareable" : false,
+      "internalID" : "tip_generous_001",
+      "localizations" : [
+        {
+          "description" : "A generous tip to support Hackery",
+          "displayName" : "Generous Tip",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.hackery.tip.generous",
+      "referenceName" : "Generous Tip",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+    "_applicationInternalID" : "hackery_app_001",
+    "_developerTeamID" : "TEAM_ID_HERE"
+  }
+}

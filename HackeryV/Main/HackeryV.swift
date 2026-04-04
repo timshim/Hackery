@@ -8,10 +8,12 @@
 
 import SwiftUI
 import SwiftData
+import StoreKit
 
 @main
 struct HackeryV: App {
   @State private var viewModel = FeedViewModel()
+  @State private var tipStore = TipStore()
 
   private let modelContainer: ModelContainer
   @State private var bookmarkStore: BookmarkStore
@@ -47,6 +49,7 @@ struct HackeryV: App {
           .padding()
           .environment(viewModel)
           .environment(bookmarkStore)
+          .environment(tipStore)
         VStack {
           Spacer()
           PaginationGlow()

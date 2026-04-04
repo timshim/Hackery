@@ -8,6 +8,7 @@
 
 import SwiftUI
 import SwiftData
+import StoreKit
 
 #if os(iOS)
 private struct IsPagingKey: EnvironmentKey {
@@ -25,6 +26,8 @@ extension EnvironmentValues {
 @main
 struct Hackery: App {
   @State private var viewModel = FeedViewModel()
+  @State private var tipStore = TipStore()
+  @State private var showTipJar = false
 
   private let modelContainer: ModelContainer
   @State private var bookmarkStore: BookmarkStore
@@ -32,6 +35,7 @@ struct Hackery: App {
 
   #if os(visionOS)
   @State private var showGlow = false
+  @State private var handTrackingManager = HandTrackingManager()
   #endif
 
   init() {
@@ -75,6 +79,12 @@ struct Hackery: App {
       .environment(viewModel)
       .environment(bookmarkStore)
       .environment(moderationStore)
+      .environment(tipStore)
+      .onShake { showTipJar = true }
+      .sheet(isPresented: $showTipJar) {
+        TipJarView()
+          .environment(tipStore)
+      }
       #elseif os(visionOS)
       ZStack {
         FeedView()
@@ -83,6 +93,7 @@ struct Hackery: App {
           .environment(viewModel)
           .environment(bookmarkStore)
           .environment(moderationStore)
+          .environment(tipStore)
         VStack {
           Spacer()
           PaginationGlow()
@@ -96,6 +107,19 @@ struct Hackery: App {
         } else {
           withAnimation(.easeOut(duration: 0.6)) { showGlow = false }
         }
+      }
+      .onChange(of: handTrackingManager.thumbsUpDetected) { _, detected in
+        if detected {
+          showTipJar = true
+          handTrackingManager.resetDetection()
+        }
+      }
+      .task {
+        await handTrackingManager.start()
+      }
+      .sheet(isPresented: $showTipJar) {
+        TipJarView()
+          .environment(tipStore)
       }
       #endif
     }
