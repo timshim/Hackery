@@ -47,6 +47,7 @@
 		EE000007EEEEEE0700000001 /* CommentClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE000004EEEEEE0400000001 /* CommentClassifier.swift */; };
 		EE000008EEEEEE0800000001 /* ReportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE000005EEEEEE0500000001 /* ReportService.swift */; };
 		EE000009EEEEEE0900000001 /* ModerationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE000006EEEEEE0600000001 /* ModerationStore.swift */; };
+		FF100001FFFFFF0100000001 /* MasonryLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF100002FFFFFF0200000001 /* MasonryLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +110,7 @@
 		EE000004EEEEEE0400000001 /* CommentClassifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentClassifier.swift; sourceTree = "<group>"; };
 		EE000005EEEEEE0500000001 /* ReportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportService.swift; sourceTree = "<group>"; };
 		EE000006EEEEEE0600000001 /* ModerationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModerationStore.swift; sourceTree = "<group>"; };
+		FF100002FFFFFF0200000001 /* MasonryLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasonryLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -168,6 +170,7 @@
 				4854FA9C22B73C18001EC4AE /* FeedModel.swift */,
 				48227EAE22AE2A82009E85EE /* FeedView.swift */,
 				48227EB022AE2B08009E85EE /* FeedViewModel.swift */,
+				FF100002FFFFFF0200000001 /* MasonryLayout.swift */,
 				48EE5B7A248351E500B8ABC7 /* StoryView.swift */,
 				48EE5B7E2483522A00B8ABC7 /* CommentButton.swift */,
 				48EE5B80248355BF00B8ABC7 /* SafariView.swift */,
@@ -437,6 +440,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				48227EAF22AE2A82009E85EE /* FeedView.swift in Sources */,
+				FF100001FFFFFF0100000001 /* MasonryLayout.swift in Sources */,
 				48B7F86022B7723500FF21AD /* Extensions.swift in Sources */,
 				485E4B7022AE27CF00626464 /* Hackery.swift in Sources */,
 				48EE5B7F2483522A00B8ABC7 /* CommentButton.swift in Sources */,
@@ -625,7 +629,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Hackery/Main/Hackery.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "Hackery/Main/Preview\\ Content";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hackery/Main/Info.plist;
@@ -654,7 +658,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Hackery/Main/Hackery.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "Hackery/Main/Preview\\ Content";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hackery/Main/Info.plist;

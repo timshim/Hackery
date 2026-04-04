@@ -1,5 +1,5 @@
 {
-  "version": "2.9",
+  "version": "2.10",
   "children": [
     {
       "type": "frame",
@@ -37,7 +37,7 @@
               "fill": {
                 "type": "image",
                 "enabled": true,
-                "url": "Simulator Screenshot - iPhone Air - 2026-03-29 at 23.00.35.png",
+                "url": "Screenshots/iphone-feed-light.png",
                 "mode": "fill"
               },
               "cornerRadius": 115,
@@ -509,17 +509,17 @@
                 {
                   "type": "rectangle",
                   "id": "in9Tc",
-                  "x": -63,
-                  "y": -60,
+                  "x": -41,
+                  "y": -39,
                   "name": "iPhone 17 Pro - Silver - Portrait",
                   "fill": {
                     "type": "image",
                     "enabled": true,
-                    "url": "Bezel.png",
+                    "url": "bezel-iphone-air.png",
                     "mode": "fill"
                   },
-                  "width": 1175,
-                  "height": 2403
+                  "width": 1131,
+                  "height": 2361
                 }
               ]
             }
@@ -578,7 +578,7 @@
               "fill": {
                 "type": "image",
                 "enabled": true,
-                "url": "Simulator Screenshot - iPhone Air - 2026-03-29 at 23.00.51.png",
+                "url": "Screenshots/iphone-bookmark-light.png",
                 "mode": "fill"
               },
               "cornerRadius": 115,
@@ -1050,17 +1050,17 @@
                 {
                   "type": "rectangle",
                   "id": "YjYOR",
-                  "x": -63,
-                  "y": -60,
+                  "x": -41,
+                  "y": -39,
                   "name": "iPhone 17 Pro - Silver - Portrait",
                   "fill": {
                     "type": "image",
                     "enabled": true,
-                    "url": "Bezel.png",
+                    "url": "bezel-iphone-air.png",
                     "mode": "fill"
                   },
-                  "width": 1175,
-                  "height": 2403
+                  "width": 1131,
+                  "height": 2361
                 }
               ]
             }
@@ -1119,7 +1119,7 @@
               "fill": {
                 "type": "image",
                 "enabled": true,
-                "url": "Simulator Screenshot - iPhone Air - 2026-03-29 at 23.01.00.png",
+                "url": "Screenshots/iphone-bookmarks-light.png",
                 "mode": "fill"
               },
               "cornerRadius": 115,
@@ -1591,17 +1591,17 @@
                 {
                   "type": "rectangle",
                   "id": "N4KgM",
-                  "x": -63,
-                  "y": -60,
+                  "x": -41,
+                  "y": -39,
                   "name": "iPhone 17 Pro - Silver - Portrait",
                   "fill": {
                     "type": "image",
                     "enabled": true,
-                    "url": "Bezel.png",
+                    "url": "bezel-iphone-air.png",
                     "mode": "fill"
                   },
-                  "width": 1175,
-                  "height": 2403
+                  "width": 1131,
+                  "height": 2361
                 }
               ]
             }
@@ -1660,7 +1660,7 @@
               "fill": {
                 "type": "image",
                 "enabled": true,
-                "url": "Simulator Screenshot - iPhone Air - 2026-03-29 at 23.01.08.png",
+                "url": "Screenshots/iphone-moderation-light.png",
                 "mode": "fill"
               },
               "cornerRadius": 115,
@@ -2132,17 +2132,17 @@
                 {
                   "type": "rectangle",
                   "id": "k25nC",
-                  "x": -63,
-                  "y": -60,
+                  "x": -41,
+                  "y": -39,
                   "name": "iPhone 17 Pro - Silver - Portrait",
                   "fill": {
                     "type": "image",
                     "enabled": true,
-                    "url": "Bezel.png",
+                    "url": "bezel-iphone-air.png",
                     "mode": "fill"
                   },
-                  "width": 1175,
-                  "height": 2403
+                  "width": 1131,
+                  "height": 2361
                 }
               ]
             }
@@ -2157,7 +2157,7 @@
           "fill": "#000000",
           "textGrowth": "fixed-width",
           "width": 1084,
-          "content": "Quick Actions",
+          "content": "AI Moderation",
           "textAlign": "center",
           "fontFamily": "Lato",
           "fontSize": 84,
@@ -2201,7 +2201,7 @@
               "fill": {
                 "type": "image",
                 "enabled": true,
-                "url": "Simulator Screenshot - iPhone Air - 2026-03-29 at 23.01.20.png",
+                "url": "Screenshots/iphone-comments-light.png",
                 "mode": "fill"
               },
               "cornerRadius": 115,
@@ -2673,17 +2673,17 @@
                 {
                   "type": "rectangle",
                   "id": "BjuYa",
-                  "x": -63,
-                  "y": -60,
+                  "x": -41,
+                  "y": -39,
                   "name": "iPhone 17 Pro - Silver - Portrait",
                   "fill": {
                     "type": "image",
                     "enabled": true,
-                    "url": "Bezel.png",
+                    "url": "bezel-iphone-air.png",
                     "mode": "fill"
                   },
-                  "width": 1175,
-                  "height": 2403
+                  "width": 1131,
+                  "height": 2361
                 }
               ]
             }
@@ -2742,7 +2742,7 @@
               "fill": {
                 "type": "image",
                 "enabled": true,
-                "url": "Simulator Screenshot - iPhone Air - 2026-03-29 at 23.01.44.png",
+                "url": "Screenshots/iphone-feed-dark.png",
                 "mode": "fill"
               },
               "cornerRadius": 115,
@@ -3214,17 +3214,17 @@
                 {
                   "type": "rectangle",
                   "id": "DYemf",
-                  "x": -63,
-                  "y": -60,
+                  "x": -41,
+                  "y": -39,
                   "name": "iPhone 17 Pro - Silver - Portrait",
                   "fill": {
                     "type": "image",
                     "enabled": true,
-                    "url": "Bezel.png",
+                    "url": "bezel-iphone-air.png",
                     "mode": "fill"
                   },
-                  "width": 1175,
-                  "height": 2403
+                  "width": 1131,
+                  "height": 2361
                 }
               ]
             }
@@ -3283,7 +3283,7 @@
               "fill": {
                 "type": "image",
                 "enabled": true,
-                "url": "Simulator Screenshot - iPhone Air - 2026-03-29 at 23.01.55.png",
+                "url": "Screenshots/iphone-bookmarks-dark.png",
                 "mode": "fill"
               },
               "cornerRadius": 115,
@@ -3755,17 +3755,17 @@
                 {
                   "type": "rectangle",
                   "id": "tfUaB",
-                  "x": -63,
-                  "y": -60,
+                  "x": -41,
+                  "y": -39,
                   "name": "iPhone 17 Pro - Silver - Portrait",
                   "fill": {
                     "type": "image",
                     "enabled": true,
-                    "url": "Bezel.png",
+                    "url": "bezel-iphone-air.png",
                     "mode": "fill"
                   },
-                  "width": 1175,
-                  "height": 2403
+                  "width": 1131,
+                  "height": 2361
                 }
               ]
             }
@@ -3824,7 +3824,7 @@
               "fill": {
                 "type": "image",
                 "enabled": true,
-                "url": "Simulator Screenshot - iPhone Air - 2026-03-29 at 23.02.02.png",
+                "url": "Screenshots/iphone-moderation-dark.png",
                 "mode": "fill"
               },
               "cornerRadius": 115,
@@ -4296,17 +4296,17 @@
                 {
                   "type": "rectangle",
                   "id": "7VqPm",
-                  "x": -63,
-                  "y": -60,
+                  "x": -41,
+                  "y": -39,
                   "name": "iPhone 17 Pro - Silver - Portrait",
                   "fill": {
                     "type": "image",
                     "enabled": true,
-                    "url": "Bezel.png",
+                    "url": "bezel-iphone-air.png",
                     "mode": "fill"
                   },
-                  "width": 1175,
-                  "height": 2403
+                  "width": 1131,
+                  "height": 2361
                 }
               ]
             }
@@ -4365,7 +4365,7 @@
               "fill": {
                 "type": "image",
                 "enabled": true,
-                "url": "Simulator Screenshot - iPhone Air - 2026-03-29 at 23.02.11.png",
+                "url": "Screenshots/iphone-bookmark-dark.png",
                 "mode": "fill"
               },
               "cornerRadius": 115,
@@ -4837,17 +4837,17 @@
                 {
                   "type": "rectangle",
                   "id": "0NkMO",
-                  "x": -63,
-                  "y": -60,
+                  "x": -41,
+                  "y": -39,
                   "name": "iPhone 17 Pro - Silver - Portrait",
                   "fill": {
                     "type": "image",
                     "enabled": true,
-                    "url": "Bezel.png",
+                    "url": "bezel-iphone-air.png",
                     "mode": "fill"
                   },
-                  "width": 1175,
-                  "height": 2403
+                  "width": 1131,
+                  "height": 2361
                 }
               ]
             }
@@ -4906,7 +4906,7 @@
               "fill": {
                 "type": "image",
                 "enabled": true,
-                "url": "Simulator Screenshot - iPhone Air - 2026-03-29 at 23.02.21.png",
+                "url": "Screenshots/iphone-comments-dark.png",
                 "mode": "fill"
               },
               "cornerRadius": 115,
@@ -5378,17 +5378,17 @@
                 {
                   "type": "rectangle",
                   "id": "CPTWT",
-                  "x": -63,
-                  "y": -60,
+                  "x": -41,
+                  "y": -39,
                   "name": "iPhone 17 Pro - Silver - Portrait",
                   "fill": {
                     "type": "image",
                     "enabled": true,
-                    "url": "Bezel.png",
+                    "url": "bezel-iphone-air.png",
                     "mode": "fill"
                   },
-                  "width": 1175,
-                  "height": 2403
+                  "width": 1131,
+                  "height": 2361
                 }
               ]
             }
@@ -5412,39 +5412,6 @@
       ]
     },
     {
-      "type": "rectangle",
-      "id": "rV5fc",
-      "x": -2972,
-      "y": -244,
-      "name": "iPhoneBezel",
-      "reusable": true,
-      "fill": {
-        "type": "image",
-        "enabled": true,
-        "url": "Bezel.png",
-        "mode": "fill"
-      },
-      "width": 1175,
-      "height": 2403
-    },
-    {
-      "type": "rectangle",
-      "id": "Xe56A",
-      "x": -1627,
-      "y": 3582,
-      "name": "iPadBezel",
-      "reusable": true,
-      "rotation": -90,
-      "fill": {
-        "type": "image",
-        "enabled": true,
-        "url": "iPad Pro 11 - M4 - Silver - Landscape.png",
-        "mode": "fill"
-      },
-      "width": 5940,
-      "height": "fill_container(4230)"
-    },
-    {
       "type": "frame",
       "id": "MEDIu",
       "x": 0,
@@ -5460,7 +5427,7 @@
           "type": "text",
           "id": "YwkxD",
           "x": 106,
-          "y": 311,
+          "y": 351,
           "name": "title1",
           "fill": "#000000",
           "textGrowth": "fixed-width",
@@ -5475,45 +5442,40 @@
           "type": "frame",
           "id": "2q2bB",
           "x": 224,
-          "y": 745,
+          "y": 802,
           "name": "r1",
           "width": 1600,
           "height": 2247,
           "layout": "none",
           "children": [
             {
-              "type": "frame",
-              "id": "6GqQD",
-              "x": 92,
-              "y": -42,
-              "name": "Screen",
-              "clip": true,
-              "width": 1418,
-              "height": 2167,
+              "type": "rectangle",
+              "id": "rgMHL",
+              "x": 102,
+              "y": 111,
               "fill": {
                 "type": "image",
                 "enabled": true,
-                "url": "Simulator Screenshot - iPad Air 13-inch (M4) - 2026-03-29 at 22.58.09.png",
-                "mode": "fit"
+                "url": "ipad-feed-light.png",
+                "mode": "fill"
               },
-              "cornerRadius": 28,
-              "layout": "none"
+              "width": 1399,
+              "height": 1866
             },
             {
               "type": "rectangle",
               "id": "JJv2g",
-              "x": 1600,
-              "y": 0,
+              "x": 23,
+              "y": 27,
               "name": "iPad Bezel",
-              "rotation": -90,
               "fill": {
                 "type": "image",
                 "enabled": true,
-                "url": "iPad Pro 11 - M4 - Silver - Landscape.png",
+                "url": "bezel-ipadpro-13.png",
                 "mode": "fill"
               },
-              "width": 2247,
-              "height": 1600
+              "width": 1557,
+              "height": 2030
             }
           ]
         }
@@ -5535,12 +5497,12 @@
           "type": "text",
           "id": "UQen8",
           "x": 106,
-          "y": 311,
+          "y": 351,
           "name": "title3",
           "fill": "#000000",
           "textGrowth": "fixed-width",
           "width": 1848,
-          "content": "Save with a Swipe",
+          "content": "Save with a Long Press",
           "textAlign": "center",
           "fontFamily": "Lato",
           "fontSize": 84,
@@ -5550,45 +5512,41 @@
           "type": "frame",
           "id": "zWFRy",
           "x": 224,
-          "y": 745,
+          "y": 802,
           "name": "r3",
           "width": 1600,
           "height": 2247,
           "layout": "none",
           "children": [
             {
-              "type": "frame",
-              "id": "WJSlG",
-              "x": 92,
-              "y": -44,
-              "name": "Screen",
-              "clip": true,
-              "width": 1418,
-              "height": 2167,
+              "type": "rectangle",
+              "id": "zqAWN",
+              "x": 102,
+              "y": 111,
+              "name": "scr1",
               "fill": {
                 "type": "image",
                 "enabled": true,
-                "url": "Simulator Screenshot - iPad Air 13-inch (M4) - 2026-03-29 at 22.58.40.png",
-                "mode": "fit"
+                "url": "Screenshots/ipad-bookmark-light.png",
+                "mode": "fill"
               },
-              "cornerRadius": 28,
-              "layout": "none"
+              "width": 1399,
+              "height": 1866
             },
             {
               "type": "rectangle",
               "id": "pUwZP",
-              "x": 1600,
-              "y": 0,
+              "x": 23,
+              "y": 27,
               "name": "iPad Bezel",
-              "rotation": -90,
               "fill": {
                 "type": "image",
                 "enabled": true,
-                "url": "iPad Pro 11 - M4 - Silver - Landscape.png",
+                "url": "bezel-ipadpro-13.png",
                 "mode": "fill"
               },
-              "width": 2247,
-              "height": 1600
+              "width": 1557,
+              "height": 2030
             }
           ]
         }
@@ -5610,12 +5568,12 @@
           "type": "text",
           "id": "e0xkU",
           "x": 106,
-          "y": 311,
+          "y": 351,
           "name": "title4",
           "fill": "#000000",
           "textGrowth": "fixed-width",
           "width": 1848,
-          "content": "Quick Actions",
+          "content": "AI Moderation",
           "textAlign": "center",
           "fontFamily": "Lato",
           "fontSize": 84,
@@ -5625,45 +5583,41 @@
           "type": "frame",
           "id": "PSn8G",
           "x": 224,
-          "y": 745,
+          "y": 802,
           "name": "r4",
           "width": 1600,
           "height": 2247,
           "layout": "none",
           "children": [
             {
-              "type": "frame",
-              "id": "EiSsN",
-              "x": 91,
-              "y": -44,
-              "name": "Screen",
-              "clip": true,
-              "width": 1417,
-              "height": 2167,
+              "type": "rectangle",
+              "id": "U6A2R",
+              "x": 102,
+              "y": 111,
+              "name": "scr2",
               "fill": {
                 "type": "image",
                 "enabled": true,
-                "url": "Simulator Screenshot - iPad Air 13-inch (M4) - 2026-03-29 at 22.58.57.png",
-                "mode": "fit"
+                "url": "Screenshots/ipad-moderation-light.png",
+                "mode": "fill"
               },
-              "cornerRadius": 28,
-              "layout": "none"
+              "width": 1399,
+              "height": 1866
             },
             {
               "type": "rectangle",
               "id": "Et85K",
-              "x": 1600,
-              "y": 0,
+              "x": 23,
+              "y": 27,
               "name": "iPad Bezel",
-              "rotation": -90,
               "fill": {
                 "type": "image",
                 "enabled": true,
-                "url": "iPad Pro 11 - M4 - Silver - Landscape.png",
+                "url": "bezel-ipadpro-13.png",
                 "mode": "fill"
               },
-              "width": 2247,
-              "height": 1600
+              "width": 1557,
+              "height": 2030
             }
           ]
         }
@@ -5685,7 +5639,7 @@
           "type": "text",
           "id": "v9jHc",
           "x": 106,
-          "y": 311,
+          "y": 351,
           "name": "title7",
           "fill": "#000000",
           "textGrowth": "fixed-width",
@@ -5700,45 +5654,41 @@
           "type": "frame",
           "id": "RXhIT",
           "x": 224,
-          "y": 745,
+          "y": 802,
           "name": "r7",
           "width": 1600,
           "height": 2247,
           "layout": "none",
           "children": [
             {
-              "type": "frame",
-              "id": "5kuFo",
-              "x": 91,
-              "y": -43,
-              "name": "Screen",
-              "clip": true,
-              "width": 1419,
-              "height": 2167,
+              "type": "rectangle",
+              "id": "2dODN",
+              "x": 102,
+              "y": 111,
+              "name": "screen4",
               "fill": {
                 "type": "image",
                 "enabled": true,
-                "url": "Simulator Screenshot - iPad Air 13-inch (M4) - 2026-03-29 at 22.59.52.png",
-                "mode": "fit"
+                "url": "Screenshots/ipad-comments-light.png",
+                "mode": "fill"
               },
-              "cornerRadius": 28,
-              "layout": "none"
+              "width": 1399,
+              "height": 1866
             },
             {
               "type": "rectangle",
               "id": "zLWHT",
-              "x": 1600,
-              "y": 0,
+              "x": 23,
+              "y": 27,
               "name": "iPad Bezel",
-              "rotation": -90,
               "fill": {
                 "type": "image",
                 "enabled": true,
-                "url": "iPad Pro 11 - M4 - Silver - Landscape.png",
+                "url": "bezel-ipadpro-13.png",
                 "mode": "fill"
               },
-              "width": 2247,
-              "height": 1600
+              "width": 1557,
+              "height": 2030
             }
           ]
         }
@@ -5780,7 +5730,7 @@
               "fill": {
                 "type": "image",
                 "enabled": true,
-                "url": "iphone-moderation-light.png",
+                "url": "Screenshots/iphone-moderation-light.png",
                 "mode": "fill"
               },
               "cornerRadius": 115,
@@ -6252,17 +6202,17 @@
                 {
                   "type": "rectangle",
                   "id": "iWfWm",
-                  "x": -63,
-                  "y": -60,
+                  "x": -41,
+                  "y": -39,
                   "name": "iPhone 17 Pro - Silver - Portrait",
                   "fill": {
                     "type": "image",
                     "enabled": true,
-                    "url": "Bezel.png",
+                    "url": "bezel-iphone-air.png",
                     "mode": "fill"
                   },
-                  "width": 1175,
-                  "height": 2403
+                  "width": 1131,
+                  "height": 2361
                 }
               ]
             }
@@ -6282,6 +6232,77 @@
           "fontFamily": "Lato",
           "fontSize": 84,
           "fontWeight": "bold"
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "xXwAq",
+      "x": 9780,
+      "y": 4403,
+      "name": "iPad5",
+      "clip": true,
+      "width": 2048,
+      "height": 2732,
+      "fill": "#000000",
+      "layout": "none",
+      "children": [
+        {
+          "type": "text",
+          "id": "urPAP",
+          "x": 106,
+          "y": 351,
+          "name": "title7",
+          "fill": "#FFFFFF",
+          "textGrowth": "fixed-width",
+          "width": 1848,
+          "content": "Beautiful Dark Mode",
+          "textAlign": "center",
+          "fontFamily": "Lato",
+          "fontSize": 84,
+          "fontWeight": "700"
+        },
+        {
+          "type": "frame",
+          "id": "gBmO0",
+          "x": 224,
+          "y": 802,
+          "name": "r5",
+          "width": 1600,
+          "height": 2247,
+          "layout": "none",
+          "children": [
+            {
+              "type": "rectangle",
+              "id": "3L4kc",
+              "x": 102,
+              "y": 111,
+              "name": "screen5",
+              "fill": {
+                "type": "image",
+                "enabled": true,
+                "url": "Screenshots/ipad-comments-dark.png",
+                "mode": "fill"
+              },
+              "width": 1399,
+              "height": 1866
+            },
+            {
+              "type": "rectangle",
+              "id": "acE8t",
+              "x": 23,
+              "y": 27,
+              "name": "iPad Bezel",
+              "fill": {
+                "type": "image",
+                "enabled": true,
+                "url": "bezel-ipadpro-13.png",
+                "mode": "fill"
+              },
+              "width": 1557,
+              "height": 2030
+            }
+          ]
         }
       ]
     }

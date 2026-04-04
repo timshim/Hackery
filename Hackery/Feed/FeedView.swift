@@ -110,15 +110,89 @@ struct StoryListView: View {
   @Environment(BookmarkStore.self) private var bookmarkStore
   #if os(iOS)
   @Environment(\.isPaging) private var isPaging
+  @Environment(\.horizontalSizeClass) private var sizeClass
   @State private var selectedURL: URL?
   #elseif os(visionOS)
   @State private var selectedStory: Story?
   #endif
 
   var body: some View {
+    #if os(iOS)
+    if sizeClass == .regular {
+      masonryGrid
+    } else {
+      phoneList
+    }
+    #elseif os(visionOS)
+    visionList
+    #endif
+  }
+
+  // MARK: - iPad Masonry Grid
+
+  #if os(iOS)
+  private var masonryGrid: some View {
+    ScrollView {
+      MasonryLayout(columns: 3, spacing: 10) {
+        ForEach(viewModel.stories) { story in
+          storyCard(story)
+        }
+      }
+      .padding(.horizontal, 12)
+      .padding(.top, 8)
+
+      if viewModel.hasMoreStories && !viewModel.stories.isEmpty && !viewModel.isLoading {
+        Color.clear
+          .frame(height: 1)
+          .onAppear {
+            Task { await viewModel.loadMoreStories() }
+          }
+      }
+    }
+    .scrollContentBackground(.hidden)
+    .scrollDisabled(isPaging)
+    .fullScreenCover(isPresented: Binding(
+      get: { selectedURL != nil },
+      set: { if !$0 { selectedURL = nil } }
+    )) {
+      if let url = selectedURL {
+        PushedSafariView(url: url)
+          .ignoresSafeArea()
+      }
+    }
+  }
+
+  private func storyCard(_ story: Story) -> some View {
+    StoryView(story: story)
+      .background(
+        RoundedRectangle(cornerRadius: 16)
+          .fill(Color("cardBg"))
+      )
+      .clipShape(RoundedRectangle(cornerRadius: 16))
+      .contentShape(Rectangle())
+      .onTapGesture {
+        if let url = URL(string: story.url), !story.url.isEmpty {
+          selectedURL = url
+        }
+      }
+      .contextMenu {
+        if bookmarkStore.isBookmarked(story) {
+          Button(action: { bookmarkStore.toggle(story) }) {
+            Label("Remove Bookmark", systemImage: "bookmark.slash.fill")
+          }
+        } else {
+          Button(action: { bookmarkStore.toggle(story) }) {
+            Label("Bookmark", systemImage: "bookmark.fill")
+          }
+        }
+      }
+  }
+
+  // MARK: - iPhone List
+
+  private var phoneList: some View {
     List {
       ForEach(viewModel.stories) { story in
-        #if os(iOS)
         storyRow(story)
           .swipeActions(edge: .trailing) {
             bookmarkSwipeButton(story)
@@ -131,31 +205,19 @@ struct StoryListView: View {
           )
           .listRowSeparator(.hidden)
           .listRowInsets(EdgeInsets(top: 1, leading: 8, bottom: 1, trailing: 8))
-        #elseif os(visionOS)
-        storyRow(story)
-          .contentShape(.hoverEffect, .rect(cornerRadius: 16))
-          .hoverEffect()
-          .swipeActions(edge: .trailing) {
-            bookmarkSwipeButton(story)
-          }
-          .listRowInsets(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
-        #endif
       }
 
       if viewModel.hasMoreStories && !viewModel.stories.isEmpty && !viewModel.isLoading {
         Color.clear
           .frame(height: 1)
           .listRowSeparator(.hidden)
-          #if os(iOS)
           .listRowBackground(Color.clear)
-          #endif
           .onAppear {
             Task { await viewModel.loadMoreStories() }
           }
       }
     }
     .listStyle(.plain)
-    #if os(iOS)
     .scrollContentBackground(.hidden)
     .scrollDisabled(isPaging)
     .fullScreenCover(isPresented: Binding(
@@ -167,13 +229,39 @@ struct StoryListView: View {
           .ignoresSafeArea()
       }
     }
-    #elseif os(visionOS)
+  }
+  #endif
+
+  // MARK: - visionOS List
+
+  #if os(visionOS)
+  private var visionList: some View {
+    List {
+      ForEach(viewModel.stories) { story in
+        storyRow(story)
+          .contentShape(.hoverEffect, .rect(cornerRadius: 16))
+          .hoverEffect()
+          .swipeActions(edge: .trailing) {
+            bookmarkSwipeButton(story)
+          }
+          .listRowInsets(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
+      }
+
+      if viewModel.hasMoreStories && !viewModel.stories.isEmpty && !viewModel.isLoading {
+        Color.clear
+          .frame(height: 1)
+          .onAppear {
+            Task { await viewModel.loadMoreStories() }
+          }
+      }
+    }
+    .listStyle(.plain)
     .contentMargins(.vertical, 16)
     .sheet(item: $selectedStory) { story in
       CommentsView(story: story)
     }
-    #endif
   }
+  #endif
 
   private func storyRow(_ story: Story) -> some View {
     #if os(iOS)
