@@ -10,9 +10,7 @@ import SwiftUI
 
 struct FeedView: View {
   @Environment(FeedViewModel.self) private var viewModel
-  @Environment(TipStore.self) private var tipStore
   @State private var showBookmarks = false
-  @State private var showTipJar = false
 
   var body: some View {
     Group {
@@ -52,22 +50,10 @@ struct FeedView: View {
         if !showBookmarks {
           RefreshButtonView(tapped: refresh)
         }
-
-        Button(action: { showTipJar = true }) {
-          Image(systemName: "cup.and.saucer.fill")
-            .font(.system(size: 20, weight: .bold, design: .rounded))
-            .frame(width: 60, height: 60)
-            .padding()
-        }
-        .buttonStyle(.plain)
       }
       .padding(.horizontal, 8)
       .glassBackgroundEffect()
     })
-    .sheet(isPresented: $showTipJar) {
-      TipJarView()
-        .environment(tipStore)
-    }
   }
 
   private func refresh() {
