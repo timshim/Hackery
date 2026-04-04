@@ -46,6 +46,7 @@ final class BlockedUser {
 @Observable
 final class ModerationStore {
   private var modelContext: ModelContext
+  private var remoteChangeObserver: Any?
 
   // Persisted
   var hideAlways: Bool = false
@@ -72,7 +73,7 @@ final class ModerationStore {
   }
 
   private func observeRemoteChanges() {
-    NotificationCenter.default.addObserver(
+    remoteChangeObserver = NotificationCenter.default.addObserver(
       forName: NSNotification.Name.NSPersistentStoreRemoteChange,
       object: nil,
       queue: .main

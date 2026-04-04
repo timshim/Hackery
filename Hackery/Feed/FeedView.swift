@@ -11,6 +11,7 @@ import SwiftUI
 struct FeedView: View {
   @Environment(FeedViewModel.self) private var viewModel
   @State private var showGlow = false
+  @State private var showTipJar = false
   #if os(visionOS)
   @State private var showBookmarks = false
   #endif
@@ -45,6 +46,10 @@ struct FeedView: View {
     }
     .onAppear {
       viewModel.loadTopStories()
+    }
+    .onShake { showTipJar = true }
+    .sheet(isPresented: $showTipJar) {
+      TipJarView()
     }
     .onChange(of: viewModel.isLoadingMore) { _, loading in
       if loading {
@@ -91,10 +96,21 @@ struct FeedView: View {
         if !showBookmarks {
           RefreshButtonView(tapped: refresh)
         }
+
+        Button(action: { showTipJar = true }) {
+          Image(systemName: "cup.and.heat.waves.fill")
+            .font(.system(size: 24, weight: .bold, design: .rounded))
+            .frame(width: 60, height: 60)
+            .padding()
+        }
+        .buttonStyle(.plain)
       }
       .padding(.horizontal, 8)
       .glassBackgroundEffect()
     })
+    .sheet(isPresented: $showTipJar) {
+      TipJarView()
+    }
     #endif
   }
 

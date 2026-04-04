@@ -29,6 +29,7 @@ struct Hackery: App {
   private let modelContainer: ModelContainer
   @State private var bookmarkStore: BookmarkStore
   @State private var moderationStore: ModerationStore
+  @State private var tipStore = TipStore()
 
   #if os(visionOS)
   @State private var showGlow = false
@@ -75,6 +76,7 @@ struct Hackery: App {
       .environment(viewModel)
       .environment(bookmarkStore)
       .environment(moderationStore)
+      .environment(tipStore)
       #elseif os(visionOS)
       ZStack {
         FeedView()
@@ -83,6 +85,7 @@ struct Hackery: App {
           .environment(viewModel)
           .environment(bookmarkStore)
           .environment(moderationStore)
+          .environment(tipStore)
         VStack {
           Spacer()
           PaginationGlow()

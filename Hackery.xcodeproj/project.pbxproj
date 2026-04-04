@@ -14,6 +14,11 @@
 		485E4B7022AE27CF00626464 /* Hackery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485E4B6F22AE27CF00626464 /* Hackery.swift */; };
 		485E4B7622AE27CF00626464 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 485E4B7522AE27CF00626464 /* Assets.xcassets */; };
 		485E4B7922AE27CF00626464 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 485E4B7822AE27CF00626464 /* Preview Assets.xcassets */; };
+		486C34402F81376A00745554 /* TipJarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486C343E2F81376A00745554 /* TipJarView.swift */; };
+		486C34412F81376A00745554 /* TipStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486C343F2F81376A00745554 /* TipStore.swift */; };
+		486C34422F81376A00745554 /* HandTrackingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486C343C2F81376A00745554 /* HandTrackingManager.swift */; };
+		486C34432F81376A00745554 /* ShakeDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486C343D2F81376A00745554 /* ShakeDetector.swift */; };
+		486C344D2F81460500745554 /* Hackery.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 486C344C2F81460500745554 /* Hackery.storekit */; };
 		488819DB2548137C007B57F2 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 488819D52548067A007B57F2 /* Lato-Bold.ttf */; };
 		488819E125481381007B57F2 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 488819D62548067A007B57F2 /* Lato-Regular.ttf */; };
 		48B7F86022B7723500FF21AD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B7F85F22B7723500FF21AD /* Extensions.swift */; };
@@ -82,6 +87,11 @@
 		485E4B6F22AE27CF00626464 /* Hackery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hackery.swift; sourceTree = "<group>"; };
 		485E4B7522AE27CF00626464 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		485E4B7822AE27CF00626464 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		486C343C2F81376A00745554 /* HandTrackingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandTrackingManager.swift; sourceTree = "<group>"; };
+		486C343D2F81376A00745554 /* ShakeDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShakeDetector.swift; sourceTree = "<group>"; };
+		486C343E2F81376A00745554 /* TipJarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipJarView.swift; sourceTree = "<group>"; };
+		486C343F2F81376A00745554 /* TipStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipStore.swift; sourceTree = "<group>"; };
+		486C344C2F81460500745554 /* Hackery.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Hackery.storekit; sourceTree = "<group>"; };
 		4871E88F2F7968C100746676 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4871E8A42F79930300746676 /* HackeryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HackeryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		487DD6BA2547FF9A006B3876 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -160,6 +170,7 @@
 				485E4B7722AE27CF00626464 /* Preview Content */,
 				48B7F85F22B7723500FF21AD /* Extensions.swift */,
 				488819D42548067A007B57F2 /* Fonts */,
+				486C344C2F81460500745554 /* Hackery.storekit */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -182,6 +193,10 @@
 				EE000004EEEEEE0400000001 /* CommentClassifier.swift */,
 				EE000005EEEEEE0500000001 /* ReportService.swift */,
 				EE000006EEEEEE0600000001 /* ModerationStore.swift */,
+				486C343C2F81376A00745554 /* HandTrackingManager.swift */,
+				486C343D2F81376A00745554 /* ShakeDetector.swift */,
+				486C343E2F81376A00745554 /* TipJarView.swift */,
+				486C343F2F81376A00745554 /* TipStore.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -410,6 +425,7 @@
 				488819E125481381007B57F2 /* Lato-Regular.ttf in Resources */,
 				488819DB2548137C007B57F2 /* Lato-Bold.ttf in Resources */,
 				485E4B7922AE27CF00626464 /* Preview Assets.xcassets in Resources */,
+				486C344D2F81460500745554 /* Hackery.storekit in Resources */,
 				485E4B7622AE27CF00626464 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -450,6 +466,10 @@
 				48EE5B7B248351E500B8ABC7 /* StoryView.swift in Sources */,
 				48B7F86322B7748B00FF21AD /* CommentsView.swift in Sources */,
 				AA000001AAAAAA0100000001 /* StoryCache.swift in Sources */,
+				486C34402F81376A00745554 /* TipJarView.swift in Sources */,
+				486C34412F81376A00745554 /* TipStore.swift in Sources */,
+				486C34422F81376A00745554 /* HandTrackingManager.swift in Sources */,
+				486C34432F81376A00745554 /* ShakeDetector.swift in Sources */,
 				AA000004AAAAAA0400000001 /* BookmarkStore.swift in Sources */,
 				BB000001BBBBBB0100000001 /* BookmarksView.swift in Sources */,
 				DD000002DDDDDD0200000001 /* HTMLParser.swift in Sources */,
