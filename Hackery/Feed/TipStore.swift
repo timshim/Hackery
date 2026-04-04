@@ -10,14 +10,9 @@ import StoreKit
 
 @Observable
 final class TipStore {
-  static let productIDs = [
-    "com.hackery.tip.small",
-    "com.hackery.tip.medium",
-    "com.hackery.tip.large",
-    "com.hackery.tip.generous"
-  ]
+  static let productID = "com.hackery.tip.coffee"
 
-  private(set) var products: [Product] = []
+  private(set) var product: Product?
   private(set) var purchaseState: PurchaseState = .idle
 
   enum PurchaseState: Equatable {
@@ -45,17 +40,18 @@ final class TipStore {
     updateTask?.cancel()
   }
 
-  func loadProducts() async {
-    guard products.isEmpty else { return }
+  func loadProduct() async {
+    guard product == nil else { return }
     do {
-      let loaded = try await Product.products(for: Self.productIDs)
-      products = loaded.sorted { $0.price < $1.price }
+      let loaded = try await Product.products(for: [Self.productID])
+      product = loaded.first
     } catch {
-      products = []
+      product = nil
     }
   }
 
-  func purchase(_ product: Product) async {
+  func purchase() async {
+    guard let product else { return }
     purchaseState = .purchasing
     do {
       let result = try await product.purchase()

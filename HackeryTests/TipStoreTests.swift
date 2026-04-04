@@ -15,21 +15,15 @@ struct TipStoreTests {
   @Test func initialStateIsIdle() {
     let store = TipStore()
     #expect(store.purchaseState == .idle)
-    #expect(store.products.isEmpty)
+    #expect(store.product == nil)
   }
 
-  @Test func productIDsContainsFourTiers() {
-    let ids = TipStore.productIDs
-    #expect(ids.count == 4)
-    #expect(ids.contains("com.hackery.tip.small"))
-    #expect(ids.contains("com.hackery.tip.medium"))
-    #expect(ids.contains("com.hackery.tip.large"))
-    #expect(ids.contains("com.hackery.tip.generous"))
+  @Test func productIDIsCoffee() {
+    #expect(TipStore.productID == "com.hackery.tip.coffee")
   }
 
   @Test func resetStateSetsIdle() {
     let store = TipStore()
-    // Simulate a state change by verifying reset always returns to idle
     store.resetState()
     #expect(store.purchaseState == .idle)
   }
@@ -43,22 +37,17 @@ struct TipStoreTests {
     #expect(TipStore.PurchaseState.idle != .purchasing)
   }
 
-  @Test func loadProductsWithInvalidIDsReturnsEmpty() async {
-    // StoreKit returns empty array for unknown product IDs in test environment
+  @Test func loadProductDoesNotCrashWithUnknownID() async {
     let store = TipStore()
-    await store.loadProducts()
-    // In a test environment without StoreKit config, products will be empty
-    // This validates the error handling path doesn't crash
-    #expect(store.products.isEmpty || !store.products.isEmpty)
+    await store.loadProduct()
+    // In test env without StoreKit config, product will be nil — just verify no crash
   }
 
-  @Test func loadProductsDoesNotReloadIfAlreadyLoaded() async {
+  @Test func loadProductDoesNotReloadIfAlreadyLoaded() async {
     let store = TipStore()
-    // First load (will be empty in test env)
-    await store.loadProducts()
-    let firstResult = store.products
-    // Second load should be a no-op (guard products.isEmpty)
-    await store.loadProducts()
-    #expect(store.products.count == firstResult.count)
+    await store.loadProduct()
+    let first = store.product
+    await store.loadProduct()
+    #expect(store.product?.id == first?.id)
   }
 }

@@ -16,6 +16,7 @@
 		485E4B7922AE27CF00626464 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 485E4B7822AE27CF00626464 /* Preview Assets.xcassets */; };
 		488819DB2548137C007B57F2 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 488819D52548067A007B57F2 /* Lato-Bold.ttf */; };
 		488819E125481381007B57F2 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 488819D62548067A007B57F2 /* Lato-Regular.ttf */; };
+		489B89182F813478007515BA /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 489B89172F813478007515BA /* StoreKit.framework */; };
 		48B7F86022B7723500FF21AD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B7F85F22B7723500FF21AD /* Extensions.swift */; };
 		48B7F86322B7748B00FF21AD /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B7F86222B7748B00FF21AD /* CommentsView.swift */; };
 		48CABD662A7FE758004F61FC /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = 48CABD652A7FE758004F61FC /* RealityKitContent */; };
@@ -87,6 +88,7 @@
 		487DD6BC2547FF9A006B3876 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		488819D52548067A007B57F2 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
 		488819D62548067A007B57F2 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
+		489B89172F813478007515BA /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		48B7F85F22B7723500FF21AD /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		48B7F86222B7748B00FF21AD /* CommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsView.swift; sourceTree = "<group>"; };
 		48BB404526777DA600490132 /* Hackery.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hackery.entitlements; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				489B89182F813478007515BA /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +285,7 @@
 		51FCD10488BC17C0CAFBED90 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				489B89172F813478007515BA /* StoreKit.framework */,
 				487DD6BA2547FF9A006B3876 /* WidgetKit.framework */,
 				487DD6BC2547FF9A006B3876 /* SwiftUI.framework */,
 			);

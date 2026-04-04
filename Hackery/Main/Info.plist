@@ -33,6 +33,8 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSHandsTrackingUsageDescription</key>
+	<string>Hackery uses hand tracking to detect hand gestures</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Lato-Regular.ttf</string>

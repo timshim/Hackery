@@ -20,7 +20,9 @@ struct TipJarView: View {
           thankYouView
         } else {
           headerView
-          tipGrid
+          if let product = tipStore.product {
+            buyButton(product)
+          }
           if case .failed(let message) = tipStore.purchaseState {
             Text(message)
               .font(.caption)
@@ -35,7 +37,7 @@ struct TipJarView: View {
       .background(Color("background"))
       #endif
       .task {
-        await tipStore.loadProducts()
+        await tipStore.loadProduct()
       }
       .toolbar {
         ToolbarItem(placement: .cancellationAction) {
@@ -52,7 +54,7 @@ struct TipJarView: View {
       }
     }
     #if os(visionOS)
-    .frame(width: 420, height: 480)
+    .frame(width: 360, height: 380)
     #endif
     .presentationDetents([.medium])
     .interactiveDismissDisabled(tipStore.purchaseState == .purchasing)
@@ -74,16 +76,30 @@ struct TipJarView: View {
     }
   }
 
-  // MARK: - Tip Grid
+  // MARK: - Buy Button
 
-  private var tipGrid: some View {
-    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
-      ForEach(tipStore.products, id: \.id) { product in
-        TipButton(product: product, isPurchasing: tipStore.purchaseState == .purchasing) {
-          Task { await tipStore.purchase(product) }
-        }
+  private func buyButton(_ product: Product) -> some View {
+    Button {
+      Task { await tipStore.purchase() }
+    } label: {
+      HStack {
+        Text("Buy Coffee")
+          .font(.system(.headline, design: .rounded))
+        Text(product.displayPrice)
+          .font(.system(.headline, design: .rounded, weight: .semibold))
+          .foregroundStyle(.secondary)
       }
+      .frame(maxWidth: .infinity)
+      .padding(.vertical, 16)
+      #if os(iOS)
+      .background(Color("cardBg"), in: RoundedRectangle(cornerRadius: 14))
+      #elseif os(visionOS)
+      .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 14))
+      #endif
     }
+    .buttonStyle(.plain)
+    .disabled(tipStore.purchaseState == .purchasing)
+    .opacity(tipStore.purchaseState == .purchasing ? 0.5 : 1)
   }
 
   // MARK: - Thank You
@@ -99,46 +115,6 @@ struct TipJarView: View {
       Text("Your support means the world.")
         .font(.system(.subheadline, design: .rounded))
         .foregroundStyle(.secondary)
-    }
-  }
-}
-
-// MARK: - Tip Button
-
-private struct TipButton: View {
-  let product: Product
-  let isPurchasing: Bool
-  let action: () -> Void
-
-  var body: some View {
-    Button(action: action) {
-      VStack(spacing: 6) {
-        Text(label)
-          .font(.system(.headline, design: .rounded))
-        Text(product.displayPrice)
-          .font(.system(.subheadline, design: .rounded, weight: .semibold))
-          .foregroundStyle(.secondary)
-      }
-      .frame(maxWidth: .infinity)
-      .padding(.vertical, 16)
-      #if os(iOS)
-      .background(Color("cardBg"), in: RoundedRectangle(cornerRadius: 14))
-      #elseif os(visionOS)
-      .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 14))
-      #endif
-    }
-    .buttonStyle(.plain)
-    .disabled(isPurchasing)
-    .opacity(isPurchasing ? 0.5 : 1)
-  }
-
-  private var label: String {
-    switch product.id {
-    case "com.hackery.tip.small": return "☕️ Small"
-    case "com.hackery.tip.medium": return "☕️ Medium"
-    case "com.hackery.tip.large": return "☕️ Large"
-    case "com.hackery.tip.generous": return "🎉 Generous"
-    default: return product.displayName
     }
   }
 }
