@@ -53,6 +53,7 @@
 		EE000008EEEEEE0800000001 /* ReportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE000005EEEEEE0500000001 /* ReportService.swift */; };
 		EE000009EEEEEE0900000001 /* ModerationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE000006EEEEEE0600000001 /* ModerationStore.swift */; };
 		FF100001FFFFFF0100000001 /* MasonryLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF100002FFFFFF0200000001 /* MasonryLayout.swift */; };
+		FF200001FFFFFF0100000001 /* EngagementTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF200000FFFFFF0000000001 /* EngagementTracker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +122,7 @@
 		EE000005EEEEEE0500000001 /* ReportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportService.swift; sourceTree = "<group>"; };
 		EE000006EEEEEE0600000001 /* ModerationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModerationStore.swift; sourceTree = "<group>"; };
 		FF100002FFFFFF0200000001 /* MasonryLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasonryLayout.swift; sourceTree = "<group>"; };
+		FF200000FFFFFF0000000001 /* EngagementTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngagementTracker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -197,6 +199,7 @@
 				486C343D2F81376A00745554 /* ShakeDetector.swift */,
 				486C343E2F81376A00745554 /* TipJarView.swift */,
 				486C343F2F81376A00745554 /* TipStore.swift */,
+				FF200000FFFFFF0000000001 /* EngagementTracker.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -468,6 +471,7 @@
 				AA000001AAAAAA0100000001 /* StoryCache.swift in Sources */,
 				486C34402F81376A00745554 /* TipJarView.swift in Sources */,
 				486C34412F81376A00745554 /* TipStore.swift in Sources */,
+				FF200001FFFFFF0100000001 /* EngagementTracker.swift in Sources */,
 				486C34422F81376A00745554 /* HandTrackingManager.swift in Sources */,
 				486C34432F81376A00745554 /* ShakeDetector.swift in Sources */,
 				AA000004AAAAAA0400000001 /* BookmarkStore.swift in Sources */,

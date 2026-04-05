@@ -12,6 +12,7 @@ struct CommentsView: View {
   @Environment(FeedViewModel.self) private var viewModel
   @Environment(BookmarkStore.self) private var bookmarkStore
   @Environment(ModerationStore.self) private var moderationStore
+  @Environment(EngagementTracker.self) private var engagement
   @State private var showGlow = false
   @State private var classifier = CommentClassifier()
 
@@ -95,6 +96,7 @@ struct CommentsView: View {
           .contentShape(Rectangle())
           .onTapGesture {
             if let _ = URL(string: story.url), !story.url.isEmpty {
+              engagement.recordInteraction()
               showSafari = true
             }
           }
@@ -117,6 +119,7 @@ struct CommentsView: View {
       }
     }
     .onAppear {
+      engagement.recordInteraction()
       // Only reset and load on first appearance for this story
       if viewModel.currentCommentStoryId != story.id {
         moderationStore.resetSession()
@@ -225,6 +228,7 @@ struct CommentsView: View {
         .contentShape(Rectangle())
         .onTapGesture {
           if let url = URL(string: story.url), !story.url.isEmpty {
+            engagement.recordInteraction()
             UIApplication.shared.open(url)
           }
         }
@@ -241,6 +245,7 @@ struct CommentsView: View {
       }
     }
     .onAppear {
+      engagement.recordInteraction()
       // Only reset and load on first appearance for this story
       if viewModel.currentCommentStoryId != story.id {
         moderationStore.resetSession()

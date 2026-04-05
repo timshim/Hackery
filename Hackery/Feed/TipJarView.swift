@@ -11,6 +11,7 @@ import StoreKit
 
 struct TipJarView: View {
   @Environment(TipStore.self) private var tipStore
+  @Environment(EngagementTracker.self) private var engagement
   @Environment(\.dismiss) private var dismiss
 
   var body: some View {
@@ -52,6 +53,7 @@ struct TipJarView: View {
       }
       .onChange(of: tipStore.purchaseState) { _, newValue in
         if newValue == .success {
+          engagement.recordTip()
           DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
             dismiss()
             tipStore.resetState()
@@ -92,6 +94,7 @@ struct TipJarView: View {
     }
     .onChange(of: tipStore.purchaseState) { _, newValue in
       if newValue == .success {
+        engagement.recordTip()
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
           dismiss()
           tipStore.resetState()

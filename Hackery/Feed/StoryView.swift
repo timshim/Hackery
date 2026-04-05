@@ -11,6 +11,7 @@ import SwiftUI
 struct StoryView: View {
   @Environment(FeedViewModel.self) private var viewModel
   @Environment(BookmarkStore.self) private var bookmarkStore
+  @Environment(EngagementTracker.self) private var engagement
 
   var story: Story
   var onShowComments: (() -> Void)?
@@ -87,7 +88,9 @@ struct StoryView: View {
             CommentButton(count: story.descendants)
           }
           .buttonStyle(BorderlessButtonStyle())
-          .sheet(isPresented: $showComments) {
+          .sheet(isPresented: $showComments, onDismiss: {
+            engagement.checkForPrompt()
+          }) {
             CommentsView(story: story)
           }
           #elseif os(visionOS)

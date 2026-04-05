@@ -10,8 +10,10 @@ import SwiftUI
 
 struct FeedView: View {
   @Environment(FeedViewModel.self) private var viewModel
+  @Environment(EngagementTracker.self) private var engagement
   @State private var showGlow = false
   @State private var showTipJar = false
+  @State private var showReviewPrompt = false
   #if os(visionOS)
   @State private var showBookmarks = false
   #endif
@@ -51,6 +53,21 @@ struct FeedView: View {
     .sheet(isPresented: $showTipJar) {
       TipJarView()
     }
+    .alert("Enjoying Hackery?", isPresented: $showReviewPrompt) {
+      Button("Yes 👍") {
+        engagement.promptShown()
+        engagement.requestReview()
+      }
+      Button("Not really", role: .cancel) {
+        engagement.promptShown()
+      }
+    } message: {
+      Text("Support me by rating it on the App Store! It only takes a second.")
+    }
+    .onChange(of: engagement.pendingPrompt) { _, prompt in
+      guard prompt != nil else { return }
+      checkEngagementPrompt()
+    }
     .onChange(of: viewModel.isLoadingMore) { _, loading in
       if loading {
         withAnimation(.easeIn(duration: 0.3)) { showGlow = true }
@@ -59,6 +76,7 @@ struct FeedView: View {
       }
     }
     #elseif os(visionOS)
+
     Group {
       if showBookmarks {
         BookmarksView()
@@ -96,14 +114,6 @@ struct FeedView: View {
         if !showBookmarks {
           RefreshButtonView(tapped: refresh)
         }
-
-        Button(action: { showTipJar = true }) {
-          Image(systemName: "cup.and.heat.waves.fill")
-            .font(.system(size: 24, weight: .bold, design: .rounded))
-            .frame(width: 60, height: 60)
-            .padding()
-        }
-        .buttonStyle(.plain)
       }
       .padding(.horizontal, 8)
       .glassBackgroundEffect()
@@ -111,7 +121,34 @@ struct FeedView: View {
     .sheet(isPresented: $showTipJar) {
       TipJarView()
     }
+    .alert("Enjoying Hackery?", isPresented: $showReviewPrompt) {
+      Button("Yes 👍") {
+        engagement.promptShown()
+        engagement.requestReview()
+      }
+      Button("Not really", role: .cancel) {
+        engagement.promptShown()
+      }
+    } message: {
+      Text("Support me by rating it on the App Store! It only takes a second.")
+    }
+    .onChange(of: engagement.pendingPrompt) { _, prompt in
+      guard prompt != nil else { return }
+      checkEngagementPrompt()
+    }
     #endif
+  }
+
+  private func checkEngagementPrompt() {
+    switch engagement.pendingPrompt {
+    case .review:
+      showReviewPrompt = true
+    case .tipJar:
+      engagement.promptShown()
+      showTipJar = true
+    case nil:
+      break
+    }
   }
 
   private func refresh() {
@@ -124,6 +161,7 @@ struct FeedView: View {
 struct StoryListView: View {
   @Environment(FeedViewModel.self) private var viewModel
   @Environment(BookmarkStore.self) private var bookmarkStore
+  @Environment(EngagementTracker.self) private var engagement
   #if os(iOS)
   @Environment(\.isPaging) private var isPaging
   @Environment(\.horizontalSizeClass) private var sizeClass
@@ -170,7 +208,9 @@ struct StoryListView: View {
     .fullScreenCover(isPresented: Binding(
       get: { selectedURL != nil },
       set: { if !$0 { selectedURL = nil } }
-    )) {
+    ), onDismiss: {
+      engagement.checkForPrompt()
+    }) {
       if let url = selectedURL {
         PushedSafariView(url: url)
           .ignoresSafeArea()
@@ -188,6 +228,7 @@ struct StoryListView: View {
       .contentShape(Rectangle())
       .onTapGesture {
         if let url = URL(string: story.url), !story.url.isEmpty {
+          engagement.recordInteraction()
           selectedURL = url
         }
       }
@@ -239,7 +280,9 @@ struct StoryListView: View {
     .fullScreenCover(isPresented: Binding(
       get: { selectedURL != nil },
       set: { if !$0 { selectedURL = nil } }
-    )) {
+    ), onDismiss: {
+      engagement.checkForPrompt()
+    }) {
       if let url = selectedURL {
         PushedSafariView(url: url)
           .ignoresSafeArea()
@@ -273,7 +316,9 @@ struct StoryListView: View {
     }
     .listStyle(.plain)
     .contentMargins(.vertical, 16)
-    .sheet(item: $selectedStory) { story in
+    .sheet(item: $selectedStory, onDismiss: {
+      engagement.checkForPrompt()
+    }) { story in
       CommentsView(story: story)
     }
   }
@@ -285,6 +330,7 @@ struct StoryListView: View {
       .contentShape(Rectangle())
       .onTapGesture {
         if let url = URL(string: story.url), !story.url.isEmpty {
+          engagement.recordInteraction()
           selectedURL = url
         }
       }
@@ -292,6 +338,7 @@ struct StoryListView: View {
     StoryView(story: story, onShowComments: { selectedStory = story })
       .onTapGesture {
         if let url = URL(string: story.url), !story.url.isEmpty {
+          engagement.recordInteraction()
           UIApplication.shared.open(url)
         }
       }
