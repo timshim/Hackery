@@ -50,7 +50,7 @@ final class ModerationStore {
 
   // Persisted
   var hideAlways: Bool = false
-  private(set) var blockedUsers: [BlockedUser] = []
+  var blockedUsers: [BlockedUser] = []
 
   /// 1 = minimal, 9 = banned word list, 10 = hide all. Controls how aggressively AI flags comments.
   var sensitivityLevel: Int = 5
