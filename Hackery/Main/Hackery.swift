@@ -29,15 +29,17 @@ struct Hackery: App {
   private let modelContainer: ModelContainer
   @State private var bookmarkStore: BookmarkStore
   @State private var moderationStore: ModerationStore
+  @State private var blocklistStore: BlocklistStore
   @State private var tipStore = TipStore()
   @State private var engagement = EngagementTracker()
 
   #if os(visionOS)
   @State private var showGlow = false
+  @AppStorage("eulaAccepted") private var eulaAccepted = false
   #endif
 
   init() {
-    let schema = Schema([BookmarkedStory.self, ModerationPreference.self, BlockedUser.self])
+    let schema = Schema([BookmarkedStory.self, ModerationPreference.self, BlockedUser.self, BlockedStory.self])
     let container: ModelContainer
     #if targetEnvironment(simulator)
     let cloudKit: ModelConfiguration.CloudKitDatabase = .none
@@ -62,6 +64,7 @@ struct Hackery: App {
     self.modelContainer = container
     self._bookmarkStore = State(initialValue: BookmarkStore(modelContext: container.mainContext))
     self._moderationStore = State(initialValue: ModerationStore(modelContext: container.mainContext))
+    self._blocklistStore = State(initialValue: BlocklistStore(modelContext: container.mainContext))
   }
 
   var body: some Scene {
@@ -87,6 +90,7 @@ struct Hackery: App {
           .environment(viewModel)
           .environment(bookmarkStore)
           .environment(moderationStore)
+          .environment(blocklistStore)
           .environment(tipStore)
       .environment(engagement)
         VStack {
@@ -102,6 +106,10 @@ struct Hackery: App {
         } else {
           withAnimation(.easeOut(duration: 0.6)) { showGlow = false }
         }
+      }
+      .sheet(isPresented: .constant(!eulaAccepted)) {
+        EULAView(accepted: $eulaAccepted)
+          .interactiveDismissDisabled()
       }
       #endif
     }
@@ -173,6 +181,65 @@ struct PageCarousel<Leading: View, Trailing: View>: View {
           }
       )
     }
+  }
+}
+#endif
+
+#if os(visionOS)
+struct EULAView: View {
+  @Binding var accepted: Bool
+
+  var body: some View {
+    VStack(spacing: 24) {
+      Text("End User License Agreement")
+        .font(.system(.title, design: .rounded, weight: .bold))
+        .multilineTextAlignment(.center)
+
+      ScrollView {
+        VStack(alignment: .leading, spacing: 16) {
+          Text("Welcome to Hackery")
+            .font(.headline)
+          Text("By using this app, you agree to the following terms:")
+
+          Text("1. Content")
+            .font(.headline)
+          Text("Hackery displays content from the Hacker News public API. Story content, comments, and links are owned by their respective authors. Hackery is not affiliated with Hacker News or Y Combinator.")
+
+          Text("2. User Conduct")
+            .font(.headline)
+          Text("You agree not to use this app for any unlawful purpose. You are responsible for any content you choose to view, bookmark, or share through the app.")
+
+          Text("3. Moderation")
+            .font(.headline)
+          Text("Hackery provides tools to hide, block, and report content. Use of these tools is at your own discretion. Hackery does not guarantee the removal of any third-party content.")
+
+          Text("4. Privacy")
+            .font(.headline)
+          Text("Bookmarks and blocked items are stored locally and synced across your devices via iCloud (CloudKit). No personal data is transmitted to Hackery's servers.")
+
+          Text("5. Disclaimer")
+            .font(.headline)
+          Text("This app is provided \"as is\" without warranty of any kind. The developer is not liable for any damages arising from the use of this app.")
+
+          Text("6. Acceptance")
+            .font(.headline)
+          Text("By tapping \"I Agree\" below, you confirm that you have read, understood, and agree to be bound by these terms.")
+        }
+        .font(.system(.body, design: .rounded))
+        .padding(.horizontal, 4)
+      }
+      .frame(maxHeight: 360)
+
+      Button(action: { accepted = true }) {
+        Text("I Agree")
+          .font(.system(.title3, design: .rounded, weight: .semibold))
+          .frame(maxWidth: .infinity)
+          .padding(.vertical, 8)
+      }
+      .buttonStyle(.borderedProminent)
+    }
+    .padding(32)
+    .frame(width: 560)
   }
 }
 #endif

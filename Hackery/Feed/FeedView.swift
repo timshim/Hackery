@@ -162,6 +162,9 @@ struct StoryListView: View {
   @Environment(FeedViewModel.self) private var viewModel
   @Environment(BookmarkStore.self) private var bookmarkStore
   @Environment(EngagementTracker.self) private var engagement
+  #if os(visionOS)
+  @Environment(BlocklistStore.self) private var blocklistStore
+  #endif
   #if os(iOS)
   @Environment(\.isPaging) private var isPaging
   @Environment(\.horizontalSizeClass) private var sizeClass
@@ -294,14 +297,26 @@ struct StoryListView: View {
   // MARK: - visionOS List
 
   #if os(visionOS)
+  private var visionStories: [Story] {
+    viewModel.stories.filter { !blocklistStore.isBlocked($0) }
+  }
+
   private var visionList: some View {
     List {
-      ForEach(viewModel.stories) { story in
+      ForEach(visionStories) { story in
         storyRow(story)
           .contentShape(.hoverEffect, .rect(cornerRadius: 16))
           .hoverEffect()
           .swipeActions(edge: .trailing) {
             bookmarkSwipeButton(story)
+          }
+          .swipeActions(edge: .leading) {
+            Button(role: .destructive, action: {
+              withAnimation { blocklistStore.block(story) }
+            }) {
+              Label("Hide", systemImage: "eye.slash.fill")
+            }
+            .tint(.red)
           }
           .listRowInsets(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
       }
