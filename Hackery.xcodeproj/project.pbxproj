@@ -20,6 +20,16 @@
 		486C344D2F81460500745554 /* Hackery.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 486C344C2F81460500745554 /* Hackery.storekit */; };
 		488819DB2548137C007B57F2 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 488819D52548067A007B57F2 /* Lato-Bold.ttf */; };
 		488819E125481381007B57F2 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 488819D62548067A007B57F2 /* Lato-Regular.ttf */; };
+		48AAEE712F893B6800C87352 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 487DD6BA2547FF9A006B3876 /* WidgetKit.framework */; };
+		48AAEE722F893B6800C87352 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 487DD6BC2547FF9A006B3876 /* SwiftUI.framework */; };
+		48AAEE812F893B6900C87352 /* HackeryWidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 48AAEE702F893B6800C87352 /* HackeryWidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		48AAEE942F893B9800C87352 /* HackeryShare.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 48AAEE8A2F893B9800C87352 /* HackeryShare.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		48AAEE992F893BEC00C87352 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC000002CCCCCC0200000001 /* AppGroup.swift */; };
+		48AAEE9A2F893BEC00C87352 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC000002CCCCCC0200000001 /* AppGroup.swift */; };
+		48AAEE9B2F893BF900C87352 /* SharedSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC000006CCCCCC0600000001 /* SharedSnapshots.swift */; };
+		48AAEE9C2F893BF900C87352 /* SharedSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC000006CCCCCC0600000001 /* SharedSnapshots.swift */; };
+		48AAEE9D2F893C0C00C87352 /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4854FA9C22B73C18001EC4AE /* FeedModel.swift */; };
+		48AAEE9E2F893C0C00C87352 /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4854FA9C22B73C18001EC4AE /* FeedModel.swift */; };
 		48B7F86022B7723500FF21AD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B7F85F22B7723500FF21AD /* Extensions.swift */; };
 		48B7F86322B7748B00FF21AD /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B7F86222B7748B00FF21AD /* CommentsView.swift */; };
 		48EE5B7B248351E500B8ABC7 /* StoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EE5B7A248351E500B8ABC7 /* StoryView.swift */; };
@@ -29,6 +39,10 @@
 		AA000004AAAAAA0400000001 /* BookmarkStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000006AAAAAA0600000001 /* BookmarkStore.swift */; };
 		AA100001AAAAAA0100000001 /* BlocklistStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100003AAAAAA0300000001 /* BlocklistStore.swift */; };
 		BB000001BBBBBB0100000001 /* BookmarksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000002BBBBBB0200000001 /* BookmarksView.swift */; };
+		CC000001CCCCCC0100000001 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC000002CCCCCC0200000001 /* AppGroup.swift */; };
+		CC000003CCCCCC0300000001 /* DeepLinkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC000004CCCCCC0400000001 /* DeepLinkRouter.swift */; };
+		CC000005CCCCCC0500000001 /* SharedSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC000006CCCCCC0600000001 /* SharedSnapshots.swift */; };
+		CC000007CCCCCC0700000001 /* SpotlightIndexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC000008CCCCCC0800000001 /* SpotlightIndexer.swift */; };
 		DD000002DDDDDD0200000001 /* HTMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD000001DDDDDD0100000001 /* HTMLParser.swift */; };
 		EE000001EEEEEE0100000001 /* CommentClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE000004EEEEEE0400000001 /* CommentClassifier.swift */; };
 		EE000002EEEEEE0200000001 /* ReportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE000005EEEEEE0500000001 /* ReportService.swift */; };
@@ -45,6 +59,20 @@
 			remoteGlobalIDString = 485E4B6B22AE27CF00626464;
 			remoteInfo = Hackery;
 		};
+		48AAEE7F2F893B6900C87352 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 485E4B6422AE27CF00626464 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 48AAEE6F2F893B6800C87352;
+			remoteInfo = HackeryWidgetsExtension;
+		};
+		48AAEE922F893B9800C87352 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 485E4B6422AE27CF00626464 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 48AAEE892F893B9800C87352;
+			remoteInfo = HackeryShare;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -54,6 +82,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				48AAEE942F893B9800C87352 /* HackeryShare.appex in Embed Foundation Extensions */,
+				48AAEE812F893B6900C87352 /* HackeryWidgetsExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -78,6 +108,8 @@
 		487DD6BC2547FF9A006B3876 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		488819D52548067A007B57F2 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
 		488819D62548067A007B57F2 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
+		48AAEE702F893B6800C87352 /* HackeryWidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = HackeryWidgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		48AAEE8A2F893B9800C87352 /* HackeryShare.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = HackeryShare.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		48B7F85F22B7723500FF21AD /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		48B7F86222B7748B00FF21AD /* CommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsView.swift; sourceTree = "<group>"; };
 		48BB404526777DA600490132 /* Hackery.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hackery.entitlements; sourceTree = "<group>"; };
@@ -89,6 +121,10 @@
 		AA000006AAAAAA0600000001 /* BookmarkStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkStore.swift; sourceTree = "<group>"; };
 		AA100003AAAAAA0300000001 /* BlocklistStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlocklistStore.swift; sourceTree = "<group>"; };
 		BB000002BBBBBB0200000001 /* BookmarksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksView.swift; sourceTree = "<group>"; };
+		CC000002CCCCCC0200000001 /* AppGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroup.swift; sourceTree = "<group>"; };
+		CC000004CCCCCC0400000001 /* DeepLinkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkRouter.swift; sourceTree = "<group>"; };
+		CC000006CCCCCC0600000001 /* SharedSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedSnapshots.swift; sourceTree = "<group>"; };
+		CC000008CCCCCC0800000001 /* SpotlightIndexer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotlightIndexer.swift; sourceTree = "<group>"; };
 		DD000001DDDDDD0100000001 /* HTMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLParser.swift; sourceTree = "<group>"; };
 		EE000004EEEEEE0400000001 /* CommentClassifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentClassifier.swift; sourceTree = "<group>"; };
 		EE000005EEEEEE0500000001 /* ReportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportService.swift; sourceTree = "<group>"; };
@@ -97,8 +133,27 @@
 		FF200000FFFFFF0000000001 /* EngagementTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngagementTracker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		48AAEE842F893B6900C87352 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 48AAEE6F2F893B6800C87352 /* HackeryWidgetsExtension */;
+		};
+		48AAEE952F893B9800C87352 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 48AAEE892F893B9800C87352 /* HackeryShare */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		4871E8A52F79930300746676 /* HackeryTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = HackeryTests; sourceTree = "<group>"; };
+		48AAEE732F893B6800C87352 /* HackeryWidgets */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (48AAEE842F893B6900C87352 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = HackeryWidgets; sourceTree = "<group>"; };
+		48AAEE8B2F893B9800C87352 /* HackeryShare */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (48AAEE952F893B9800C87352 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = HackeryShare; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +171,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		48AAEE6D2F893B6800C87352 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				48AAEE722F893B6800C87352 /* SwiftUI.framework in Frameworks */,
+				48AAEE712F893B6800C87352 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		48AAEE872F893B9800C87352 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -127,6 +198,8 @@
 				485E4B7522AE27CF00626464 /* Assets.xcassets */,
 				485E4B7722AE27CF00626464 /* Preview Content */,
 				48B7F85F22B7723500FF21AD /* Extensions.swift */,
+				CC000002CCCCCC0200000001 /* AppGroup.swift */,
+				CC000004CCCCCC0400000001 /* DeepLinkRouter.swift */,
 				488819D42548067A007B57F2 /* Fonts */,
 				486C344C2F81460500745554 /* Hackery.storekit */,
 			);
@@ -157,6 +230,8 @@
 				486C343E2F81376A00745554 /* TipJarView.swift */,
 				486C343F2F81376A00745554 /* TipStore.swift */,
 				FF200000FFFFFF0000000001 /* EngagementTracker.swift */,
+				CC000006CCCCCC0600000001 /* SharedSnapshots.swift */,
+				CC000008CCCCCC0800000001 /* SpotlightIndexer.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -167,6 +242,8 @@
 				485E4B6E22AE27CF00626464 /* Hackery */,
 				48CABD632A7FE758004F61FC /* Packages */,
 				4871E8A52F79930300746676 /* HackeryTests */,
+				48AAEE732F893B6800C87352 /* HackeryWidgets */,
+				48AAEE8B2F893B9800C87352 /* HackeryShare */,
 				485E4B6D22AE27CF00626464 /* Products */,
 				51FCD10488BC17C0CAFBED90 /* Frameworks */,
 			);
@@ -177,6 +254,8 @@
 			children = (
 				485E4B6C22AE27CF00626464 /* Hackery.app */,
 				4871E8A42F79930300746676 /* HackeryTests.xctest */,
+				48AAEE702F893B6800C87352 /* HackeryWidgetsExtension.appex */,
+				48AAEE8A2F893B9800C87352 /* HackeryShare.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -239,6 +318,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				48AAEE802F893B6900C87352 /* PBXTargetDependency */,
+				48AAEE932F893B9800C87352 /* PBXTargetDependency */,
 			);
 			name = Hackery;
 			packageProductDependencies = (
@@ -270,6 +351,50 @@
 			productReference = 4871E8A42F79930300746676 /* HackeryTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		48AAEE6F2F893B6800C87352 /* HackeryWidgetsExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 48AAEE852F893B6900C87352 /* Build configuration list for PBXNativeTarget "HackeryWidgetsExtension" */;
+			buildPhases = (
+				48AAEE6C2F893B6800C87352 /* Sources */,
+				48AAEE6D2F893B6800C87352 /* Frameworks */,
+				48AAEE6E2F893B6800C87352 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				48AAEE732F893B6800C87352 /* HackeryWidgets */,
+			);
+			name = HackeryWidgetsExtension;
+			packageProductDependencies = (
+			);
+			productName = HackeryWidgetsExtension;
+			productReference = 48AAEE702F893B6800C87352 /* HackeryWidgetsExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		48AAEE892F893B9800C87352 /* HackeryShare */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 48AAEE962F893B9800C87352 /* Build configuration list for PBXNativeTarget "HackeryShare" */;
+			buildPhases = (
+				48AAEE862F893B9800C87352 /* Sources */,
+				48AAEE872F893B9800C87352 /* Frameworks */,
+				48AAEE882F893B9800C87352 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				48AAEE8B2F893B9800C87352 /* HackeryShare */,
+			);
+			name = HackeryShare;
+			packageProductDependencies = (
+			);
+			productName = HackeryShare;
+			productReference = 48AAEE8A2F893B9800C87352 /* HackeryShare.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -287,6 +412,12 @@
 					4871E8A32F79930300746676 = {
 						CreatedOnToolsVersion = 26.4;
 						TestTargetID = 485E4B6B22AE27CF00626464;
+					};
+					48AAEE6F2F893B6800C87352 = {
+						CreatedOnToolsVersion = 26.4;
+					};
+					48AAEE892F893B9800C87352 = {
+						CreatedOnToolsVersion = 26.4;
 					};
 				};
 			};
@@ -307,6 +438,8 @@
 			targets = (
 				485E4B6B22AE27CF00626464 /* Hackery */,
 				4871E8A32F79930300746676 /* HackeryTests */,
+				48AAEE6F2F893B6800C87352 /* HackeryWidgetsExtension */,
+				48AAEE892F893B9800C87352 /* HackeryShare */,
 			);
 		};
 /* End PBXProject section */
@@ -325,6 +458,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		4871E8A22F79930300746676 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		48AAEE6E2F893B6800C87352 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		48AAEE882F893B9800C87352 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -361,6 +508,10 @@
 				EE000001EEEEEE0100000001 /* CommentClassifier.swift in Sources */,
 				EE000002EEEEEE0200000001 /* ReportService.swift in Sources */,
 				EE000003EEEEEE0300000001 /* ModerationStore.swift in Sources */,
+				CC000001CCCCCC0100000001 /* AppGroup.swift in Sources */,
+				CC000003CCCCCC0300000001 /* DeepLinkRouter.swift in Sources */,
+				CC000005CCCCCC0500000001 /* SharedSnapshots.swift in Sources */,
+				CC000007CCCCCC0700000001 /* SpotlightIndexer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,6 +522,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		48AAEE6C2F893B6800C87352 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				48AAEE9B2F893BF900C87352 /* SharedSnapshots.swift in Sources */,
+				48AAEE992F893BEC00C87352 /* AppGroup.swift in Sources */,
+				48AAEE9D2F893C0C00C87352 /* FeedModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		48AAEE862F893B9800C87352 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				48AAEE9C2F893BF900C87352 /* SharedSnapshots.swift in Sources */,
+				48AAEE9A2F893BEC00C87352 /* AppGroup.swift in Sources */,
+				48AAEE9E2F893C0C00C87352 /* FeedModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -378,6 +549,17 @@
 			isa = PBXTargetDependency;
 			target = 485E4B6B22AE27CF00626464 /* Hackery */;
 			targetProxy = 4871E8A82F79930300746676 /* PBXContainerItemProxy */;
+		};
+		48AAEE802F893B6900C87352 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 48AAEE6F2F893B6800C87352 /* HackeryWidgetsExtension */;
+			targetProxy = 48AAEE7F2F893B6900C87352 /* PBXContainerItemProxy */;
+		};
+		48AAEE932F893B9800C87352 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilter = ios;
+			target = 48AAEE892F893B9800C87352 /* HackeryShare */;
+			targetProxy = 48AAEE922F893B9800C87352 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -629,6 +811,150 @@
 			};
 			name = Release;
 		};
+		48AAEE822F893B6900C87352 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = HackeryWidgets/HackeryWidgets.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HackeryWidgets/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = HackeryWidgets;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 Tim Shim. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.timshim.Hackery.HackeryWidgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 26.4;
+			};
+			name = Debug;
+		};
+		48AAEE832F893B6900C87352 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = HackeryWidgets/HackeryWidgets.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HackeryWidgets/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = HackeryWidgets;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 Tim Shim. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.timshim.Hackery.HackeryWidgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 26.4;
+			};
+			name = Release;
+		};
+		48AAEE972F893B9800C87352 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = HackeryShare/HackeryShare.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HackeryShare/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = HackeryShare;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 Tim Shim. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.timshim.Hackery.HackeryShare;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		48AAEE982F893B9800C87352 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = HackeryShare/HackeryShare.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HackeryShare/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = HackeryShare;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 Tim Shim. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.timshim.Hackery.HackeryShare;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -655,6 +981,24 @@
 			buildConfigurations = (
 				4871E8AA2F79930300746676 /* Debug */,
 				4871E8AB2F79930300746676 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		48AAEE852F893B6900C87352 /* Build configuration list for PBXNativeTarget "HackeryWidgetsExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				48AAEE822F893B6900C87352 /* Debug */,
+				48AAEE832F893B6900C87352 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		48AAEE962F893B9800C87352 /* Build configuration list for PBXNativeTarget "HackeryShare" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				48AAEE972F893B9800C87352 /* Debug */,
+				48AAEE982F893B9800C87352 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -8,6 +8,7 @@
 
 import SwiftUI
 import SwiftData
+import CoreSpotlight
 
 #if os(iOS)
 private struct IsPagingKey: EnvironmentKey {
@@ -32,6 +33,8 @@ struct Hackery: App {
   @State private var blocklistStore: BlocklistStore
   @State private var tipStore = TipStore()
   @State private var engagement = EngagementTracker()
+  @State private var router = DeepLinkRouter()
+  @State private var deepLinkStory: Story?
 
   #if os(visionOS)
   @State private var showGlow = false
@@ -82,6 +85,26 @@ struct Hackery: App {
       .environment(moderationStore)
       .environment(tipStore)
       .environment(engagement)
+      .environment(router)
+      .onAppear {
+        SharedSnapshots.writeBookmarks(bookmarkStore.bookmarks)
+        SpotlightIndexer.reindexBookmarks(bookmarkStore.bookmarks)
+      }
+      .onOpenURL { router.handle(url: $0) }
+      .onContinueUserActivity(CSSearchableItemActionType) { activity in
+        router.handle(activity: activity)
+      }
+      .onChange(of: router.pending) { _, destination in
+        handleRouterChange(destination)
+      }
+      .sheet(item: $deepLinkStory) { story in
+        CommentsView(story: story)
+          .environment(viewModel)
+          .environment(bookmarkStore)
+          .environment(moderationStore)
+          .environment(tipStore)
+          .environment(engagement)
+      }
       #elseif os(visionOS)
       ZStack {
         FeedView()
@@ -107,6 +130,26 @@ struct Hackery: App {
           withAnimation(.easeOut(duration: 0.6)) { showGlow = false }
         }
       }
+      .onAppear {
+        SharedSnapshots.writeBookmarks(bookmarkStore.bookmarks)
+        SpotlightIndexer.reindexBookmarks(bookmarkStore.bookmarks)
+      }
+      .onOpenURL { router.handle(url: $0) }
+      .onContinueUserActivity(CSSearchableItemActionType) { activity in
+        router.handle(activity: activity)
+      }
+      .onChange(of: router.pending) { _, destination in
+        handleRouterChange(destination)
+      }
+      .sheet(item: $deepLinkStory) { story in
+        CommentsView(story: story)
+          .environment(viewModel)
+          .environment(bookmarkStore)
+          .environment(moderationStore)
+          .environment(blocklistStore)
+          .environment(tipStore)
+          .environment(engagement)
+      }
       .sheet(isPresented: .constant(!eulaAccepted)) {
         EULAView(accepted: $eulaAccepted)
           .interactiveDismissDisabled()
@@ -117,6 +160,34 @@ struct Hackery: App {
     .defaultSize(width: 500, height: 800)
     .windowResizability(.contentSize)
     #endif
+  }
+
+  private func handleRouterChange(_ destination: DeepLinkDestination?) {
+    guard let destination else { return }
+    switch destination {
+    case .story(let id):
+      Task { await fetchAndPresentStory(id: id) }
+    case .bookmarks:
+      // iOS: carousel already exposes bookmarks as the leading pane.
+      // visionOS: bookmarks are toggled via FeedView's ornament — a deeper
+      // hook-up can be added later if needed.
+      break
+    }
+    router.clear()
+  }
+
+  private func fetchAndPresentStory(id: Int) async {
+    let urlString = "https://hacker-news.firebaseio.com/v0/item/\(id).json"
+    guard let url = URL(string: urlString) else { return }
+    do {
+      let (data, _) = try await URLSession.shared.data(from: url)
+      let item = try JSONDecoder().decode(HNItem.self, from: data)
+      await MainActor.run {
+        deepLinkStory = Story(from: item)
+      }
+    } catch {
+      // Swallow — deep link fetch failures shouldn't crash the app.
+    }
   }
 }
 

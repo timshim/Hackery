@@ -64,6 +64,13 @@ struct CommentsView: View {
                   showEnableAIAlert = true
                 }
               }
+              ShareLink(item: URL(string: "hackery://story/\(story.id)")!) {
+                Image(systemName: "square.and.arrow.up")
+                  .font(.system(size: 14, weight: .medium))
+                  .foregroundColor(Color("subtitleColor").opacity(0.8))
+                  .frame(width: 40, height: 40)
+                  .overlay(Circle().stroke(Color("borderColor"), lineWidth: 1))
+              }
               Button(action: {
                 bookmarkStore.toggle(story)
               }) {
@@ -182,6 +189,15 @@ struct CommentsView: View {
               showEnableAIAlert = true
             }
           }
+          ShareLink(item: URL(string: "hackery://story/\(story.id)")!) {
+            Image(systemName: "square.and.arrow.up")
+              .font(.system(size: 14, weight: .semibold))
+              .foregroundStyle(.secondary.opacity(0.8))
+              .frame(width: 32, height: 32)
+              .background(.ultraThinMaterial, in: Circle())
+          }
+          .buttonStyle(.plain)
+          .hoverEffect()
           Button(action: {
             bookmarkStore.toggle(story)
           }) {

@@ -102,6 +102,8 @@ final class BookmarkStore {
       bookmarks.insert(story, at: 0)
     }
     try? modelContext.save()
+    SharedSnapshots.writeBookmarks(bookmarks)
+    SpotlightIndexer.reindexBookmarks(bookmarks)
   }
 
   private func loadFromStore() {
@@ -110,5 +112,7 @@ final class BookmarkStore {
     )
     guard let stored = try? modelContext.fetch(descriptor) else { return }
     bookmarks = stored.map { $0.toStory() }
+    SharedSnapshots.writeBookmarks(bookmarks)
+    SpotlightIndexer.reindexBookmarks(bookmarks)
   }
 }

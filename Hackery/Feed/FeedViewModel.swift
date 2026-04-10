@@ -60,6 +60,8 @@ final class FeedViewModel {
         stories = firstPage
         loadedCount = pageSize
         StoryCache.save(firstPage)
+        SharedSnapshots.writeTopStories(firstPage)
+        SpotlightIndexer.indexFeedStories(firstPage)
       } catch is CancellationError {
         // no-op
       } catch {
@@ -83,6 +85,7 @@ final class FeedViewModel {
       stories.append(contentsOf: more)
       loadedCount += pageSize
       StoryCache.save(stories)
+      SpotlightIndexer.indexFeedStories(stories)
     } catch is CancellationError {
       // no-op
     } catch {
