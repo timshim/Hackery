@@ -129,15 +129,20 @@ struct TopStoryView: View {
     if let story = entry.stories.first {
       Link(destination: URL(string: "hackery://story/\(story.id)")!) {
         VStack(alignment: .leading, spacing: 4) {
-          Text(story.title)
-            .font(.custom("Lato-Bold", size: 15, relativeTo: .subheadline))
-            .minimumScaleFactor(0.8)
+          HStack {
+            Text(story.title)
+              .font(.custom("Lato-Bold", size: 14, relativeTo: .subheadline))
+              .minimumScaleFactor(0.8)
+            Spacer()
+          }
 
           Spacer(minLength: 0)
 
-          HStack(spacing: 6) {
+          HStack(spacing: 12) {
             Label("\(story.score)", systemImage: "arrow.up")
+              .labelStyle(SpacedLabelStyle(spacing: 4))
             Label("\(story.descendants)", systemImage: "bubble.right")
+              .labelStyle(SpacedLabelStyle(spacing: 4))
           }
           .font(.custom("Lato-Regular", size: 11, relativeTo: .caption2))
           .foregroundStyle(.secondary)
@@ -222,9 +227,10 @@ struct TopStoriesListView: View {
   private func storyList(count: Int) -> some View {
     let stories = Array(entry.stories.prefix(count))
     return VStack(alignment: .leading, spacing: 0) {
+      Spacer()
       ForEach(Array(stories.enumerated()), id: \.element.id) { index, story in
         if index > 0 {
-          Divider().padding(.vertical, 4)
+          Divider().padding(.vertical, 8)
         }
         Link(destination: URL(string: "hackery://story/\(story.id)")!) {
           HStack(alignment: .top, spacing: 8) {
@@ -233,14 +239,19 @@ struct TopStoriesListView: View {
               .foregroundStyle(.secondary)
               .frame(width: 16, alignment: .trailing)
 
-            VStack(alignment: .leading, spacing: 2) {
-              Text(story.title)
-                .font(.custom("Lato-Bold", size: 12, relativeTo: .caption))
-                .fixedSize(horizontal: false, vertical: true)
+            VStack(alignment: .leading, spacing: 8) {
+              HStack {
+                Text(story.title)
+                  .font(.custom("Lato-Bold", size: 14, relativeTo: .caption))
+                  .fixedSize(horizontal: false, vertical: true)
+                Spacer()
+              }
 
-              HStack(spacing: 6) {
+              HStack(spacing: 12) {
                 Label("\(story.score)", systemImage: "arrow.up")
+                  .labelStyle(SpacedLabelStyle(spacing: 4))
                 Label("\(story.descendants)", systemImage: "bubble.right")
+                  .labelStyle(SpacedLabelStyle(spacing: 4))
                 if !story.domain.isEmpty {
                   Text(story.domain)
                 }
@@ -252,6 +263,18 @@ struct TopStoriesListView: View {
           }
         }
       }
+      Spacer()
+    }
+  }
+}
+
+struct SpacedLabelStyle: LabelStyle {
+  let spacing: CGFloat
+
+  func makeBody(configuration: Configuration) -> some View {
+    HStack(spacing: spacing) {
+      configuration.icon
+      configuration.title
     }
   }
 }

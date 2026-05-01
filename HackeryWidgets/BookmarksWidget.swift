@@ -62,14 +62,14 @@ struct BookmarksWidgetView: View {
   private var listCount: Int {
     switch family {
     case .systemLarge:
-      let base = 7
+      let base = 5
       if entry.stories.count >= base + 1,
          entry.stories.prefix(base + 1).allSatisfy({ $0.title.count <= Self.titleCharBudget }) {
         return base + 1
       }
       return base
     default:
-      let base = 3
+      let base = 2
       #if os(visionOS)
       return base
       #else
@@ -101,16 +101,21 @@ struct BookmarksWidgetView: View {
               .font(.caption2)
               .foregroundStyle(.orange)
 
-            Text(story.title)
-              .font(.custom("Lato-Bold", size: 15, relativeTo: .subheadline))
-              .lineLimit(3)
-              .minimumScaleFactor(0.8)
+            HStack {
+              Text(story.title)
+                .font(.custom("Lato-Bold", size: 15, relativeTo: .subheadline))
+                .lineLimit(3)
+                .minimumScaleFactor(0.8)
+              Spacer()
+            }
 
             Spacer(minLength: 0)
 
-            HStack(spacing: 6) {
+            HStack(spacing: 12) {
               Label("\(story.score)", systemImage: "arrow.up")
+                .labelStyle(SpacedLabelStyle(spacing: 4))
               Label("\(story.descendants)", systemImage: "bubble.right")
+                .labelStyle(SpacedLabelStyle(spacing: 4))
             }
             .font(.custom("Lato-Regular", size: 11, relativeTo: .caption2))
             .foregroundStyle(.secondary)
@@ -142,33 +147,42 @@ struct BookmarksWidgetView: View {
           .font(.custom("Lato-Bold", size: 12, relativeTo: .caption))
           .foregroundStyle(.secondary)
       }
-      .padding(.bottom, 4)
+      .padding(.bottom, 8)
 
       if bookmarks.isEmpty {
         emptyView
       } else {
-        ForEach(Array(bookmarks.enumerated()), id: \.element.id) { index, story in
-          if index > 0 {
-            Divider().padding(.vertical, family == .systemLarge ? 6 : 2)
-          }
-          Link(destination: URL(string: "hackery://story/\(story.id)")!) {
-            VStack(alignment: .leading, spacing: 2) {
-              Text(story.title)
-                .font(.custom("Lato-Bold", size: 12, relativeTo: .caption))
-                .lineLimit(2)
-
-              HStack(spacing: 6) {
-                Label("\(story.score)", systemImage: "arrow.up")
-                Label("\(story.descendants)", systemImage: "bubble.right")
-                if !story.domain.isEmpty {
-                  Text(story.domain)
+        VStack {
+          Spacer()
+          ForEach(Array(bookmarks.enumerated()), id: \.element.id) { index, story in
+            if index > 0 {
+              Divider().padding(.vertical, 4)
+            }
+            Link(destination: URL(string: "hackery://story/\(story.id)")!) {
+              VStack(alignment: .leading, spacing: 4) {
+                HStack {
+                  Text(story.title)
+                    .font(.custom("Lato-Bold", size: 14, relativeTo: .caption))
+                    .fixedSize(horizontal: false, vertical: true)
+                  Spacer()
                 }
+
+                HStack(spacing: 12) {
+                  Label("\(story.score)", systemImage: "arrow.up")
+                    .labelStyle(SpacedLabelStyle(spacing: 4))
+                  Label("\(story.descendants)", systemImage: "bubble.right")
+                    .labelStyle(SpacedLabelStyle(spacing: 4))
+                  if !story.domain.isEmpty {
+                    Text(story.domain)
+                  }
+                }
+                .font(.custom("Lato-Regular", size: 11, relativeTo: .caption2))
+                .foregroundStyle(.secondary)
+                .lineLimit(1)
               }
-              .font(.custom("Lato-Regular", size: 11, relativeTo: .caption2))
-              .foregroundStyle(.secondary)
-              .lineLimit(1)
             }
           }
+          Spacer()
         }
       }
 
