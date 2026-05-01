@@ -7,6 +7,7 @@
 
 import WidgetKit
 import SwiftUI
+import AppIntents
 
 // MARK: - Shared Timeline Entry
 
@@ -26,49 +27,23 @@ struct StoryEntry: TimelineEntry {
   }
 }
 
-// MARK: - Provider
+// MARK: - Fetcher
 
-struct TopStoriesProvider: TimelineProvider {
+enum TopStoriesFetcher {
   private static let baseURL = "https://hacker-news.firebaseio.com/v0"
   private static let storyCount = 10
 
-  func placeholder(in context: Context) -> StoryEntry { .placeholder }
-
-  func getSnapshot(in context: Context, completion: @escaping (StoryEntry) -> Void) {
-    let stories = SharedSnapshots.readTopStories()
-    completion(StoryEntry(date: .now, stories: stories.isEmpty ? StoryEntry.placeholder.stories : stories))
-  }
-
-  func getTimeline(in context: Context, completion: @escaping (Timeline<StoryEntry>) -> Void) {
-    let nextUpdate = Calendar.current.date(byAdding: .minute, value: 20, to: .now)!
-
-    Task {
-      let stories = await fetchTopStories()
-      let resolved = stories.isEmpty ? SharedSnapshots.readTopStories() : stories
-
-      if !stories.isEmpty {
-        SharedSnapshots.writeTopStories(stories)
-      }
-
-      let entry = StoryEntry(
-        date: .now,
-        stories: resolved.isEmpty ? StoryEntry.placeholder.stories : resolved
-      )
-      completion(Timeline(entries: [entry], policy: .after(nextUpdate)))
-    }
-  }
-
-  private func fetchTopStories() async -> [Story] {
-    guard let url = URL(string: "\(Self.baseURL)/topstories.json") else { return [] }
+  static func fetch() async -> [Story] {
+    guard let url = URL(string: "\(baseURL)/topstories.json") else { return [] }
     do {
       let (data, _) = try await URLSession.shared.data(from: url)
       let ids = try JSONDecoder().decode([Int].self, from: data)
-      let topIds = Array(ids.prefix(Self.storyCount))
+      let topIds = Array(ids.prefix(storyCount))
 
       return await withTaskGroup(of: (Int, Story?).self) { group in
         for (index, id) in topIds.enumerated() {
           group.addTask {
-            guard let itemURL = URL(string: "\(Self.baseURL)/item/\(id).json") else {
+            guard let itemURL = URL(string: "\(baseURL)/item/\(id).json") else {
               return (index, nil)
             }
             do {
@@ -96,6 +71,36 @@ struct TopStoriesProvider: TimelineProvider {
   }
 }
 
+// MARK: - Provider
+
+struct TopStoriesProvider: TimelineProvider {
+  func placeholder(in context: Context) -> StoryEntry { .placeholder }
+
+  func getSnapshot(in context: Context, completion: @escaping (StoryEntry) -> Void) {
+    let stories = SharedSnapshots.readTopStories()
+    completion(StoryEntry(date: .now, stories: stories.isEmpty ? StoryEntry.placeholder.stories : stories))
+  }
+
+  func getTimeline(in context: Context, completion: @escaping (Timeline<StoryEntry>) -> Void) {
+    let nextUpdate = Calendar.current.date(byAdding: .minute, value: 20, to: .now)!
+
+    Task {
+      let stories = await TopStoriesFetcher.fetch()
+      let resolved = stories.isEmpty ? SharedSnapshots.readTopStories() : stories
+
+      if !stories.isEmpty {
+        SharedSnapshots.writeTopStories(stories)
+      }
+
+      let entry = StoryEntry(
+        date: .now,
+        stories: resolved.isEmpty ? StoryEntry.placeholder.stories : resolved
+      )
+      completion(Timeline(entries: [entry], policy: .after(nextUpdate)))
+    }
+  }
+}
+
 // MARK: - Top Story Widget (single headline)
 
 struct TopStoryWidget: Widget {
@@ -108,7 +113,7 @@ struct TopStoryWidget: Widget {
           #if os(visionOS)
           Color.clear
           #else
-          Rectangle().fill(.fill.tertiary)
+          Rectangle().fill(.background)
           #endif
         }
     }
@@ -123,37 +128,84 @@ struct TopStoryWidget: Widget {
 }
 
 struct TopStoryView: View {
+  @Environment(\.widgetFamily) private var family
   let entry: StoryEntry
 
   var body: some View {
     if let story = entry.stories.first {
       Link(destination: URL(string: "hackery://story/\(story.id)")!) {
-        VStack(alignment: .leading, spacing: 4) {
-          Text(story.title)
-            .font(.custom("Lato-Bold", size: 15, relativeTo: .subheadline))
-            .minimumScaleFactor(0.8)
-
-          Spacer(minLength: 0)
-
-          HStack(spacing: 6) {
-            Label("\(story.score)", systemImage: "arrow.up")
-            Label("\(story.descendants)", systemImage: "bubble.right")
-          }
-          .font(.custom("Lato-Regular", size: 11, relativeTo: .caption2))
-          .foregroundStyle(.secondary)
-
-          if !story.domain.isEmpty {
-            Text(story.domain)
-              .font(.custom("Lato-Regular", size: 11, relativeTo: .caption2))
-              .foregroundStyle(.tertiary)
-              .lineLimit(1)
-          }
+        #if os(iOS)
+        if family == .accessoryRectangular {
+          accessoryLayout(story)
+        } else {
+          standardLayout(story)
         }
+        #else
+        standardLayout(story)
+        #endif
       }
     } else {
       Text("No stories yet")
-        .font(.custom("Lato-Regular", size: 12, relativeTo: .caption))
+        .font(.custom("Lato-Regular", size: widgetFontSize(12), relativeTo: .caption))
         .foregroundStyle(.secondary)
+    }
+  }
+
+  private func standardLayout(_ story: Story) -> some View {
+    VStack(alignment: .leading, spacing: 4) {
+      HStack {
+        Text(story.title)
+          .font(.custom("Lato-Bold", size: widgetFontSize(14), relativeTo: .subheadline))
+          .minimumScaleFactor(0.8)
+        Spacer()
+      }
+
+      Spacer(minLength: 0)
+
+      HStack(spacing: 12) {
+        Label("\(story.score)", systemImage: "arrow.up")
+          .labelStyle(SpacedLabelStyle(spacing: 4))
+        Label("\(story.descendants)", systemImage: "bubble.right")
+          .labelStyle(SpacedLabelStyle(spacing: 4))
+      }
+      .font(.custom("Lato-Regular", size: widgetFontSize(11), relativeTo: .caption2))
+      .foregroundStyle(.secondary)
+
+      if !story.domain.isEmpty {
+        Text(story.domain)
+          .font(.custom("Lato-Regular", size: widgetFontSize(11), relativeTo: .caption2))
+          .foregroundStyle(.tertiary)
+          .lineLimit(1)
+      }
+    }
+  }
+
+  // Lockscreen rectangular accessory: two-line title with metadata and the
+  // (truncated) domain sharing a single row beneath it.
+  private func accessoryLayout(_ story: Story) -> some View {
+    VStack(alignment: .leading, spacing: 2) {
+      Text(story.title)
+        .font(.custom("Lato-Bold", size: 13, relativeTo: .caption))
+        .lineLimit(2)
+
+      Spacer(minLength: 0)
+
+      HStack(spacing: 8) {
+        Label("\(story.score)", systemImage: "arrow.up")
+          .labelStyle(SpacedLabelStyle(spacing: 2))
+          .fixedSize()
+        Label("\(story.descendants)", systemImage: "bubble.right")
+          .labelStyle(SpacedLabelStyle(spacing: 2))
+          .fixedSize()
+
+        if !story.domain.isEmpty {
+          Text(story.domain)
+            .lineLimit(1)
+            .truncationMode(.tail)
+            .foregroundStyle(.secondary)
+        }
+      }
+      .font(.custom("Lato-Regular", size: 11, relativeTo: .caption2))
     }
   }
 }
@@ -171,7 +223,7 @@ struct TopStoriesWidget: Widget {
           #if os(visionOS)
           Color.clear
           #else
-          Rectangle().fill(.fill.tertiary)
+          Rectangle().fill(.background)
           #endif
         }
     }
@@ -186,7 +238,15 @@ struct TopStoriesListView: View {
   let entry: StoryEntry
 
   private var maxCount: Int { family == .systemLarge ? 8 : 3 }
-  private var minCount: Int { family == .systemLarge ? 5 : 2 }
+  private var minCount: Int {
+    #if os(visionOS)
+    // Larger spatial typography means ViewThatFits needs a smaller floor
+    // or it falls back to the last (still-clipping) option.
+    return family == .systemLarge ? 3 : 2
+    #else
+    return family == .systemLarge ? 5 : 2
+    #endif
+  }
 
   // Rough character budget for a single-line title in the medium widget at
   // font size 12. If the first 4 titles all fit under this, we can pack 4
@@ -203,55 +263,86 @@ struct TopStoriesListView: View {
   }
 
   var body: some View {
-    if entry.stories.isEmpty {
-      Text("Open Hackery to load stories")
-        .font(.custom("Lato-Regular", size: 12, relativeTo: .caption))
-        .foregroundStyle(.secondary)
-    } else if mediumShowsFour {
-      storyList(count: 4)
-    } else {
-      // Try decreasing counts until the content fits without clipping.
-      ViewThatFits(in: .vertical) {
-        ForEach(Array(stride(from: maxCount, through: minCount, by: -1)), id: \.self) { count in
-          storyList(count: count)
+    Group {
+      if entry.stories.isEmpty {
+        Text("Open Hackery to load stories")
+          .font(.custom("Lato-Regular", size: widgetFontSize(12), relativeTo: .caption))
+          .foregroundStyle(.secondary)
+      } else if mediumShowsFour {
+        storyList(count: 4)
+      } else {
+        // Try decreasing counts until the content fits without clipping. The
+        // last option is used even when it doesn't fit, so at the floor count
+        // tighten the dividers first, then give up a story rather than clip
+        // long two-line titles against the top and bottom edges.
+        ViewThatFits(in: .vertical) {
+          ForEach(Array(stride(from: maxCount, through: minCount, by: -1)), id: \.self) { count in
+            storyList(count: count)
+          }
+          storyList(count: minCount, dividerPadding: 4)
+          storyList(count: minCount - 1, dividerPadding: 4)
         }
       }
     }
   }
 
-  private func storyList(count: Int) -> some View {
+  #if os(visionOS)
+  private static let defaultDividerPadding: CGFloat = 4
+  #else
+  private static let defaultDividerPadding: CGFloat = 8
+  #endif
+
+  private func storyList(count: Int, dividerPadding: CGFloat = defaultDividerPadding) -> some View {
     let stories = Array(entry.stories.prefix(count))
     return VStack(alignment: .leading, spacing: 0) {
+      Spacer()
       ForEach(Array(stories.enumerated()), id: \.element.id) { index, story in
         if index > 0 {
-          Divider().padding(.vertical, 4)
+          Divider().padding(.vertical, dividerPadding)
         }
         Link(destination: URL(string: "hackery://story/\(story.id)")!) {
           HStack(alignment: .top, spacing: 8) {
             Text("\(index + 1)")
-              .font(.custom("Lato-Bold", size: 12, relativeTo: .caption))
+              .font(.custom("Lato-Bold", size: widgetFontSize(12), relativeTo: .caption))
               .foregroundStyle(.secondary)
               .frame(width: 16, alignment: .trailing)
 
-            VStack(alignment: .leading, spacing: 2) {
-              Text(story.title)
-                .font(.custom("Lato-Bold", size: 12, relativeTo: .caption))
-                .fixedSize(horizontal: false, vertical: true)
+            VStack(alignment: .leading, spacing: 8) {
+              HStack {
+                Text(story.title)
+                  .font(.custom("Lato-Bold", size: widgetFontSize(14), relativeTo: .caption))
+                  .fixedSize(horizontal: false, vertical: true)
+                Spacer()
+              }
 
-              HStack(spacing: 6) {
+              HStack(spacing: 12) {
                 Label("\(story.score)", systemImage: "arrow.up")
+                  .labelStyle(SpacedLabelStyle(spacing: 4))
                 Label("\(story.descendants)", systemImage: "bubble.right")
+                  .labelStyle(SpacedLabelStyle(spacing: 4))
                 if !story.domain.isEmpty {
                   Text(story.domain)
                 }
               }
-              .font(.custom("Lato-Regular", size: 11, relativeTo: .caption2))
+              .font(.custom("Lato-Regular", size: widgetFontSize(11), relativeTo: .caption2))
               .foregroundStyle(.secondary)
               .lineLimit(1)
             }
           }
         }
       }
+      Spacer()
+    }
+  }
+}
+
+struct SpacedLabelStyle: LabelStyle {
+  let spacing: CGFloat
+
+  func makeBody(configuration: Configuration) -> some View {
+    HStack(spacing: spacing) {
+      configuration.icon
+      configuration.title
     }
   }
 }

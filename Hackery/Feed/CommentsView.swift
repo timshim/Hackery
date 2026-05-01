@@ -36,6 +36,9 @@ struct CommentsView: View {
   #endif
 
   var story: Story
+  /// Opens the article somewhere other than a full screen cover, like the
+  /// detail pane that already holds it.
+  var onOpenArticle: (() -> Void)?
 
   var body: some View {
     #if os(iOS)
@@ -104,7 +107,11 @@ struct CommentsView: View {
           .onTapGesture {
             if let _ = URL(string: story.url), !story.url.isEmpty {
               engagement.recordInteraction()
-              showSafari = true
+              if let onOpenArticle {
+                onOpenArticle()
+              } else {
+                showSafari = true
+              }
             }
           }
           .fullScreenCover(isPresented: $showSafari) {
@@ -148,7 +155,7 @@ struct CommentsView: View {
     }
     .onChange(of: viewModel.comments.count) { oldCount, newCount in
       guard moderationStore.isModerationActive, newCount > oldCount,
-            !viewModel.isLoading else { return }
+            !viewModel.isLoadingComments else { return }
       let newComments = Array(viewModel.comments.suffix(newCount - oldCount))
       classifyComments(newComments)
     }
@@ -283,7 +290,7 @@ struct CommentsView: View {
     }
     .onChange(of: viewModel.comments.count) { oldCount, newCount in
       guard moderationStore.isModerationActive, newCount > oldCount,
-            !viewModel.isLoading else { return }
+            !viewModel.isLoadingComments else { return }
       let newComments = Array(viewModel.comments.suffix(newCount - oldCount))
       classifyComments(newComments)
     }
@@ -360,7 +367,7 @@ struct CommentsView: View {
             onReport: { reportTarget = comment }
           )
         }
-        if viewModel.hasMoreComments && !viewModel.comments.isEmpty && !viewModel.isLoading {
+        if viewModel.hasMoreComments && !viewModel.comments.isEmpty && !viewModel.isLoadingComments {
           Color.clear
             .frame(height: 1)
             .onAppear {
@@ -387,7 +394,7 @@ struct CommentsView: View {
 
   private var loadingOverlay: some View {
     Group {
-      if viewModel.isLoading {
+      if viewModel.isLoadingComments {
         VStack {
           Spacer()
           ProgressView()

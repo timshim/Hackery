@@ -55,7 +55,7 @@ enum SharedSnapshots {
   }
 
   private static func reloadWidgets(kinds: [String]) {
-    #if canImport(WidgetKit) && !os(visionOS)
+    #if canImport(WidgetKit)
     for kind in kinds {
       WidgetCenter.shared.reloadTimelines(ofKind: kind)
     }

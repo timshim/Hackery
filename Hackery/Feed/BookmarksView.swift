@@ -13,36 +13,48 @@ struct BookmarksView: View {
   #if os(iOS)
   @Environment(\.isPaging) private var isPaging
   @Environment(\.horizontalSizeClass) private var sizeClass
+  @Environment(StoryPresenter.self) private var presenter: StoryPresenter?
+  @Environment(\.storyListPlacement) private var placement
   @State private var selectedURL: URL?
+  @State private var rowFrames = StoryRowFrames()
   #elseif os(visionOS)
   @State private var selectedStory: Story?
   #endif
 
   var body: some View {
+    #if os(iOS)
+    // Shares the navigation container, and its bar, with the feed page.
+    content
+    #elseif os(visionOS)
     NavigationStack {
-      ZStack {
+      content
+        .navigationBarHidden(true)
+    }
+    #endif
+  }
+
+  private var content: some View {
+    ZStack {
+      #if os(iOS)
+      Color("background")
+        .ignoresSafeArea()
+      #endif
+      if bookmarkStore.bookmarks.isEmpty {
+        emptyState
+      } else {
         #if os(iOS)
-        Color("background")
-          .ignoresSafeArea()
-        #endif
-        if bookmarkStore.bookmarks.isEmpty {
-          emptyState
+        if sizeClass == .regular && presenter == nil {
+          iPadGrid
         } else {
-          #if os(iOS)
-          if sizeClass == .regular {
-            iPadGrid
-          } else {
-            phoneList
-          }
-          #elseif os(visionOS)
-          visionList
-          #endif
+          phoneList
         }
-        #if os(iOS)
-        StatusBarView()
+        #elseif os(visionOS)
+        visionList
         #endif
       }
-      .navigationBarHidden(true)
+      #if os(iOS)
+      StatusBarView()
+      #endif
     }
   }
 
@@ -120,23 +132,34 @@ struct BookmarksView: View {
         StoryView(story: story)
           .contentShape(Rectangle())
           .onTapGesture {
-            if let url = URL(string: story.url), !story.url.isEmpty {
+            if let presenter {
+              presenter.show(story, mode: .article)
+            } else if let url = URL(string: story.url), !story.url.isEmpty {
               selectedURL = url
             }
           }
+          .reportsStoryRowFrame(story.id, to: rowFrames)
           .listRowBackground(
             RoundedRectangle(cornerRadius: 16)
               .fill(Color("cardBg"))
               .padding(.vertical, 1)
-              .padding(.horizontal, 8)
+              .padding(.leading, placement.leadingCardInset)
+              .padding(.trailing, placement.trailingCardInset)
           )
           .listRowSeparator(.hidden)
-          .listRowInsets(EdgeInsets(top: 1, leading: 8, bottom: 1, trailing: 8))
+          .listRowInsets(EdgeInsets(
+            top: 1, leading: placement.leadingCardInset, bottom: 1, trailing: placement.trailingCardInset))
       }
     }
     .listStyle(.plain)
     .scrollContentBackground(.hidden)
     .scrollDisabled(isPaging)
+    .overlay {
+      if let presenter, placement == .besidePane {
+        SelectionIndicatorOverlay(rowFrames: rowFrames, selectedID: presenter.story?.id)
+      }
+    }
+    .frame(maxWidth: placement.maxWidth)
     .fullScreenCover(isPresented: Binding(
       get: { selectedURL != nil },
       set: { if !$0 { selectedURL = nil } }

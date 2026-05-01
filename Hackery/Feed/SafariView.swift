@@ -26,6 +26,8 @@ struct SafariView: View {
 struct SafariViewController: UIViewControllerRepresentable {
 
   var url: URL
+  /// Extra room above Safari's bar, for when it isn't under the status bar.
+  var topInset: CGFloat = 0
   var onDismiss: () -> Void
 
   func makeCoordinator() -> Coordinator {
@@ -34,9 +36,10 @@ struct SafariViewController: UIViewControllerRepresentable {
 
   func makeUIViewController(context: Context) -> SFSafariViewController {
     let config = SFSafariViewController.Configuration()
-    config.entersReaderIfAvailable = true
+    config.entersReaderIfAvailable = context.environment.opensInReader
     let safariVC = SFSafariViewController(url: url, configuration: config)
     safariVC.delegate = context.coordinator
+    safariVC.additionalSafeAreaInsets.top = topInset
     return safariVC
   }
 
@@ -60,7 +63,7 @@ struct PushedSafariView: UIViewControllerRepresentable {
 
   func makeUIViewController(context: Context) -> SFSafariViewController {
     let config = SFSafariViewController.Configuration()
-    config.entersReaderIfAvailable = true
+    config.entersReaderIfAvailable = context.environment.opensInReader
     return SFSafariViewController(url: url, configuration: config)
   }
 

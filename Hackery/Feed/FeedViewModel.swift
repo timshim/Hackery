@@ -20,12 +20,17 @@ final class FeedViewModel {
   var stories = [Story]()
   var comments = [Comment]()
   var isLoading = false
+  var isLoadingComments = false
   var isLoadingMore = false
   var isLoadingMoreComments = false
   var error: String?
 
   private let decoder = JSONDecoder()
-  private var currentTask: Task<Void, Never>?
+  // Feed and comments load independently — a deep link can present comments
+  // while the feed is still loading (e.g. cold launch from a widget), so they
+  // must not share a task handle or cancel one another.
+  private var storiesTask: Task<Void, Never>?
+  private var commentsTask: Task<Void, Never>?
   private var allStoryIds = [Int]()
   private var loadedCount = 0
   private var allTopLevelCommentIds = [Int]()
@@ -33,7 +38,7 @@ final class FeedViewModel {
   private(set) var currentCommentStoryId: Int?
 
   func loadTopStories(refresh: Bool = false) {
-    currentTask?.cancel()
+    storiesTask?.cancel()
     guard let url = URL(string: "\(baseURL)/topstories.json") else { return }
 
     if refresh {
@@ -47,7 +52,7 @@ final class FeedViewModel {
     isLoading = true
     error = nil
 
-    currentTask = Task {
+    storiesTask = Task {
       do {
         let (data, _) = try await URLSession.shared.data(from: url)
         try Task.checkCancellation()
@@ -104,15 +109,15 @@ final class FeedViewModel {
     if currentCommentStoryId == story.id && !comments.isEmpty {
       return
     }
-    currentTask?.cancel()
-    isLoading = true
+    commentsTask?.cancel()
+    isLoadingComments = true
     error = nil
     comments.removeAll()
     allTopLevelCommentIds = story.kids
     loadedCommentCount = 0
     currentCommentStoryId = story.id
 
-    currentTask = Task {
+    commentsTask = Task {
       do {
         let firstBatch = Array(allTopLevelCommentIds.prefix(commentPageSize))
         let fetched = try await fetchCommentTree(ids: firstBatch, depth: 0)
@@ -132,7 +137,7 @@ final class FeedViewModel {
         setError(error)
       }
 
-      isLoading = false
+      isLoadingComments = false
     }
   }
 

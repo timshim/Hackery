@@ -17,6 +17,7 @@ struct StoryView: View {
   var onShowComments: (() -> Void)?
 
   #if os(iOS)
+  @Environment(StoryPresenter.self) private var presenter: StoryPresenter?
   @State private var showComments = false
   #endif
 
@@ -81,6 +82,8 @@ struct StoryView: View {
           Button(action: {
             if let onShowComments {
               onShowComments()
+            } else if let presenter {
+              presenter.show(story, mode: .comments)
             } else {
               showComments = true
             }

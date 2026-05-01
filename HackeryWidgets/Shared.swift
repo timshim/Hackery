@@ -50,3 +50,13 @@ extension Story {
     )
   }
 }
+
+// visionOS widgets render on a wall surface viewed at ~1m, so iOS-sized
+// type ends up small. Bump every widget font size by a fixed amount.
+func widgetFontSize(_ size: CGFloat) -> CGFloat {
+  #if os(visionOS)
+  return size + 3
+  #else
+  return size
+  #endif
+}

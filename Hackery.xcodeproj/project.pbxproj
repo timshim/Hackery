@@ -18,6 +18,7 @@
 		486C34422F81376A00745554 /* HandTrackingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486C343C2F81376A00745554 /* HandTrackingManager.swift */; };
 		486C34432F81376A00745554 /* ShakeDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486C343D2F81376A00745554 /* ShakeDetector.swift */; };
 		486C344D2F81460500745554 /* Hackery.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 486C344C2F81460500745554 /* Hackery.storekit */; };
+		48D0C0DE2FA1000000000001 /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 48D0C0DE2FA1000000000002 /* AppIcon.icon */; platformFilter = ios; };
 		488819DB2548137C007B57F2 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 488819D52548067A007B57F2 /* Lato-Bold.ttf */; };
 		488819E125481381007B57F2 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 488819D62548067A007B57F2 /* Lato-Regular.ttf */; };
 		48AAEE712F893B6800C87352 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 487DD6BA2547FF9A006B3876 /* WidgetKit.framework */; };
@@ -103,6 +104,7 @@
 		486C343E2F81376A00745554 /* TipJarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipJarView.swift; sourceTree = "<group>"; };
 		486C343F2F81376A00745554 /* TipStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipStore.swift; sourceTree = "<group>"; };
 		486C344C2F81460500745554 /* Hackery.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Hackery.storekit; sourceTree = "<group>"; };
+		48D0C0DE2FA1000000000002 /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
 		4871E8A42F79930300746676 /* HackeryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HackeryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		487DD6BA2547FF9A006B3876 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		487DD6BC2547FF9A006B3876 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -195,6 +197,7 @@
 			children = (
 				485E4B6F22AE27CF00626464 /* Hackery.swift */,
 				48BB404526777DA600490132 /* Hackery.entitlements */,
+				48D0C0DE2FA1000000000002 /* AppIcon.icon */,
 				485E4B7522AE27CF00626464 /* Assets.xcassets */,
 				485E4B7722AE27CF00626464 /* Preview Content */,
 				48B7F85F22B7723500FF21AD /* Extensions.swift */,
@@ -453,6 +456,7 @@
 				488819DB2548137C007B57F2 /* Lato-Bold.ttf in Resources */,
 				485E4B7922AE27CF00626464 /* Preview Assets.xcassets in Resources */,
 				486C344D2F81460500745554 /* Hackery.storekit in Resources */,
+				48D0C0DE2FA1000000000001 /* AppIcon.icon in Resources */,
 				485E4B7622AE27CF00626464 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -694,7 +698,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Hackery/Main/Hackery.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "Hackery/Main/Preview\\ Content";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hackery/Main/Info.plist;
@@ -705,7 +709,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0;
+				MARKETING_VERSION = 2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.timshim.Hackery;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
@@ -723,7 +727,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Hackery/Main/Hackery.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "Hackery/Main/Preview\\ Content";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hackery/Main/Info.plist;
@@ -734,7 +738,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0;
+				MARKETING_VERSION = 2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.timshim.Hackery;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
@@ -833,7 +837,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 2.0;
+				MARKETING_VERSION = 2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.timshim.Hackery.HackeryWidgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -871,7 +875,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 2.0;
+				MARKETING_VERSION = 2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.timshim.Hackery.HackeryWidgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -906,7 +910,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 2.0;
+				MARKETING_VERSION = 2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.timshim.Hackery.HackeryShare;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -941,7 +945,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 2.0;
+				MARKETING_VERSION = 2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.timshim.Hackery.HackeryShare;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

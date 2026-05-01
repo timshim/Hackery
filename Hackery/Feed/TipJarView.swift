@@ -14,55 +14,17 @@ struct TipJarView: View {
   @Environment(EngagementTracker.self) private var engagement
   @Environment(\.dismiss) private var dismiss
 
+  /// Shows the tip jar as a small card centered over existing content instead
+  /// of as a sheet, and is called to close it.
+  var onClose: (() -> Void)?
+
   var body: some View {
     #if os(iOS)
-    NavigationStack {
-      VStack(spacing: 24) {
-        Spacer()
-        if tipStore.purchaseState == .success {
-          thankYouView
-        } else {
-          headerView
-          if let product = tipStore.product {
-            buyButton(product)
-          }
-          if case .failed(let message) = tipStore.purchaseState {
-            Text(message)
-              .font(.caption)
-              .foregroundStyle(.red)
-              .multilineTextAlignment(.center)
-          }
-        }
-        Spacer()
-      }
-      .padding(24)
-      .frame(maxWidth: .infinity, maxHeight: .infinity)
-      .background(Color("cardBg"))
-      .task {
-        tipStore.listenForTransactions()
-        await tipStore.loadProduct()
-      }
-      .toolbar {
-        ToolbarItem(placement: .cancellationAction) {
-          Button { dismiss() } label: {
-            Image(systemName: "xmark")
-              .font(.system(size: 14, weight: .bold))
-              .foregroundStyle(.secondary)
-          }
-        }
-      }
-      .onChange(of: tipStore.purchaseState) { _, newValue in
-        if newValue == .success {
-          engagement.recordTip()
-          DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
-            dismiss()
-            tipStore.resetState()
-          }
-        }
-      }
+    if onClose != nil {
+      card
+    } else {
+      sheet
     }
-    .presentationDetents([.medium])
-    .interactiveDismissDisabled(tipStore.purchaseState == .purchasing)
     #elseif os(visionOS)
     VStack(spacing: 24) {
       if tipStore.purchaseState == .success {
@@ -109,6 +71,106 @@ struct TipJarView: View {
     #endif
   }
 
+  private func close() {
+    if let onClose {
+      onClose()
+    } else {
+      dismiss()
+    }
+  }
+
+  // MARK: - Presentations
+
+  #if os(iOS)
+  private var content: some View {
+    VStack(spacing: 24) {
+      if tipStore.purchaseState == .success {
+        thankYouView
+      } else {
+        headerView
+        if let product = tipStore.product {
+          buyButton(product)
+        }
+        if case .failed(let message) = tipStore.purchaseState {
+          Text(message)
+            .font(.caption)
+            .foregroundStyle(.red)
+            .multilineTextAlignment(.center)
+        }
+      }
+    }
+    .task {
+      tipStore.listenForTransactions()
+      await tipStore.loadProduct()
+    }
+    .onChange(of: tipStore.purchaseState) { _, newValue in
+      if newValue == .success {
+        engagement.recordTip()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+          close()
+          tipStore.resetState()
+        }
+      }
+    }
+  }
+
+  private var sheet: some View {
+    NavigationStack {
+      VStack(spacing: 24) {
+        Spacer()
+        content
+        Spacer()
+      }
+      .padding(24)
+      .frame(maxWidth: .infinity, maxHeight: .infinity)
+      .background(Color("cardBg"))
+      .toolbar {
+        ToolbarItem(placement: .cancellationAction) {
+          Button { close() } label: {
+            Image(systemName: "xmark")
+              .font(.system(size: 14, weight: .bold))
+              .foregroundStyle(.secondary)
+          }
+        }
+      }
+    }
+    .presentationDetents([.medium])
+    .interactiveDismissDisabled(tipStore.purchaseState == .purchasing)
+  }
+
+  private var card: some View {
+    ZStack {
+      // Clear, but still catches taps outside the card to close it.
+      Color.clear
+        .contentShape(Rectangle())
+        .ignoresSafeArea()
+        .onTapGesture {
+          if tipStore.purchaseState != .purchasing { close() }
+        }
+      content
+        .padding(.horizontal, 24)
+        .padding(.top, 44)
+        .padding(.bottom, 24)
+        .frame(width: 340)
+        .background(Color("cardBg"), in: RoundedRectangle(cornerRadius: 28))
+        .overlay(alignment: .topLeading) {
+          Button { close() } label: {
+            Image(systemName: "xmark")
+              .font(.system(size: 14, weight: .bold))
+              .foregroundStyle(.secondary)
+              .frame(width: 36, height: 36)
+              .glassEffect(in: .circle)
+          }
+          .buttonStyle(.plain)
+          .disabled(tipStore.purchaseState == .purchasing)
+          .accessibilityLabel("Close")
+          .padding(12)
+        }
+    }
+    .accessibilityAddTraits(.isModal)
+  }
+  #endif
+
   // MARK: - Header
 
   private var headerView: some View {
@@ -134,12 +196,12 @@ struct TipJarView: View {
       HStack {
         Text("Tip me")
           .font(.custom("Lato-Bold", size: 20, relativeTo: .title3))
-          .foregroundStyle(.primary)
-          .colorInvert()
+          .foregroundStyle(.white)
+        // Plain white rather than inverted hierarchical styles, which blend
+        // with the green and invert to magenta.
         Text(product.displayPrice)
           .font(.custom("Lato-Bold", size: 20, relativeTo: .title3))
-          .foregroundStyle(.secondary)
-          .colorInvert()
+          .foregroundStyle(.white.opacity(0.75))
       }
       .frame(maxWidth: .infinity)
       .padding(.vertical, 18)

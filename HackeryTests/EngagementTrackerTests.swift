@@ -48,20 +48,17 @@ struct EngagementTrackerTests {
   @MainActor @Test func reviewPromptAtThreshold() {
     let tracker = EngagementTracker()
     // Record one less than threshold
-    tracker.recordInteraction()
-    tracker.checkForPrompt()
+    record(14, on: tracker)
     #expect(tracker.pendingPrompt == nil)
 
     // Hit threshold
-    tracker.recordInteraction()
-    tracker.checkForPrompt()
+    record(1, on: tracker)
     #expect(tracker.pendingPrompt == .review)
   }
 
   @MainActor @Test func noReviewBeforeThreshold() {
     let tracker = EngagementTracker()
-    tracker.recordInteraction() // 1 interaction, threshold is 2
-    tracker.checkForPrompt()
+    record(14, on: tracker) // threshold is 15
     #expect(tracker.pendingPrompt == nil)
   }
 
@@ -69,7 +66,7 @@ struct EngagementTrackerTests {
 
   @MainActor @Test func tipJarAt30AfterReview() {
     let tracker = EngagementTracker()
-    record(2, on: tracker)
+    record(15, on: tracker)
     #expect(tracker.pendingPrompt == .review)
     tracker.promptShown()
 
@@ -204,7 +201,7 @@ struct EngagementTrackerTests {
 
   @MainActor @Test func promptShownResetsCounter() {
     let tracker = EngagementTracker()
-    record(2, on: tracker)
+    record(15, on: tracker)
     #expect(tracker.pendingPrompt == .review)
 
     tracker.promptShown()
@@ -230,10 +227,10 @@ struct EngagementTrackerTests {
 
   @MainActor @Test func statePersistedAcrossInstances() {
     let tracker1 = EngagementTracker()
-    tracker1.recordInteraction() // 1 interaction
+    for _ in 1...14 { tracker1.recordInteraction() } // 14 interactions
 
     let tracker2 = EngagementTracker()
-    tracker2.recordInteraction() // 2nd interaction total
+    tracker2.recordInteraction() // 15th interaction total
     tracker2.checkForPrompt()
     #expect(tracker2.pendingPrompt == .review) // threshold reached
   }
@@ -242,7 +239,7 @@ struct EngagementTrackerTests {
 
   @MainActor @Test func checkForPromptSetsPromptWithoutRecording() {
     let tracker = EngagementTracker()
-    for _ in 1...2 { tracker.recordInteraction() }
+    for _ in 1...15 { tracker.recordInteraction() }
     #expect(tracker.pendingPrompt == nil) // recordInteraction no longer sets it
 
     tracker.checkForPrompt()
