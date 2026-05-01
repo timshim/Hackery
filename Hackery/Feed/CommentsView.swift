@@ -148,7 +148,7 @@ struct CommentsView: View {
     }
     .onChange(of: viewModel.comments.count) { oldCount, newCount in
       guard moderationStore.isModerationActive, newCount > oldCount,
-            !viewModel.isLoading else { return }
+            !viewModel.isLoadingComments else { return }
       let newComments = Array(viewModel.comments.suffix(newCount - oldCount))
       classifyComments(newComments)
     }
@@ -283,7 +283,7 @@ struct CommentsView: View {
     }
     .onChange(of: viewModel.comments.count) { oldCount, newCount in
       guard moderationStore.isModerationActive, newCount > oldCount,
-            !viewModel.isLoading else { return }
+            !viewModel.isLoadingComments else { return }
       let newComments = Array(viewModel.comments.suffix(newCount - oldCount))
       classifyComments(newComments)
     }
@@ -360,7 +360,7 @@ struct CommentsView: View {
             onReport: { reportTarget = comment }
           )
         }
-        if viewModel.hasMoreComments && !viewModel.comments.isEmpty && !viewModel.isLoading {
+        if viewModel.hasMoreComments && !viewModel.comments.isEmpty && !viewModel.isLoadingComments {
           Color.clear
             .frame(height: 1)
             .onAppear {
@@ -387,7 +387,7 @@ struct CommentsView: View {
 
   private var loadingOverlay: some View {
     Group {
-      if viewModel.isLoading {
+      if viewModel.isLoadingComments {
         VStack {
           Spacer()
           ProgressView()

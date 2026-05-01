@@ -25,14 +25,9 @@
           "value" : "tinted"
         }
       ],
+      "filename" : "Hackery_AppIcon_Clear.png",
       "idiom" : "universal",
       "platform" : "ios",
-      "size" : "1024x1024"
-    },
-    {
-      "filename" : "Hackery_AppIcon_Watch.png",
-      "idiom" : "universal",
-      "platform" : "watchos",
       "size" : "1024x1024"
     }
   ],

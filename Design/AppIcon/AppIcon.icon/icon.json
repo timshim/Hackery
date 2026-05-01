@@ -1,0 +1,75 @@
+{
+  "fill-specializations" : [
+    {
+      "value" : {
+        "automatic-gradient" : "display-p3:0.72452,0.86457,0.96783,1.00000"
+      }
+    },
+    {
+      "appearance" : "dark",
+      "value" : "automatic"
+    }
+  ],
+  "groups" : [
+    {
+      "blend-mode-specializations" : [
+        {
+          "value" : "normal"
+        },
+        {
+          "appearance" : "dark",
+          "value" : "lighten"
+        },
+        {
+          "appearance" : "tinted",
+          "value" : "plus-darker"
+        }
+      ],
+      "blur-material" : null,
+      "layers" : [
+        {
+          "glass" : true,
+          "hidden" : false,
+          "image-name" : "Hackery_AppIcon_Top.svg",
+          "name" : "Hackery_AppIcon_Top",
+          "position" : {
+            "scale" : 1.3,
+            "translation-in-points" : [
+              15.675061118389067,
+              0.13099844381315506
+            ]
+          }
+        },
+        {
+          "glass" : true,
+          "image-name" : "Hackery_AppIcon_Bottom.svg",
+          "name" : "Hackery_AppIcon_Bottom",
+          "opacity" : 1,
+          "position" : {
+            "scale" : 1.3,
+            "translation-in-points" : [
+              -15.39299397432228,
+              0.13229905730293012
+            ]
+          }
+        }
+      ],
+      "lighting" : "combined",
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "specular" : false,
+      "translucency" : {
+        "enabled" : false,
+        "value" : 0.5
+      }
+    }
+  ],
+  "supported-platforms" : {
+    "circles" : [
+      "watchOS"
+    ],
+    "squares" : "shared"
+  }
+}
